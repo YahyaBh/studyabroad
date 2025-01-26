@@ -30,12 +30,12 @@ export default function Home() {
 
           <div className="select-container">
 
-          <label>Country</label>
-          <select>
-            <option disabled selected>Programmes</option>
-            <option value="program1">Program 1</option>
-            <option value="program2">Program 2</option>
-          </select>
+            <label>Country</label>
+            <select>
+              <option disabled selected>Programmes</option>
+              <option value="program1">Program 1</option>
+              <option value="program2">Program 2</option>
+            </select>
 
           </div>
           <button>
@@ -47,7 +47,26 @@ export default function Home() {
       </nav>
 
       <header>
+        <div className="left">
+          <h1>Your <span>Global Education</span> Journey Begins Here</h1>
 
+          <h4>Discover, Apply, Achieve</h4>
+
+          <p>Find Your Dream University and Transform Your Future Unlock unparalleled opportunities with top global institutions. Immerse yourself in diverse cultures, gain cutting-edge knowledge, and build a successful career. Your journey to excellence starts here.</p>
+
+          <div className="buttons">
+            <button className="get_consult">Get Consultation</button>
+            <button className="explore">Explore Universities</button>
+          </div>
+        </div>
+
+        <div className="right">
+          <img src="../../public/assets/images/Hero/Rectangle.svg" />
+          <img src="../../public/assets/images/Hero/Map.svg" />
+          <img src="../../public/assets/images/Hero/PersonGirl.svg" />
+
+
+        </div>
       </header>
 
 
