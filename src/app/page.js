@@ -11,13 +11,13 @@ export default function Home() {
             <img src="/assets/images/Logo.svg" />
           </a>
 
-          <div class="nav-links">
+          <div className="nav-links">
             <a href="/">Home</a>
             <a href="/infos">Information <IoIosArrowDown /></a>
             <a href="/about">About Us</a>
           </div>
 
-          <div class="search-box">
+          <div className="search-box">
             <div className="select-container">
               <label htmlFor="country">Country</label>
               <select id="country">
@@ -88,6 +88,35 @@ export default function Home() {
 
       </header>
 
+
+
+      <section className="about">
+        <div className="about_container">
+          <div className="left">
+
+
+            <h3 className="title-main"><span className="line-l"></span> About Us <span className="line-r"></span></h3>
+
+            <h2>BEDAYA : Your Gateway to Educational Excellence</h2>
+
+            <p>Beginning, established in 2017, is dedicated to supporting ambitious students in achieving their educational dreams abroad. We have successfully assisted numerous students in gaining admission to top global universities and institutions. Our comprehensive advisory services cover everything from selecting the right university to adapting to life abroad, ensuring a smooth and rewarding study experience. With extensive expertise and a committed team, Beginning has become a trusted leader in study abroad consultation ...</p>
+
+            <button>Learn More</button>
+
+            <img src="/assets/images/Hero/ArrowButton.svg" alt="arrow" />
+          </div>
+
+          <div className="right">
+            <img src="/assets/images/Hero/GraduateGirl.png" />
+          </div>
+        </div>
+      </section>
+
+
+      <section className="services">
+        <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
+
+      </section>
 
     </>
   );
