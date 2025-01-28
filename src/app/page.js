@@ -1,5 +1,6 @@
-import { FaSearch } from "react-icons/fa";
+import { FaLocationArrow, FaSearch, FaStar } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
+import { MdArrowOutward } from "react-icons/md";
 import "./page.scss";
 
 export default function Home() {
@@ -21,7 +22,7 @@ export default function Home() {
             <div className="select-container">
               <label htmlFor="country">Country</label>
               <select id="country">
-                <option disabled selected>Name of country</option>
+                <option disabled defaultValue={""}>Name of country</option>
                 <option value="country1">Country 1</option>
                 <option value="country2">Country 2</option>
               </select>
@@ -114,8 +115,261 @@ export default function Home() {
 
 
       <section className="services">
-        <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
 
+
+        <div className="services-container">
+
+          <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
+
+
+          <div className="services-main">
+
+            <div className="left">
+              <h2>Offered services and their description.</h2>
+
+              <p>Our strategies for achieving global academic success, your guide to opening new horizons.</p>
+            </div>
+
+            <div className="right">
+
+              <div className="service-card">
+                <img src="/assets/images/Services/VisaIcon.svg" />
+
+                <div className="content">
+                  <h4>Preparing the Visa file</h4>
+                  <p>Our advisory services cover everything from selecting the right university to adapting to life abroad, ensuring a smooth and rewarding study experience.</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div className="services-cards">
+
+            <div className="service-card">
+
+              <div className="images-container">
+                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                <img src="/assets/images/Services/StudyIcon.svg" />
+                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+              </div>
+
+
+              <div className="content">
+                <h4>Education Consultation</h4>
+                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+              </div>
+            </div>
+
+            <div className="service-card">
+
+              <div className="images-container">
+                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                <img src="/assets/images/Services/StudyIcon.svg" />
+                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+              </div>
+
+
+              <div className="content">
+                <h4>Education Consultation</h4>
+                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+              </div>
+            </div>
+
+            <div className="service-card">
+
+              <div className="images-container">
+                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                <img src="/assets/images/Services/StudyIcon.svg" />
+                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+              </div>
+
+
+              <div className="content">
+                <h4>Education Consultation</h4>
+                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+              </div>
+            </div>
+
+            <div className="service-card">
+
+              <div className="images-container">
+                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                <img src="/assets/images/Services/StudyIcon.svg" />
+                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+              </div>
+
+
+              <div className="content">
+                <h4>Education Consultation</h4>
+                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <div className="line-divider"></div>
+
+
+      <section className="countires">
+        <div className="countires-container">
+
+          <h2>Explore the best global <br /> study destinations.</h2>
+
+          <p>We provide you with an overview of the most popular countries for studying abroad, highlighting their capitals and the advantages each destination offers.</p>
+
+          <div className="countires-cards">
+          <div className="countires-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+
+            <div className="countires-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+
+            <div className="countires-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+
+            <div className="countires-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+          </div>
+
+          <button className="explore">Explore The Countries</button>
+
+        </div>
+      </section>
+
+      <section className="universities">
+        <div className="universities-container">
+
+          <h2>World Universities Guide</h2>
+
+          <p>Explore top universities worldwide, including in the US, UK, and Arab countries, with details on admissions, programs, fees, and scholarships.</p>
+
+          <div className="universities-cards">
+          <div className="universities-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              <div className="rating">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+
+            <div className="universities-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              <div className="rating">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+
+            <div className="universities-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              <div className="rating">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+
+            <div className="universities-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              <div className="rating">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward/> </button>
+            </div>
+          </div>
+
+          <button className="explore">Explore The Countries</button>
+
+        </div>
       </section>
 
     </>
