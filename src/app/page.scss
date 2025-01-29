@@ -488,6 +488,7 @@ header {
   justify-content: center;
   padding: 50px;
   margin-top: 50px;
+  margin-bottom: 50px;
   box-sizing: border-box;
 
   .services-container {
@@ -641,7 +642,7 @@ header {
   width: 100%;
   height: 10px;
   background: linear-gradient(to right, #5e1a98, #f7c607);
-  margin: 40px 0;
+  margin: 0px 0;
 }
 
 .countires {
@@ -675,7 +676,7 @@ header {
     }
 
     p {
-      font-size: .8em;
+      font-size: 0.8em;
       text-align: center;
       width: 50%;
     }
@@ -702,7 +703,7 @@ header {
           linear-gradient(
               180deg,
               rgba(255, 255, 255, 1) 55%,
-              rgba(255, 233, 165, 1) 74%,
+              rgb(255, 244, 212) 74%,
               rgba(255, 255, 255, 1) 89%,
               rgba(255, 255, 255, 1) 100%
             )
@@ -715,6 +716,7 @@ header {
           height: 200px;
           object-fit: cover;
           border-radius: 20px;
+          // margin-bottom: 10px;
         }
 
         .rating {
@@ -737,6 +739,8 @@ header {
         p {
           width: 100%;
           text-align: justify;
+          margin-bottom: 10px;
+          opacity: 0.8;
         }
 
         button {
@@ -753,7 +757,6 @@ header {
           align-items: center;
           gap: 10px;
           font-size: 1em;
-
 
           svg {
             color: #ffc300;
@@ -779,14 +782,18 @@ header {
   }
 }
 
-
 .universities {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 50px 50px 50px;
+  padding: 0 50px 0 50px;
   box-sizing: border-box;
+  background: url(/assets/images/Unis/BG.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: border-box;
 
   .universities-container {
     display: flex;
@@ -810,7 +817,7 @@ header {
     }
 
     p {
-      font-size: .8em;
+      font-size: 0.8em;
       text-align: center;
       width: 50%;
     }
@@ -829,7 +836,7 @@ header {
         align-items: flex-start;
         justify-content: center;
         flex-direction: column;
-        gap: 15px;
+        gap: 5px;
         box-sizing: border-box;
         border-radius: 20px; /* Rounded corners */
         border: transparent 3px solid;
@@ -837,7 +844,7 @@ header {
           linear-gradient(
               180deg,
               rgba(255, 255, 255, 1) 55%,
-              rgba(255, 233, 165, 1) 74%,
+              rgb(255, 244, 212) 74%,
               rgba(255, 255, 255, 1) 89%,
               rgba(255, 255, 255, 1) 100%
             )
@@ -850,6 +857,7 @@ header {
           height: 200px;
           object-fit: cover;
           border-radius: 20px;
+          margin-bottom: 10px;
         }
 
         .rating {
@@ -874,8 +882,16 @@ header {
           }
         }
 
+        h3 {
+          color: #870ae6;
+          font-size: 1em;
+          font-weight: 600;
+        }
+
         p {
           width: 100%;
+          opacity: 0.8;
+          margin-bottom: 10px;
           text-align: justify;
         }
 
@@ -893,7 +909,6 @@ header {
           align-items: center;
           gap: 10px;
           font-size: 1em;
-
 
           svg {
             color: #ffc300;
@@ -915,6 +930,141 @@ header {
       padding: 15px 30px;
       font-weight: 600;
       font-size: 1em;
+    }
+  }
+}
+
+.achieve {
+  background: linear-gradient(to bottom, #fcc51f, #fff);
+  height: 100dvh;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .achieve-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (min-width: 1200px) {
+      max-width: 1400px !important ;
+    }
+
+    .left {
+      flex-basis: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      height: 80%;
+      gap: 10px;
+
+      h2 {
+        font-size: 2.5em;
+        font-weight: 600;
+        color: #5e1a98;
+      }
+
+      p {
+        color: #5e1a98;
+      }
+
+      .achieve-card-container {
+        width: 100%;
+        background-color: #ffffff5f;
+        padding: 20px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .achieve-card-t {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 20px;
+
+          .achieve-card {
+            flex-basis: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 10px;
+
+            .achieve-card-content {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-basis: 50%;
+
+              h3 {
+                font-size: 1.5em;
+                font-weight: 600;
+                color: #5e1a98;
+              }
+
+              svg {
+                background-color: #fff;
+                padding: 10px;
+                border-radius: 50%;
+                color: #000;
+                font-size: 1.5em;
+              }
+            }
+
+            p {
+              font-size: 0.8em;
+              color: #5e1a98;
+            }
+          }
+        }
+
+        .achieve-card-b {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          gap: 10px;
+          width: 100%;
+
+          .achieve-card-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            
+            h3 {
+              font-size: 1.5em;
+              font-weight: 600;
+              color: #5e1a98;
+            }
+
+            svg {
+              background-color: #fff;
+              padding: 10px;
+              border-radius: 50%;
+              color: #000;
+              font-size: 1.5em;
+            }
+          }
+
+          p {
+            font-size: 0.8em;
+            color: #5e1a98;
+          }
+        }
+      }
+    }
+
+    .right {
+      flex-basis: 50%;
+
+      img {
+        width: 100%;
+      }
     }
   }
 }

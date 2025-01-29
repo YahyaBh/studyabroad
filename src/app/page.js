@@ -1,4 +1,4 @@
-import { FaLocationArrow, FaSearch, FaStar } from "react-icons/fa";
+import { FaLocationArrow, FaSchool, FaSearch, FaStar } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdArrowOutward } from "react-icons/md";
 import "./page.scss";
@@ -224,56 +224,56 @@ export default function Home() {
           <p>We provide you with an overview of the most popular countries for studying abroad, highlighting their capitals and the advantages each destination offers.</p>
 
           <div className="countires-cards">
-          <div className="countires-card">
+            <div className="countires-card">
               <img src="/assets/images/HeroBack.svg" />
 
-              
+
 
               <h4><FaLocationArrow /> Washington</h4>
 
               <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
 
 
-              <button>Learn More <MdArrowOutward/> </button>
+              <button>Learn More <MdArrowOutward /> </button>
             </div>
 
             <div className="countires-card">
               <img src="/assets/images/HeroBack.svg" />
 
-              
+
 
               <h4><FaLocationArrow /> Washington</h4>
 
               <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
 
 
-              <button>Learn More <MdArrowOutward/> </button>
+              <button>Learn More <MdArrowOutward /> </button>
             </div>
 
             <div className="countires-card">
               <img src="/assets/images/HeroBack.svg" />
 
-              
+
 
               <h4><FaLocationArrow /> Washington</h4>
 
               <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
 
 
-              <button>Learn More <MdArrowOutward/> </button>
+              <button>Learn More <MdArrowOutward /> </button>
             </div>
 
             <div className="countires-card">
               <img src="/assets/images/HeroBack.svg" />
 
-              
+
 
               <h4><FaLocationArrow /> Washington</h4>
 
               <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
 
 
-              <button>Learn More <MdArrowOutward/> </button>
+              <button>Learn More <MdArrowOutward /> </button>
             </div>
           </div>
 
@@ -290,25 +290,6 @@ export default function Home() {
           <p>Explore top universities worldwide, including in the US, UK, and Arab countries, with details on admissions, programs, fees, and scholarships.</p>
 
           <div className="universities-cards">
-          <div className="universities-card">
-              <img src="/assets/images/HeroBack.svg" />
-
-              <div className="rating">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-
-              <h4><FaLocationArrow /> Washington</h4>
-
-              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
-
-
-              <button>Learn More <MdArrowOutward/> </button>
-            </div>
-
             <div className="universities-card">
               <img src="/assets/images/HeroBack.svg" />
 
@@ -322,12 +303,13 @@ export default function Home() {
 
               <h4><FaLocationArrow /> Washington</h4>
 
+              <h3>Korea University</h3>
+
               <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
 
 
-              <button>Learn More <MdArrowOutward/> </button>
+              <button>Learn More <MdArrowOutward /> </button>
             </div>
-
             <div className="universities-card">
               <img src="/assets/images/HeroBack.svg" />
 
@@ -341,12 +323,13 @@ export default function Home() {
 
               <h4><FaLocationArrow /> Washington</h4>
 
+              <h3>Korea University</h3>
+
               <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
 
 
-              <button>Learn More <MdArrowOutward/> </button>
+              <button>Learn More <MdArrowOutward /> </button>
             </div>
-
             <div className="universities-card">
               <img src="/assets/images/HeroBack.svg" />
 
@@ -360,17 +343,101 @@ export default function Home() {
 
               <h4><FaLocationArrow /> Washington</h4>
 
+              <h3>Korea University</h3>
+
               <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
 
 
-              <button>Learn More <MdArrowOutward/> </button>
+              <button>Learn More <MdArrowOutward /> </button>
             </div>
+            <div className="universities-card">
+              <img src="/assets/images/HeroBack.svg" />
+
+              <div className="rating">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+
+              <h4><FaLocationArrow /> Washington</h4>
+
+              <h3>Korea University</h3>
+
+              <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+              <button>Learn More <MdArrowOutward /> </button>
+            </div>
+
           </div>
 
           <button className="explore">Explore The Countries</button>
 
         </div>
       </section>
+
+      <div className="line-divider"></div>
+
+
+      <section className="achieve">
+
+        <h3 className="title-main"><span className="line-l"></span> About Us <span className="line-r"></span></h3>
+
+
+        <section className="achieve-container">
+
+          <div className="left">
+            <h2>What Have We Achieved?</h2>
+
+            <p>We’ve guided over 1,000 students to top universities worldwide, secured scholarships, and ensured smooth transitions to life abroad. Our success is reflected in the bright futures of the students we’ve supported.</p>
+
+            <div className="achieve-card-container">
+              <div className="achieve-card-t">
+                <div className="achieve-card">
+                  <div className="achieve-card-content">
+                    <h3>Over 1,000 Students Guided</h3>
+                    <FaSchool />
+                  </div>
+
+                  <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
+                </div>
+
+                <div className="achieve-card">
+                  <div className="achieve-card-content">
+                    <h3>Over 1,000 Students Guided</h3>
+                    <FaSchool />
+                  </div>
+
+                  <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
+                </div>
+
+              </div>
+
+              <div className="achieve-card-b">
+                <div className="achieve-card">
+                  <div className="achieve-card-content">
+                    <h3>Over 1,000 Students Guided</h3>
+                    <FaSchool />
+                  </div>
+
+                  <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="right">
+            <img src="/assets/images/Achiev/GuyAch.svg" />
+          </div>
+
+
+
+
+        </section>
+
+      </section >
 
     </>
   );
