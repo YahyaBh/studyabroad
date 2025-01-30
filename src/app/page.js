@@ -439,6 +439,48 @@ export default function Home() {
 
       </section >
 
+
+      <section className="partners">
+
+
+        <div className="partners-container">
+
+        <h3 className="title-main"><span className="line-l"></span> University Partners <span className="line-r"></span></h3>
+
+          <div className="top-container">
+            
+            <img src="/assets/images/Partners/Uni1.svg" />
+            <img src="/assets/images/Partners/Uni2.svg" />
+            <img src="/assets/images/Partners/Uni3.svg" />
+            <img src="/assets/images/Partners/Uni4.svg" />
+            <img src="/assets/images/Partners/Uni5.svg" />
+            <img src="/assets/images/Partners/Uni1.svg" />
+            <img src="/assets/images/Partners/Uni2.svg" />
+            <img src="/assets/images/Partners/Uni3.svg" />
+            <img src="/assets/images/Partners/Uni4.svg" />
+            <img src="/assets/images/Partners/Uni5.svg" />
+          </div>
+
+
+          <div className="bottom-container">
+            <img src="/assets/images/Partners/Uni1.svg" />
+            <img src="/assets/images/Partners/Uni2.svg" />
+            <img src="/assets/images/Partners/Uni3.svg" />
+            <img src="/assets/images/Partners/Uni4.svg" />
+            <img src="/assets/images/Partners/Uni5.svg" />
+            <img src="/assets/images/Partners/Uni1.svg" />
+            <img src="/assets/images/Partners/Uni2.svg" />
+            <img src="/assets/images/Partners/Uni3.svg" />
+            <img src="/assets/images/Partners/Uni4.svg" />
+            <img src="/assets/images/Partners/Uni5.svg" />
+          </div>
+
+        </div>
+
+
+
+      </section>
+
     </>
   );
 }

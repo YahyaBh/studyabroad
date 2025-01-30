@@ -936,10 +936,12 @@ header {
 
 .achieve {
   background: linear-gradient(to bottom, #fcc51f, #fff);
-  height: 100dvh;
+  height: 100%;
   padding: 20px 30px;
   box-sizing: border-box;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
 
   .achieve-container {
@@ -1096,6 +1098,74 @@ header {
 
         img {
           width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.partners {
+  height: 100%;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .partners-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 30px;
+    overflow: hidden;
+
+    @media screen and (min-width: 1200px) {
+      max-width: 1400px !important ;
+    }
+
+    img {
+      width: 200px;
+    }
+
+    .top-container {
+      display: flex; /* Align images horizontally */
+      top: 0;
+      left: 0;
+      animation: slideright 20s linear infinite; /* Adjust duration for images */
+      gap: 30px;
+      flex-wrap: nowrap;
+      justify-content: space-evenly;
+      align-items: center;
+
+      @keyframes slideright {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%); /* Move only half the width for seamless loop */
+        }
+      }
+    }
+
+    .bottom-container {
+      display: flex; /* Align images horizontally */
+      top: 0;
+      right: 0;
+      animation: slideleft 20s linear infinite; /* Adjust duration for images */
+      gap: 30px;
+      flex-wrap: nowrap;
+      justify-content: space-evenly;
+      align-items: center;
+
+      @keyframes slideleft {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(50%); /* Move only half the width for seamless loop */
         }
       }
     }
