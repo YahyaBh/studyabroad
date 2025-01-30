@@ -521,15 +521,21 @@ export default function Home() {
               <label>
                 <input type="text" placeholder="Search" />
               </label>
-              <input type="text" placeholder="Your Email" />
+              <label>
+                <input type="email" placeholder="Email" />
+              </label>
             </div>
 
-            <div className="doubl-inp">
-              <input type="text" placeholder="Your Name" />
-              <input type="text" placeholder="Your Email" />
+            <div className="double-inp">
+              <label>
+                <input type="phone" placeholder="Phone" />
+              </label>
+              <label>
+                <input type="phone" placeholder="Phone" />
+              </label>
             </div>
 
-            <textarea />
+            <textarea placeholder="How can we help you ? Feel free to get in touch!" cols={"40"} rows={"10"} />
 
             <div className="agree">
 
