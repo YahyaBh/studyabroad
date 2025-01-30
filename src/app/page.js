@@ -1,4 +1,4 @@
-import { FaLocationArrow, FaSchool, FaSearch, FaStar } from "react-icons/fa";
+import { FaArrowDown, FaLocationArrow, FaSchool, FaSearch, FaStar } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdArrowOutward } from "react-icons/md";
 import "./page.scss";
@@ -445,10 +445,10 @@ export default function Home() {
 
         <div className="partners-container">
 
-        <h3 className="title-main"><span className="line-l"></span> University Partners <span className="line-r"></span></h3>
+          <h3 className="title-main"><span className="line-l"></span> University Partners <span className="line-r"></span></h3>
 
           <div className="top-container">
-            
+
             <img src="/assets/images/Partners/Uni1.svg" />
             <img src="/assets/images/Partners/Uni2.svg" />
             <img src="/assets/images/Partners/Uni3.svg" />
@@ -480,6 +480,75 @@ export default function Home() {
 
 
       </section>
+
+
+      <section className="contact">
+
+        <div className="title">
+          <h2>Contact Us</h2>
+          <FaArrowDown />
+        </div>
+
+
+        <div className="contact-container">
+          <div className="left">
+            <h3>Have Questions? <br /> Get in Touch!</h3>
+
+            <p>Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+
+
+            <div className="location">
+              <div className="local">
+                <span className="icons"><FaLocationArrow /></span>
+                <h4>Rabat — 723 17th Street, Office 478 hassan, IM 5</h4>
+              </div>
+
+              <div className="local">
+                <span className="icons"><FaLocationArrow /></span>
+                <h4>Rabat — 723 17th Street, Office 478 hassan, IM 5</h4>
+              </div>
+
+              <div className="local">
+                <span className="icons"><FaLocationArrow /></span>
+                <h4>Rabat — 723 17th Street, Office 478 hassan, IM 5</h4>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="right">
+            <div className="double-inp">
+              <label>
+                <input type="text" placeholder="Search" />
+              </label>
+              <input type="text" placeholder="Your Email" />
+            </div>
+
+            <div className="doubl-inp">
+              <input type="text" placeholder="Your Name" />
+              <input type="text" placeholder="Your Email" />
+            </div>
+
+            <textarea />
+
+            <div className="agree">
+
+              <input type="checkbox" />
+              <label>I agree to the terms and privacy policy</label>
+
+            </div>
+
+            <button className="btn-sub">🤙 Get In Touch</button>
+          </div>
+        </div>
+
+
+      </section >
+
+
+      <footer>
+
+      </footer>
 
     </>
   );
