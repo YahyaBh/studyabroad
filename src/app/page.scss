@@ -557,7 +557,7 @@ header {
             }
 
             p {
-              font-size: 0.8em;
+              font-size: 1em;
             }
           }
         }
@@ -960,6 +960,8 @@ header {
       align-items: flex-start;
       height: 80%;
       gap: 10px;
+      position: relative;
+      z-index: 0;
 
       h2 {
         font-size: 2.5em;
@@ -973,12 +975,28 @@ header {
 
       .achieve-card-container {
         width: 100%;
-        background-color: #ffffff5f;
-        padding: 20px;
-        border-radius: 20px;
+        padding: 60px 20px;
+        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         gap: 20px;
+        background: transparent;
+        border: 6px solid transparent;
+        border-radius: 20px;
+        background-clip: padding-box;
+        position: relative;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -6px;
+          left: -6px;
+          right: -6px;
+          bottom: -6px;
+          z-index: -1;
+          background: linear-gradient(to bottom, #fff, #ffffff00);
+          border-radius: 20px;
+        }
 
         .achieve-card-t {
           display: flex;
@@ -1001,23 +1019,31 @@ header {
               flex-basis: 50%;
 
               h3 {
-                font-size: 1.5em;
-                font-weight: 600;
-                color: #5e1a98;
+                font-size: 1.8em;
+                font-weight: 500;
+                color: #410071;
               }
 
-              svg {
-                background-color: #fff;
-                padding: 10px;
+              .icon {
+                width: 50px;
+                height: 50px;
                 border-radius: 50%;
-                color: #000;
-                font-size: 1.5em;
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                svg {
+                  color: #000;
+                  font-size: 1.2em;
+                  width: 50px;
+                }
               }
             }
 
             p {
-              font-size: 0.8em;
-              color: #5e1a98;
+              font-size: 1em;
+              color: #410071;
             }
           }
         }
@@ -1035,35 +1061,42 @@ header {
             justify-content: space-between;
             align-items: center;
 
-            
             h3 {
-              font-size: 1.5em;
-              font-weight: 600;
-              color: #5e1a98;
+              font-size: 1.8em;
+              font-weight: 500;
+              color: #410071;
             }
 
-            svg {
-              background-color: #fff;
-              padding: 10px;
+            .icon {
+              width: 50px;
+              height: 50px;
               border-radius: 50%;
-              color: #000;
-              font-size: 1.5em;
+              background-color: #fff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              svg {
+                color: #000;
+                font-size: 1.2em;
+                width: 50px;
+              }
             }
           }
 
           p {
-            font-size: 0.8em;
-            color: #5e1a98;
+            font-size: 1em;
+            color: #410071;
           }
         }
       }
-    }
 
-    .right {
-      flex-basis: 50%;
+      .right {
+        flex-basis: 50%;
 
-      img {
-        width: 100%;
+        img {
+          width: 100%;
+        }
       }
     }
   }

@@ -398,7 +398,7 @@ export default function Home() {
                 <div className="achieve-card">
                   <div className="achieve-card-content">
                     <h3>Over 1,000 Students Guided</h3>
-                    <FaSchool />
+                    <span className="icon"><FaSchool /></span>
                   </div>
 
                   <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
@@ -407,7 +407,7 @@ export default function Home() {
                 <div className="achieve-card">
                   <div className="achieve-card-content">
                     <h3>Over 1,000 Students Guided</h3>
-                    <FaSchool />
+                    <span className="icon"><FaSchool /></span>
                   </div>
 
                   <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
@@ -419,7 +419,7 @@ export default function Home() {
                 <div className="achieve-card">
                   <div className="achieve-card-content">
                     <h3>Over 1,000 Students Guided</h3>
-                    <FaSchool />
+                    <span className="icon"><FaSchool /></span>
                   </div>
 
                   <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
