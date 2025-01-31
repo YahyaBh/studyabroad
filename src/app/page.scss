@@ -1186,7 +1186,7 @@ header {
     180deg,
     rgba(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 1) 11%,
-    rgba(255, 233, 165, .6) 52%,
+    rgba(255, 233, 165, 0.6) 52%,
     rgba(255, 255, 255, 1) 89%,
     rgba(0, 0, 0, 0) 100%
   );
@@ -1318,7 +1318,6 @@ header {
         border-bottom: 1px solid #410071;
         background-color: transparent;
 
-
         &::placeholder {
           color: #410071;
         }
@@ -1329,6 +1328,27 @@ header {
         align-items: center;
         justify-content: flex-start;
         gap: 10px;
+        width: 100%;
+
+        label {
+          font-size: 14px;
+          color: #410071;
+        }
+
+        input {
+          accent-color: #410071;
+        }
+      }
+
+      .btn-sub {
+        padding: 10px 20px;
+        background-color: #410071;
+        color: #fff;
+        font-size: 1em;
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        margin-right: auto;
       }
     }
   }

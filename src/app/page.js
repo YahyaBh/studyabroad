@@ -542,9 +542,12 @@ export default function Home() {
               <input type="checkbox" />
               <label>I agree to the terms and privacy policy</label>
 
+
             </div>
 
             <button className="btn-sub">🤙 Get In Touch</button>
+
+
           </div>
         </div>
 
