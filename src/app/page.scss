@@ -1181,6 +1181,16 @@ header {
   align-items: center;
   flex-direction: column;
 
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 11%,
+    rgba(255, 233, 165, .6) 52%,
+    rgba(255, 255, 255, 1) 89%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
   .title {
     color: #410071;
     font-weight: 600;
@@ -1290,6 +1300,7 @@ header {
           outline: none;
           border: none;
           border-bottom: 1px solid #410071;
+          background-color: transparent;
 
           &::placeholder {
             color: #410071;
@@ -1305,10 +1316,19 @@ header {
         outline: none;
         border: none;
         border-bottom: 1px solid #410071;
+        background-color: transparent;
+
 
         &::placeholder {
           color: #410071;
         }
+      }
+
+      .agree {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
       }
     }
   }
