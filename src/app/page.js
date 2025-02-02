@@ -2,53 +2,14 @@ import { FaArrowDown, FaLocationArrow, FaPhone, FaSchool, FaSearch, FaStar } fro
 import { IoIosArrowDown } from "react-icons/io";
 import { MdArrowOutward, MdEmail } from "react-icons/md";
 import "./page.scss";
+import Footer from "./comps/footer/footer";
+import Navbar from "./comps/navbar/navbar";
 
 export default function Home() {
   return (
     <>
-      <nav>
-        <div className="nav-container">
-          <a href="/">
-            <img src="/assets/images/Logo.svg" />
-          </a>
 
-          <div className="nav-links">
-            <a href="/">Home</a>
-            <a href="/infos">Information <IoIosArrowDown /></a>
-            <a href="/about">About Us</a>
-          </div>
-
-          <div className="search-box">
-            <div className="select-container">
-              <label htmlFor="country">Country</label>
-              <select id="country">
-                <option disabled defaultValue={""}>Name of country</option>
-                <option value="country1">Country 1</option>
-                <option value="country2">Country 2</option>
-              </select>
-            </div>
-
-            <span className="search-wall"></span>
-
-            <div className="select-container">
-
-              <label htmlFor="program">Country</label>
-              <select id="program">
-                <option disabled selected>Programmes</option>
-                <option value="program1">Program 1</option>
-                <option value="program2">Program 2</option>
-              </select>
-
-            </div>
-            <button>
-              <i><FaSearch /></i>
-            </button>
-          </div>
-
-          <button className="get_consult">Get Consultation</button>
-        </div>
-      </nav >
-
+      <Navbar />
 
       <header>
 
@@ -555,59 +516,7 @@ export default function Home() {
       </section >
 
 
-      <footer>
-
-
-        <div className="footer-container">
-
-
-
-          <div className="cont">
-            <ul>
-              <li><FaSchool/> Satyamstudio</li>
-              <li><FaLocationArrow/> 8819 Ohio St. South Gate, CA 90280</li>
-              <li><MdEmail/> Ourstudio@hello.com</li>
-              <li><FaPhone/> +1 386-688-3295</li>
-            </ul>
-          </div>
-
-          <div className="cont">
-            <h4>Services</h4>
-
-            <ul>
-              <li>Travel Organization </li>
-              <li>Preparing the Visa file</li>
-              <li>University Admission</li>
-              <li>University Scholarship</li>
-              <li>Education Consultation</li>
-            </ul>
-          </div>
-
-          <div className="cont">
-            <h4>Menu</h4>
-
-            <ul>
-              <li>About Us</li>
-              <li>Countries</li>
-              <li>Universities  </li>
-            </ul>
-
-          </div>
-
-
-          <div className="cont">
-            <h4>Join a Newsletter</h4>
-
-            <p>Subscribe to our newsletter to get the latest news and updates.</p>
-
-            <input type="email" placeholder="Enter your email" />
-
-            <button>Subscribe</button>
-          </div>
-        </div>
-
-      </footer>
-
+      <Footer />
     </>
   );
 }
