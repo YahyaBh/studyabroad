@@ -79,6 +79,115 @@ function About() {
 
 
             </header>
+
+
+            <section className="services">
+
+
+                <div className="services-container">
+
+                    <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
+
+
+                    <div className="services-main">
+
+                        <div className="left">
+                            <h2>Offered services and their description.</h2>
+
+                            <p>Our strategies for achieving global academic success, your guide to opening new horizons.</p>
+                        </div>
+
+                        <div className="right">
+
+                            <div className="service-card">
+                                <img src="/assets/images/Services/VisaIcon.svg" />
+
+                                <div className="content">
+                                    <h4>Preparing the Visa file</h4>
+                                    <p>Our advisory services cover everything from selecting the right university to adapting to life abroad, ensuring a smooth and rewarding study experience.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div className="services-cards">
+
+                        <div className="service-card">
+
+                            <div className="images-container">
+                                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                                <img src="/assets/images/Services/StudyIcon.svg" />
+                                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+                            </div>
+
+
+                            <div className="content">
+                                <h4>Education Consultation</h4>
+                                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+                            </div>
+                        </div>
+
+                        <div className="service-card">
+
+                            <div className="images-container">
+                                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                                <img src="/assets/images/Services/StudyIcon.svg" />
+                                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+                            </div>
+
+
+                            <div className="content">
+                                <h4>Education Consultation</h4>
+                                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+                            </div>
+                        </div>
+
+                        <div className="service-card">
+
+                            <div className="images-container">
+                                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                                <img src="/assets/images/Services/StudyIcon.svg" />
+                                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+                            </div>
+
+
+                            <div className="content">
+                                <h4>Education Consultation</h4>
+                                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+                            </div>
+                        </div>
+
+                        <div className="service-card">
+
+                            <div className="images-container">
+                                <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                                <img src="/assets/images/Services/StudyIcon.svg" />
+                                <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+                            </div>
+
+
+                            <div className="content">
+                                <h4>Education Consultation</h4>
+                                <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section className='founders'>
+                <div className="founders-container">
+
+                    <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
+
+
+                </div>
+            </section>
         </>
     )
 }
