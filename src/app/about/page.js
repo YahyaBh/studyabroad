@@ -52,18 +52,28 @@ function About() {
 
             <header>
 
-
                 <div className="header-container">
 
-                    <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
 
 
                     <div className="header-left">
 
+                        <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
+
+
+
+                        <h2>BEDAYA <span>:</span> Your Gateway to Educational <span>Excellence</span></h2>
+
+
+                        <p>Founded in 2017, Beginning is a premier study abroad consultancy dedicated to helping ambitious students turn their academic dreams into reality. With a commitment to excellence, we offer end-to-end services that guide students from choosing the right university to adapting to life abroad. Our mission is to empower students by simplifying the complexities of studying overseas, ensuring they can focus on their education and personal growth.
+                            At Beginning, we believe in a personalized approach to every student’s journey. Whether it's identifying the ideal program, navigating admissions processes, or preparing for cultural transitions, we are here to make the journey as seamless as possible</p>
+
+                        <button>Get Consultation</button>
+
                     </div>
 
                     <div className="header-right">
-
+                        <img src="/assets/images/About/HeroImg.png" />
                     </div>
                 </div>
 
