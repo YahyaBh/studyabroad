@@ -431,5 +431,85 @@ header {
         @media screen and (min-width: 1200px) {
             max-width: 1400px !important ;
         }
+
+        .top-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+
+            .left {
+                flex-basis: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 20px;
+
+                h3 {
+                    font-size: 1.8em;
+                    font-weight: 600;
+                    color: #410071;
+                }
+
+                p {
+                    font-size: 1em;
+                    color: #410071;
+                }
+            }
+
+            .right {
+                flex-basis: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 100px;
+
+            .per-card {
+                flex-basis: 30%;
+                position: relative;
+
+                img {
+                    position: relative;
+                    filter: grayscale(100%);
+                    -webkit-mask-image: -webkit-gradient(
+                        linear,
+                        left top,
+                        left bottom,
+                        from(rgba(0, 0, 0, 1)),
+                        to(rgba(0, 0, 0, 1)),
+                        to(rgba(0, 0, 0, 0))
+                    );
+                    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)  , rgba(0, 0, 0, 0));
+                }
+
+                .text {
+                    position: absolute;
+                    bottom: 0;
+                    left: -5px;
+                    box-sizing: border-box;
+                    padding: 10px;
+
+                    h3 {
+                        font-size: 1em;
+                        font-weight: 600;
+                        color: #5e1a98;
+                    }
+
+                    h5 {
+                        font-size: 0.8em;
+                        color: #410071;
+                    }
+                }
+            }
+        }
     }
 }

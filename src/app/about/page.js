@@ -186,6 +186,47 @@ function About() {
                     <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
 
 
+
+                    <div className='top-content'>
+                        <div className='left'>
+                            <h3>Founders</h3>
+
+                            <p>The visionaries behind Beginning are education experts with years of experience in academic counseling and international education. They recognized the challenges students face in navigating the complex process of studying abroad and built Beginning to be a bridge to success.</p>
+                        </div>
+
+                        <div className='right'>
+                            <img src='/assets/images/About/ServicesIcons.svg' />
+                        </div>
+                    </div>
+
+
+                    <div className='bottom-content'>
+                        <div className='per-card'>
+                            <img src='/assets/images/About/PERSONTEST.png' />
+
+                            <div className='text'>
+                                <h3>Dr. Nada Al-Azab</h3>
+                                <h5>A dedicated professional with expertise in global education trends, committed to student success.</h5>
+                            </div>
+                        </div>
+
+                        <div className='per-card'>
+                            <img src='/assets/images/About/PERSONTEST.png' />
+                            <div className='text'>
+                                <h3>Dr. Nada Al-Azab</h3>
+                                <h5>A dedicated professional with expertise in global education trends, committed to student success.</h5>
+                            </div>
+                        </div>
+
+                        <div className='per-card'>
+                            <img src='/assets/images/About/PERSONTEST.png' />
+                            <div className='text'>
+                                <h3>Dr. Nada Al-Azab</h3>
+                                <h5>A dedicated professional with expertise in global education trends, committed to student success.</h5>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </>
