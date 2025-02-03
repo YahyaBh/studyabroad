@@ -12,8 +12,8 @@ header {
 
     .header-container {
         width: 100%;
+        flex-basis: 50%;
         position: relative; /* Ensure cards are positioned relative to this container */
-        height: 400px; /* Adjust based on your card height */
         margin: 50px auto; /* Center the stack */
 
         @media screen and (min-width: 1200px) {
