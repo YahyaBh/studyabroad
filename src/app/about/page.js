@@ -6,7 +6,7 @@ import './page.scss'
 function About() {
     return (
         <>
-            <Navbar/>
+            <Navbar />
 
 
             <header>
@@ -290,7 +290,137 @@ function About() {
 
             </section>
 
-            <Footer/>
+            <section className="achieve">
+
+                <h3 className="title-main"><span className="line-l"></span> About Us <span className="line-r"></span></h3>
+
+
+                <section className="achieve-container">
+
+                    <div className="left">
+                        <h2>What Have We Achieved?</h2>
+
+                        <p>We’ve guided over 1,000 students to top universities worldwide, secured scholarships, and ensured smooth transitions to life abroad. Our success is reflected in the bright futures of the students we’ve supported.</p>
+
+                        <div className="achieve-card-container">
+                            <div className="achieve-card-t">
+                                <div className="achieve-card">
+                                    <div className="achieve-card-content">
+                                        <h3>Over 1,000 Students Guided</h3>
+                                        <span className="icon"><FaSchool /></span>
+                                    </div>
+
+                                    <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
+                                </div>
+
+                                <div className="achieve-card">
+                                    <div className="achieve-card-content">
+                                        <h3>Over 1,000 Students Guided</h3>
+                                        <span className="icon"><FaSchool /></span>
+                                    </div>
+
+                                    <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
+                                </div>
+
+                            </div>
+
+                            <div className="achieve-card-b">
+                                <div className="achieve-card">
+                                    <div className="achieve-card-content">
+                                        <h3>Over 1,000 Students Guided</h3>
+                                        <span className="icon"><FaSchool /></span>
+                                    </div>
+
+                                    <p>We have successfully assisted students in securing admission to top universities worldwide.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="right">
+                        <img src="/assets/images/Achiev/GuyAch.svg" />
+                    </div>
+
+
+
+
+                </section>
+
+            </section >
+
+            <section className="contact">
+
+                <div className="title">
+                    <h2>Contact Us</h2>
+                    <FaArrowDown />
+                </div>
+
+
+                <div className="contact-container">
+                    <div className="left">
+                        <h3>Have Questions? <br /> Get in Touch!</h3>
+
+                        <p>Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+
+
+                        <div className="location">
+                            <div className="local">
+                                <span className="icons"><FaLocationArrow /></span>
+                                <h4>Rabat — 723 17th Street, Office 478 hassan, IM 5</h4>
+                            </div>
+
+                            <div className="local">
+                                <span className="icons"><FaLocationArrow /></span>
+                                <h4>Rabat — 723 17th Street, Office 478 hassan, IM 5</h4>
+                            </div>
+
+                            <div className="local">
+                                <span className="icons"><FaLocationArrow /></span>
+                                <h4>Rabat — 723 17th Street, Office 478 hassan, IM 5</h4>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div className="right">
+                        <div className="double-inp">
+                            <label>
+                                <input type="text" placeholder="Search" />
+                            </label>
+                            <label>
+                                <input type="email" placeholder="Email" />
+                            </label>
+                        </div>
+
+                        <div className="double-inp">
+                            <label>
+                                <input type="phone" placeholder="Phone" />
+                            </label>
+                            <label>
+                                <input type="phone" placeholder="Phone" />
+                            </label>
+                        </div>
+
+                        <textarea placeholder="How can we help you ? Feel free to get in touch!" cols={"40"} rows={"10"} />
+
+                        <div className="agree">
+
+                            <input type="checkbox" />
+                            <label>I agree to the terms and privacy policy</label>
+
+
+                        </div>
+
+                        <button className="btn-sub">🤙 Get In Touch</button>
+
+
+                    </div>
+                </div>
+
+
+            </section >
+
+            <Footer />
         </>
     )
 }
