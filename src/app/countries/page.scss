@@ -11,13 +11,10 @@ header {
     align-items: center;
 
     .header-container {
-        color: #fff;
-        font-size: 24px;
-        font-weight: 600;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
+        width: 100%;
+        position: relative; /* Ensure cards are positioned relative to this container */
+        height: 400px; /* Adjust based on your card height */
+        margin: 50px auto; /* Center the stack */
 
         @media screen and (min-width: 1200px) {
             max-width: 1400px !important ;
@@ -166,7 +163,7 @@ header {
                     }
 
                     p {
-                        font-size: .6em;
+                        font-size: 0.6em;
                         width: 100%;
                         text-align: justify;
                         margin-bottom: 10px;
