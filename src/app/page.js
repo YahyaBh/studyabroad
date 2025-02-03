@@ -1,6 +1,5 @@
 import { FaArrowDown, FaLocationArrow, FaPhone, FaSchool, FaSearch, FaStar } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
-import { MdArrowOutward, MdEmail } from "react-icons/md";
+import { MdArrowOutward } from "react-icons/md";
 import "./page.scss";
 import Footer from "./comps/footer/footer";
 import Navbar from "./comps/navbar/navbar";
