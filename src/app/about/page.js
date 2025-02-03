@@ -1,3 +1,4 @@
+import { FaArrowDown, FaLocationArrow, FaSchool } from 'react-icons/fa'
 import Footer from '../comps/footer/footer'
 import Navbar from '../comps/navbar/navbar'
 import './page.scss'
