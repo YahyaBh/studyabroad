@@ -100,6 +100,139 @@ const page = () => {
                 </div>
             </header>
 
+
+            <div className="countries">
+
+                <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
+
+
+                <div className="countries-container">
+
+
+                    <div className="titles">
+                        <h2>Explore the best global <br /> study destinations.</h2>
+
+                        <p>We provide you with an overview of the most popular countries for studying abroad, highlighting their capitals and the advantages each destination offers.</p>
+
+                    </div>
+
+
+                    <div className="countries-cards">
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+
+                        <div className="countires-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
             <Footer />
 
         </>

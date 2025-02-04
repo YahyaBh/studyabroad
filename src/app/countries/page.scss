@@ -30,7 +30,6 @@ header {
             gap: 20px;
             box-sizing: border-box;
 
-
             h2 {
                 font-size: 4em;
                 font-weight: 600;
@@ -45,7 +44,7 @@ header {
             p {
                 color: #fff;
                 font-size: 1.4em;
-                opacity: .7;
+                opacity: 0.7;
             }
 
             .search-box {
@@ -153,7 +152,7 @@ header {
                             )
                             padding-box,
                         linear-gradient(to bottom, #f7c607, #870ae6) border-box;
-                    padding:  10px;
+                    padding: 10px;
                     padding-bottom: 20px;
                     color: #000;
                     transition: all 1s ease;
@@ -233,6 +232,156 @@ header {
                         &:hover {
                             background: #870ae6;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.title-main {
+    font-weight: 600;
+    color: #5e1a98;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+
+    .line-l {
+        background: linear-gradient(to right, #ffffff00, #5e1a98);
+        width: 6em;
+        height: 3px;
+    }
+
+    .line-r {
+        background: linear-gradient(to left, #ffffff00, #5e1a98);
+        width: 6em;
+        height: 3px;
+    }
+}
+
+.countries {
+    background: linear-gradient(to bottom, #dbaaff, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px;
+
+    text-align: center;
+
+    .countries-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        @media screen and (min-width: 1200px) {
+            max-width: 1400px !important ;
+        }
+
+        .titles {
+            width: 70%;
+
+            h2 {
+                font-size: 2.4em;
+                font-weight: 600;
+                color: #410071;
+            }
+
+            p {
+                font-size: 1.2em;
+                color: #410071;
+            }
+        }
+
+        .countries-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-sizing: border-box;
+            padding-top: 20px;
+
+            .countires-card {
+                flex-basis: 22%;
+                height: 100%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                flex-direction: column;
+                gap: 15px;
+                box-sizing: border-box;
+                border-radius: 20px; /* Rounded corners */
+                border: transparent 3px solid;
+                background:
+                    linear-gradient(
+                            180deg,
+                            rgba(255, 255, 255, 1) 55%,
+                            rgb(255, 244, 212) 74%,
+                            rgba(255, 255, 255, 1) 89%,
+                            rgba(255, 255, 255, 1) 100%
+                        )
+                        padding-box,
+                    linear-gradient(to bottom, #f7c607, #870ae6) border-box;
+                padding: 10px;
+
+                img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 20px;
+                    // margin-bottom: 10px;
+                }
+
+                .rating {
+                    svg {
+                        color: #fcc51f;
+                    }
+                }
+
+                h4 {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 1.2em;
+
+                    svg {
+                        color: #5e1a98;
+                    }
+                }
+
+                p {
+                    width: 100%;
+                    text-align: justify;
+                    margin-bottom: 10px;
+                    opacity: 0.8;
+                }
+
+                button {
+                    width: 100%;
+                    height: 40px;
+                    border-radius: 10px;
+                    border: transparent;
+                    background: #5e1a98;
+                    color: white;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 1em;
+
+                    svg {
+                        color: #ffc300;
+                    }
+
+                    &:hover {
+                        background: #870ae6;
                     }
                 }
             }
