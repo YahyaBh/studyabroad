@@ -19,6 +19,11 @@ const page = () => {
                 <div className="header-container">
 
                     <div className="left" >
+
+                        <h2>Explore Study <span>Destinations</span></h2>
+
+                        <p>Discover the opportunities and benefits of studying in your dream country.</p>
+
                         <div className="search-box">
                             <div className="select-container">
                                 <label htmlFor="country">Country</label>

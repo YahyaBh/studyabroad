@@ -30,6 +30,24 @@ header {
             gap: 20px;
             box-sizing: border-box;
 
+
+            h2 {
+                font-size: 4em;
+                font-weight: 600;
+                color: #fff;
+
+                span {
+                    color: #f7c607;
+                    font-weight: 600;
+                }
+            }
+
+            p {
+                color: #fff;
+                font-size: 1.4em;
+                opacity: .7;
+            }
+
             .search-box {
                 display: flex;
                 align-items: center;
@@ -106,7 +124,6 @@ header {
 
         .right {
             flex-basis: 55%;
-            position: relative;
 
             .card-cont {
                 width: 100%;
@@ -139,7 +156,7 @@ header {
                     padding:  10px;
                     padding-bottom: 20px;
                     color: #000;
-                    transition: all 0.3s ease;
+                    transition: all 1s ease;
 
                     &:hover {
                         z-index: 4;
@@ -147,17 +164,17 @@ header {
                     }
 
                     &:nth-child(1) {
-                        rotate: 13deg;
-                        transform: translate(40%, -5%);
+                        rotate: 8deg;
+                        left: 40%;
                     }
 
                     &:nth-child(2) {
-                        transform: translate(10%, 0px);
+                        left: 25%;
                     }
 
                     &:nth-child(3) {
                         rotate: -9deg;
-                        transform: translate(-35%, 0px);
+                        left: 5%;
                     }
 
                     img {
@@ -179,7 +196,7 @@ header {
                         justify-content: center;
                         align-items: center;
                         gap: 10px;
-                        font-size: 1em;
+                        font-size: 1.2em;
 
                         svg {
                             color: #5e1a98;
@@ -187,7 +204,7 @@ header {
                     }
 
                     p {
-                        font-size: 0.6em;
+                        font-size: 0.8em;
                         width: 100%;
                         text-align: justify;
                         margin-bottom: 10px;
