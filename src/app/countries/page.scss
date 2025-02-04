@@ -107,24 +107,22 @@ header {
         .right {
             flex-basis: 55%;
             position: relative;
-            
 
             .card-cont {
                 width: 100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
                 align-items: center;
                 position: relative;
 
                 .countires-card {
                     position: absolute;
-                    flex-basis: 33%;
-                    width: 40%;
+                    width: 45%;
                     display: flex;
                     align-items: flex-start;
                     justify-content: center;
                     flex-direction: column;
-                    gap: 15px;
+                    gap: 20px;
                     box-sizing: border-box;
                     border-radius: 20px; /* Rounded corners */
                     border: transparent 3px solid;
@@ -138,8 +136,29 @@ header {
                             )
                             padding-box,
                         linear-gradient(to bottom, #f7c607, #870ae6) border-box;
-                    padding: 10px;
+                    padding:  10px;
+                    padding-bottom: 20px;
                     color: #000;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        z-index: 4;
+                        transform: scale(1.07);
+                    }
+
+                    &:nth-child(1) {
+                        rotate: 13deg;
+                        transform: translate(40%, -5%);
+                    }
+
+                    &:nth-child(2) {
+                        transform: translate(10%, 0px);
+                    }
+
+                    &:nth-child(3) {
+                        rotate: -9deg;
+                        transform: translate(-35%, 0px);
+                    }
 
                     img {
                         width: 100%;
