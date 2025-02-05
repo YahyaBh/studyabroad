@@ -1,0 +1,116 @@
+header {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/images/HeroBack.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80dvh;
+    width: 100%;
+    padding-top: 5dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .header-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+
+        @media screen and (min-width: 1200px) {
+            max-width: 1400px !important ;
+        }
+
+        h2 {
+            font-size: 3.2em;
+            font-weight: 600;
+            color: #fff;
+
+            span {
+                color: #f7c607;
+                font-weight: 600;
+            }
+        }
+
+        p {
+            color: #fff;
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            height: 66px;
+
+            .search-wall {
+                border-right: 1px solid #41007142;
+                height: 60%;
+                width: 1px;
+            }
+        }
+
+        .select-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            width: 250px;
+            color: #5e1a98; /* Purple text */
+            padding: 15px 10px;
+            transition: all 0.3s ease-in-out;
+            gap: 10px;
+            position: relative;
+
+            label {
+                font-size: 16px;
+                font-weight: 600;
+                position: absolute;
+                top: 22px;
+                padding: 3px;
+            }
+        }
+
+        .search-box select,
+        .search-box input {
+            border: none;
+            font-size: 14px;
+            outline: none;
+            padding: 20px 0px 0px 0px;
+            cursor: pointer;
+        }
+
+        .search-box input {
+            flex: 1;
+            border-left: 1px solid #41007142;
+        }
+
+        .search-box button {
+            background-color: #ffd700; /* Yellow background */
+            border: none;
+            padding: 20px 35px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .search-box button:hover {
+            background-color: #ffc300; /* Slightly darker yellow on hover */
+        }
+
+        .search-box button i {
+            font-size: 16px;
+            color: #000; /* Black icon */
+        }
+    }
+}
