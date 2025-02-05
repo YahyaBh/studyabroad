@@ -1,7 +1,9 @@
-import { FaSearch } from 'react-icons/fa'
+import { FaLocationArrow, FaSearch } from 'react-icons/fa'
 import Footer from '../comps/footer/footer'
 import Navbar from '../comps/navbar/navbar'
 import './page.scss'
+import { MdArrowOutward } from 'react-icons/md'
+import { IoMdStar } from 'react-icons/io'
 const page = () => {
 
     return (
@@ -45,6 +47,51 @@ const page = () => {
                     </div>
                 </div>
             </header>
+
+
+            <div className="universities">
+
+                <h3 className="title-main"><span className="line-l"></span> Services <span className="line-r"></span></h3>
+
+
+                <div className="universities-container">
+
+
+                    <div className="titles">
+                        <h2>Explore the best global <br /> study destinations.</h2>
+
+                        <p>We provide you with an overview of the most popular countries for studying abroad, highlighting their capitals and the advantages each destination offers.</p>
+
+                    </div>
+
+
+                    <div className="universities-cards">
+                        <div className="universities-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+                            <div className="rating">
+                                <IoMdStar />
+                                <IoMdStar />
+                                <IoMdStar />
+                                <IoMdStar />
+                                <IoMdStar />
+                            </div>
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <h3>Korea University</h3>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
 
 
             <Footer />

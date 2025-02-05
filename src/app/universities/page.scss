@@ -114,3 +114,164 @@ header {
         }
     }
 }
+
+.title-main {
+    font-weight: 600;
+    color: #5e1a98;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+
+    .line-l {
+        background: linear-gradient(to right, #ffffff00, #5e1a98);
+        width: 6em;
+        height: 3px;
+    }
+
+    .line-r {
+        background: linear-gradient(to left, #ffffff00, #5e1a98);
+        width: 6em;
+        height: 3px;
+    }
+}
+
+.universities {
+    background: linear-gradient(to bottom, #dcaaff64, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px;
+
+    text-align: center;
+
+    .universities-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        @media screen and (min-width: 1200px) {
+            max-width: 1400px !important ;
+        }
+
+        .titles {
+            width: 70%;
+
+            h2 {
+                font-size: 2.4em;
+                font-weight: 600;
+                color: #410071;
+            }
+
+            p {
+                font-size: 1.2em;
+                color: #410071;
+            }
+        }
+
+        .universities-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-sizing: border-box;
+            padding-top: 20px;
+
+            .universities-card {
+                flex-basis: 25%;
+                height: 100%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                flex-direction: column;
+                gap: 5px;
+                box-sizing: border-box;
+                border-radius: 20px; /* Rounded corners */
+                border: transparent 3px solid;
+                background:
+                    linear-gradient(
+                            180deg,
+                            rgba(255, 255, 255, 1) 55%,
+                            rgb(255, 244, 212) 74%,
+                            rgba(255, 255, 255, 1) 89%,
+                            rgba(255, 255, 255, 1) 100%
+                        )
+                        padding-box,
+                    linear-gradient(to bottom, #f7c607, #870ae6) border-box;
+                padding: 10px;
+
+                img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 20px;
+                    margin-bottom: 10px;
+                }
+
+                .rating {
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-start;
+                    gap: 5px;
+
+                    svg {
+                        color: #fcc51f;
+                        font-size: 1.4em;
+                    }
+                }
+
+                h4 {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+
+                    svg {
+                        color: #5e1a98;
+                    }
+                }
+
+                h3 {
+                    color: #870ae6;
+                    font-size: 1em;
+                    font-weight: 600;
+                }
+
+                p {
+                    width: 100%;
+                    opacity: 0.8;
+                    margin-bottom: 10px;
+                    text-align: justify;
+                }
+
+                button {
+                    width: 100%;
+                    height: 40px;
+                    border-radius: 10px;
+                    border: transparent;
+                    background: #5e1a98;
+                    color: white;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 1em;
+
+                    svg {
+                        color: #ffc300;
+                    }
+
+                    &:hover {
+                        background: #870ae6;
+                    }
+                }
+            }
+        }
+    }
+}
