@@ -66,26 +66,32 @@ const page = () => {
 
 
                     <div className="universities-cards">
-                        <div className="universities-card">
-                            <img src="/assets/images/HeroBack.svg" />
 
-                            <div className="rating">
-                                <IoMdStar />
-                                <IoMdStar />
-                                <IoMdStar />
-                                <IoMdStar />
-                                <IoMdStar />
+
+                        {[...Array(16)].map((_, index) => (
+                            <div key={index} className="universities-card">
+                                <img src="/assets/images/HeroBack.svg" />
+
+                                <div className="rating">
+                                    <IoMdStar />
+                                    <IoMdStar />
+                                    <IoMdStar />
+                                    <IoMdStar />
+                                    <IoMdStar />
+                                </div>
+
+                                <h4><FaLocationArrow /> Washington</h4>
+
+                                <h3>Korea University</h3>
+
+                                <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                                <button>Learn More <MdArrowOutward /> </button>
                             </div>
-
-                            <h4><FaLocationArrow /> Washington</h4>
-
-                            <h3>Korea University</h3>
-
-                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+                        ))}
 
 
-                            <button>Learn More <MdArrowOutward /> </button>
-                        </div>
 
 
 
