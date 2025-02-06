@@ -266,7 +266,7 @@ header {
 
                     h4 {
                         display: flex;
-                        justify-content:flex-start;
+                        justify-content: flex-start;
                         align-items: center;
                         gap: 10px;
                         font-size: 1.2em;
@@ -280,10 +280,9 @@ header {
                     .social-media {
                         width: 100%;
                         display: flex;
-                        justify-content:space-evenly;
+                        justify-content: space-evenly;
                         align-items: center;
                         font-size: 1.8em;
-                        
 
                         svg {
                             color: #420071;
@@ -313,5 +312,32 @@ header {
         background: linear-gradient(to left, #ffffff00, #5e1a98);
         width: 6em;
         height: 3px;
+    }
+}
+
+.informations-uni {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    .informations-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin: 20px;
+        background-color: #c682fa28;
+        border-radius: 20px;
+        height: 100%;
+        padding: 5dvh;
+        @media screen and (min-width: 1200px) {
+            max-width: 1400px !important ;
+        }
+
+        
     }
 }

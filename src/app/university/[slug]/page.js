@@ -136,6 +136,36 @@ const page = ({ params }) => {
             </header >
 
 
+            <section className='informations-uni'>
+
+
+
+                <div className='informations-container'>
+                    <div className='left'>
+                        <h3 className="title-main"><span className="line-l"></span> Rankings <span className="line-r"></span></h3>
+
+                        <h2>UNSW Rankings Summary</h2>
+
+                        <p>The QS World University Rankings, commonly referred to as the QS Rankings, evaluate and rank universities based on their overall performance, encompassing academic research and the quality of education. It is recognized as one
+                            of the most widely used university ranking systems globally. The evaluation is based on key criteria, including :</p>
+
+                        <div className='rules-list'>
+                            <h4>1. Learning Quality</h4>
+                            <h4>2. Learning Quality</h4>
+                            <h4>3. Learning Quality</h4>
+                            <h4>4. Learning Quality</h4>
+                            <h4>5. Learning Quality</h4>
+                        </div>
+                    </div>
+
+                    <div className='right'>
+
+                    </div>
+                </div>
+
+            </section>
+
+
             <Footer />
 
         </>
