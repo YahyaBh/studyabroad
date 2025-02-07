@@ -7,11 +7,9 @@ import { FaFacebook, FaLinkedin, FaPhone, FaWeibo, FaWordpressSimple } from 'rea
 import { FaTwitter } from 'react-icons/fa';
 
 const page = ({ params }) => {
+    console.log("Params:", params); // Debugging
 
-    async function slug() {
-        const slug = params.slug;
-        return slug;
-    }
+    if (!params || !params.slug) return <p>Loading...</p>;
 
     return (
         <>
@@ -24,7 +22,7 @@ const page = ({ params }) => {
                 <div className='header-container'>
 
                     <div className='left'>
-                        <h2>{slug()} <MdOutlineUpload /></h2>
+                        <h2>{params.slug} <MdOutlineUpload /></h2>
 
 
                         <h3>Overview</h3>
@@ -247,10 +245,9 @@ const page = ({ params }) => {
             <div className='line-div'></div>
 
             <section className='uni-req'>
+                <h3 className="title-main"><span className="line-l"></span> Description <span className="line-r"></span></h3>
+
                 <div className='req-container'>
-                    <h3 className="title-main"><span className="line-l"></span> Description <span className="line-r"></span></h3>
-
-
                     <div className='top-cont'>
                         <div className='left'>
                             <h2>Admission Requirements at the University of New South Wales</h2>
@@ -263,6 +260,33 @@ const page = ({ params }) => {
                                 <img src='/assets/images/Uni/Rank1.png' />
                                 <h4>For the TOEFL iBT exam, a minimum score of 90 is required, with at least 22 in Writing, 22 in Reading, 22 in Listening, and 22 in Speaking. </h4>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className='bottom-cont'>
+                        <div className='card'>
+                            <img src='/assets/images/Uni/Rank1.png' />
+                            <h4>For the IELTS exam, a minimum score of 6.5 is required, with at least 6.0 in each of the four sections (Listening, Reading, Writing, and Speaking).</h4>
+                        </div>
+                        <div className='card'>
+                            <img src='/assets/images/Uni/Rank1.png' />
+                            <h4>For the IELTS exam, a minimum score of 6.5 is required, with at least 6.0 in each of the four sections (Listening, Reading, Writing, and Speaking).</h4>
+                        </div>
+                        <div className='card'>
+                            <img src='/assets/images/Uni/Rank1.png' />
+                            <h4>For the IELTS exam, a minimum score of 6.5 is required, with at least 6.0 in each of the four sections (Listening, Reading, Writing, and Speaking).</h4>
+                        </div>
+                        <div className='card'>
+                            <img src='/assets/images/Uni/Rank1.png' />
+                            <h4>For the IELTS exam, a minimum score of 6.5 is required, with at least 6.0 in each of the four sections (Listening, Reading, Writing, and Speaking).</h4>
+                        </div>
+                        <div className='card'>
+                            <img src='/assets/images/Uni/Rank1.png' />
+                            <h4>For the IELTS exam, a minimum score of 6.5 is required, with at least 6.0 in each of the four sections (Listening, Reading, Writing, and Speaking).</h4>
+                        </div>
+                        <div className='card'>
+                            <img src='/assets/images/Uni/Rank1.png' />
+                            <h4>For the IELTS exam, a minimum score of 6.5 is required, with at least 6.0 in each of the four sections (Listening, Reading, Writing, and Speaking).</h4>
                         </div>
                     </div>
                 </div>
