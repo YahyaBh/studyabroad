@@ -151,16 +151,51 @@ const page = ({ params }) => {
 
                         <div className='rules-list'>
                             <h4>1. Learning Quality</h4>
-                            <h4>2. Learning Quality</h4>
-                            <h4>3. Learning Quality</h4>
-                            <h4>4. Learning Quality</h4>
-                            <h4>5. Learning Quality</h4>
+                            <h4>2. Research Output</h4>
+                            <h4>3. Scientific Vision</h4>
+                            <h4>4. Academic Reputition</h4>
+                            <h4>5. Job Market Connection</h4>
                         </div>
                     </div>
 
                     <div className='right'>
+                        <div className='line'></div>
+                        <div className='cards'>
+                            <div className='rank'>
+                                <div className='content'>
+                                    <h5>the top 100 <br /> universities globally</h5>
+                                    <h3>43rd</h3>
+                                    <h5>the university ranked</h5>
+                                </div>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                            </div>
+                            <div className='rank'>
+                                <div className='content'>
+                                    <h5>the top 100 <br /> universities globally</h5>
+                                    <h3>43rd</h3>
+                                    <h5>the university ranked</h5>
+                                </div>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                            </div>
+                        </div>
+                        <div className='line'></div>
 
                     </div>
+                </div>
+
+            </section>
+
+
+            <section className='description-uni'>
+
+                <div className='description-uni-container'>
+                    <h3 className="title-main"><span className="line-l"></span> Description <span className="line-r"></span></h3>
+
+                    <h2>The University of New South Wales building.</h2>
+
+                    <p>The main campus of the University of New South Wales is situated on a 38-hectare site in Kensington, just seven kilometers from Sydney. It features a wide range of facilities and buildings, including the Student Club, Health Center, University Bank, ATMs, parking lots, bus stops, and a bike center. The campus also offers on-campus housing, a library, the UNSW Bookstore, and various research centers. Additionally, it houses theaters, galleries, museums, an alumni foundation, a counseling services center, a prospective students' office, a language institute, and a postal center. Sports facilities, such as squash courts and swimming pools, are also available, along with the UNSW Center for International Students.</p>
+
+
                 </div>
 
             </section>
