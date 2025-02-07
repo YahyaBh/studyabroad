@@ -1,9 +1,9 @@
 import Navbar from '@/app/comps/navbar/navbar';
 import Footer from '@/app/comps/footer/footer';
-import { MdOutlineUpload } from 'react-icons/md';
+import { MdArrowOutward, MdOutlineUpload } from 'react-icons/md';
 
 import './page.scss'
-import { FaFacebook, FaLinkedin, FaPhone, FaWeibo, FaWordpressSimple } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaLocationArrow, FaPhone, FaStar, FaWeibo, FaWordpressSimple } from 'react-icons/fa';
 import { FaTwitter } from 'react-icons/fa';
 
 const page = ({ params }) => {
@@ -292,7 +292,231 @@ const page = ({ params }) => {
                 </div>
             </section>
 
+            <section className='fees'>
+                <h3 className="title-main"><span className="line-l"></span> Fees <span className="line-r"></span></h3>
 
+                <div className='fees-container'>
+                    <div className='left'>
+                        <h2>Tuition Fees at the University of New South Wales</h2>
+
+                        <p>Undoubtedly, studying abroad is a significant investment, but it requires thorough research and planning. Students must manage their finances and budget, which is why UNSW has developed a calculator that allows students to determine the tuition fees for the program they plan to pursue.
+                            It is important to note that the cost of studying at the University of New South Wales largely depends on the program students intend to study, as well as the academic degree they pursue. However, in general, the estimated tuition fees at UNSW are approximately 1,000 AUD, which equals around 719 USD annually, in addition to other fees that students may need.
+                            The Opportunity platform has provided estimated costs related to other expenses:</p>
+                    </div>
+
+                    <div className='right'>
+                        <div className='cards-container'>
+                            <div className='card'>
+                                <h5>Application Fee:</h5>
+                                <h3>125 AUD</h3>
+                            </div>
+
+                            <div className='card' >
+                                <h5>Books (note that purchasing books is not mandatory):</h5>
+                                <h3>1000 AUD</h3>
+                            </div>
+
+                            <div className='card' >
+                                <h5>Living expenses:</h5>
+                                <h3>200 AUD</h3>
+                            </div>
+
+                            <div className='card' >
+                                <h5>Additional fees such as health insurance, course fees, equipment and tool usage, laboratory fees, and field trips.</h5>
+                                <h3></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section className='why'>
+                <h3 className="title-main"><span className="line-l"></span> Why [University Name] <span className="line-r"></span></h3>
+
+                <div className='why-container'>
+                    <div className='left'>
+                        <h2>Why Choose the University of New South Wales: Benefits and Challenges for International Students</h2>
+
+                        <p>You may be wondering: why study at the University of New South Wales? Here's a list of key reasons that encourage students to choose UNSW: The university has a strong global reputation for its high quality of teaching and research. It offers a culturally diverse environment along with a safe and comfortable study atmosphere. Of the 500 companies in Australia, 45% are owned by UNSW, meaning there are ample job opportunities for students after graduation. The campus serves as a hub for recreational facilities, sports amenities, and cultural centers, offering students plenty of things to do in their free time. The climate is moderate, neither too hot nor too cold. However, there are also challenges that international students may face, such as the fact that English is not the official language of Australia, which can make communication difficult. Students might also initially struggle to build relationships and make friends, but this can be overcome by greeting others and joining student clubs.
+                            Additionally, students may encounter cultural differences that are quite distinct from their own.</p>
+                    </div>
+
+                    <div className='right'>
+                        <img src='/assets/images/Uni/WhyImage.svg' />
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section className='scholarship'>
+
+                <div className='scholarship-container'>
+
+
+                    <div className='left'>
+                        <img src='/assets/images/Uni/ScholarshipImage.svg' />
+
+                    </div>
+
+                    <div className='right'>
+
+                        <h3 className="title-main"><span className="line-l"></span> Scholarship <span className="line-r"></span></h3>
+
+                        <h2>Scholarships Offered by the University of New South Wales</h2>
+
+                        <p>The University of New South Wales provides a variety of scholarships for students.</p>
+
+                        <button>Learn More</button>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section className='graduates'>
+
+                <h3 className="title-main"><span className="line-l"></span> Top Graduates <span className="line-r"></span></h3>
+
+
+                <div className='graduates-container'>
+
+                    <h2>Notable Alumni of the University of New South Wales</h2>
+
+                    <h4>When talking about a prestigious university like the University of New South Wales,
+                        which we’ve explored today, it's no surprise that it has graduated and shaped generations of leading figures in their communities.
+                        Some of the most notable of these figures include:</h4>
+
+
+                    <div className='bottom-content'>
+                        <div className='per-card'>
+                            <img src='/assets/images/About/PERSONTEST.png' />
+
+                            <div className='text'>
+                                <h3>Dr. Nada Al-Azab</h3>
+                                <h5>A dedicated professional with expertise in global education trends, committed to student success.</h5>
+                            </div>
+                        </div>
+
+                        <div className='per-card'>
+                            <img src='/assets/images/About/PERSONTEST.png' />
+                            <div className='text'>
+                                <h3>Dr. Nada Al-Azab</h3>
+                                <h5>A dedicated professional with expertise in global education trends, committed to student success.</h5>
+                            </div>
+                        </div>
+
+                        <div className='per-card'>
+                            <img src='/assets/images/About/PERSONTEST.png' />
+                            <div className='text'>
+                                <h3>Dr. Nada Al-Azab</h3>
+                                <h5>A dedicated professional with expertise in global education trends, committed to student success.</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section className="universities">
+                <div className="universities-container">
+
+                    <h2>World Universities Guide</h2>
+
+                    <p>Explore top universities worldwide, including in the US, UK, and Arab countries, with details on admissions, programs, fees, and scholarships.</p>
+
+                    <div className="universities-cards">
+                        <div className="universities-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+                            <div className="rating">
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                            </div>
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <h3>Korea University</h3>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+                        <div className="universities-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+                            <div className="rating">
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                            </div>
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <h3>Korea University</h3>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+                        <div className="universities-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+                            <div className="rating">
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                            </div>
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <h3>Korea University</h3>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+                        <div className="universities-card">
+                            <img src="/assets/images/HeroBack.svg" />
+
+                            <div className="rating">
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                                <FaStar />
+                            </div>
+
+                            <h4><FaLocationArrow /> Washington</h4>
+
+                            <h3>Korea University</h3>
+
+                            <p>The United States is home to some of the world's top universities, such as Harvard and Stanford. It offers diverse study programs and extensive research opportunities.</p>
+
+
+                            <button>Learn More <MdArrowOutward /> </button>
+                        </div>
+
+                    </div>
+
+                    <button className="explore">Explore The Countries</button>
+
+                </div>
+            </section>
             <Footer />
 
         </>
