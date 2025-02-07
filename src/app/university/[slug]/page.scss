@@ -12,7 +12,8 @@ header {
         align-items: center;
         gap: 20px;
         margin: 20px;
-        background-color: #c682fa28;
+        background-color: #c682fa0a;
+        box-shadow: 0 0 5px 1px #000;
         border-radius: 20px;
         height: 100%;
         padding: 2dvh;
@@ -767,6 +768,12 @@ header {
                             linear-gradient(white, white) content-box,
                             linear-gradient(white, white);
                         -webkit-mask-composite: destination-out;
+                    }
+
+                    h3 {
+                        font-size: 1.6em;
+                        color: #870ae6;
+                        font-weight: 600;
                     }
                 }
             }
