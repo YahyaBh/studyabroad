@@ -301,6 +301,7 @@ header {
     justify-content: center;
     align-items: center;
     gap: 0.5em;
+    font-size: 1.4em;
 
     .line-l {
         background: linear-gradient(to right, #ffffff00, #5e1a98);
@@ -420,11 +421,9 @@ header {
 
 .description-uni {
     display: flex;
-    flex-direction: column;;
+    flex-direction: column;
     gap: 1em;
-    margin-top: 2em;
     margin-bottom: 2em;
-
 
     .description-uni-container {
         width: 100%;
@@ -434,13 +433,13 @@ header {
         flex-direction: column;
         gap: 20px;
         margin: 20px;
+        margin-top: 0;
         height: 100%;
         padding: 5dvh;
 
         @media screen and (min-width: 1200px) {
             max-width: 1400px !important ;
         }
-
 
         h2 {
             font-size: 2em;
@@ -452,4 +451,117 @@ header {
             font-size: 1em;
         }
     }
+}
+
+.degrees-offered {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .degrees-offered-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        gap: 20px;
+        margin: 20px;
+        margin-top: 0;
+        height: 100%;
+        padding: 5dvh;
+
+        @media screen and (min-width: 1200px) {
+            max-width: 1400px !important ;
+        }
+
+        .left {
+            flex-basis: 50%;
+
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 1em;
+
+            h2 {
+                font-size: 2em;
+                color: #420071;
+                font-weight: 600;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+
+        .right {
+            flex-basis: 50%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            .cards-cont {
+                display: flex;
+                justify-content: space-evenly;
+                align-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                position: relative;
+                padding: 20px;
+                border-radius: 35px; /* Rounded corners */
+                border: 5px solid transparent;
+                background:
+                    linear-gradient(white, white) padding-box,
+                    linear-gradient(to bottom, #5d1a9888 10%, #ffffff00 80%) border-box;
+
+                .card {
+                    flex-basis: 40%;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    position: relative;
+                    padding: 20px;
+                    background: white; /* Inner background */
+                    border-radius: 20px;
+                    z-index: 1; /* Ensures it stays above the gradient */
+                    overflow: hidden; /* Prevents pseudo-element from leaking */
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        padding: 5px; /* Border thickness */
+                        background: linear-gradient(to bottom, #5d1a9888 10%, #ffffff00 80%);
+                        border-radius: 25px;
+                        z-index: -1; /* Keeps it behind the card */
+                        mask:
+                            linear-gradient(white, white) content-box,
+                            linear-gradient(white, white);
+                        mask-composite: exclude;
+                        -webkit-mask:
+                            linear-gradient(white, white) content-box,
+                            linear-gradient(white, white);
+                        -webkit-mask-composite: destination-out;
+                    }
+
+                    img {
+                        flex-shrink: 30%;
+                    }
+
+                    h3 {
+                        font-size: 1em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.line-div {
+    background: linear-gradient(to right , #420071 , #f7c607);
+    height: 5px;
+    width: 100%;
 }

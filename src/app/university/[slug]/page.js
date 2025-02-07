@@ -201,6 +201,74 @@ const page = ({ params }) => {
             </section>
 
 
+            <section className='degrees-offered'>
+
+                <div className='degrees-offered-container'>
+                    <div className='left'>
+                        <h3 className="title-main"><span className="line-l"></span> Degrees Offered <span className="line-r"></span></h3>
+
+                        <h2>Degrees Offered by the University of New South Wales</h2>
+
+                        <p>The University of New South Wales always supports empowering students to discover opportunities that will shape their future through world-class academic programs offered by the university, which include the following :</p>
+                    </div>
+
+                    <div className='right'>
+                        <div className='cards-cont'>
+                            <div className='card'>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                                <h3>Bachelor's Degree</h3>
+                            </div>
+                            <div className='card'>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                                <h3>Bachelor's Degree</h3>
+                            </div>
+                            <div className='card'>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                                <h3>Bachelor's Degree</h3>
+                            </div>
+                            <div className='card'>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                                <h3>Bachelor's Degree</h3>
+                            </div>
+                            <div className='card'>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                                <h3>Bachelor's Degree</h3>
+                            </div>
+                            <div className='card'>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                                <h3>Bachelor's Degree</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <div className='line-div'></div>
+
+            <section className='uni-req'>
+                <div className='req-container'>
+                    <h3 className="title-main"><span className="line-l"></span> Description <span className="line-r"></span></h3>
+
+
+                    <div className='top-cont'>
+                        <div className='left'>
+                            <h2>Admission Requirements at the University of New South Wales</h2>
+
+                            <p>Admission requirements for each program at the University of New South Wales vary depending on the field of study. However, here are the main requirements that prospective students must meet :</p>
+                        </div>
+
+                        <div className='right'>
+                            <div className='card'>
+                                <img src='/assets/images/Uni/Rank1.png' />
+                                <h4>For the TOEFL iBT exam, a minimum score of 90 is required, with at least 22 in Writing, 22 in Reading, 22 in Listening, and 22 in Speaking. </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
             <Footer />
 
         </>
