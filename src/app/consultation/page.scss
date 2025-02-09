@@ -73,10 +73,12 @@
                 overflow: hidden; /* Prevents pseudo-element from leaking */
                 padding: 5dvh;
                 gap: 20px;
-                transition: all .3s ease;
+                transition: all 0.3s ease;
 
                 &:hover {
-                    filter: grayscale(100%);
+                    .card {
+                        opacity: 0.7;
+                    }
                 }
 
                 &::before {
@@ -100,6 +102,15 @@
                     -webkit-mask-composite: destination-out;
                 }
 
+                .active {
+                    transform: scale(1.1);
+
+                    img {
+                        -webkit-filter: drop-shadow(0 0 10px #5d1a98);
+                        filter: drop-shadow(0 0 10px #5d1a98);
+                    }
+                }
+
                 .card {
                     display: flex;
                     flex-direction: column;
@@ -108,12 +119,12 @@
                     gap: 20px;
                     flex-basis: 20%;
                     cursor: pointer;
-                    transition: all .3s ease;
+                    transition: all 0.3s ease;
 
                     &:hover {
-                        transform: scale(.97);
-                        filter: grayscale(0%) !important;
-                    } 
+                        transform: scale(0.97);
+                        opacity: 1;
+                    }
 
                     img {
                         width: 60%;

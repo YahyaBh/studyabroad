@@ -7,6 +7,8 @@ const page = () => {
 
     const [currentPage, setCurrentPage] = useState();
 
+    const [country, setCountry] = useState();
+
     useEffect(() => {
         setCurrentPage('country');
     }, []);
@@ -56,7 +58,7 @@ const page = () => {
                     </div>
 
 
-                    {currentPage === 'country' && <CountryPage />}
+                    {currentPage === 'country' && <CountryPage country={country} setCountry={setCountry} />}
                 </div>
 
             </div>
@@ -67,13 +69,13 @@ const page = () => {
 export default page
 
 
-const CountryPage = () => {
+const CountryPage = ({country , setCountry}) => {
     return (
         <div className="page-cont">
             <h2>Click on the country you are interested in studying in and choose the date.</h2>
 
             <section className="cards-cont">
-                <div className="card">
+                <div className={country === 'Canada' ? 'active card' : 'card'} onClick={country !== 'Canada' ? () => setCountry('Canada') : () => setCountry()} >
                     <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
                     <h3>Canada</h3>
                 </div>
@@ -106,7 +108,7 @@ const CountryPage = () => {
                     <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
                     <h3>Canada</h3>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     )
 }
