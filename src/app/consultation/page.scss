@@ -104,10 +104,11 @@
 
                 .active {
                     transform: scale(1.1);
+                    box-shadow: 0 0 10px -5px #5d1a98;
+
 
                     img {
-                        -webkit-filter: drop-shadow(0 0 10px #5d1a98);
-                        filter: drop-shadow(0 0 10px #5d1a98);
+                        opacity: 1;
                     }
                 }
 
@@ -119,7 +120,9 @@
                     gap: 20px;
                     flex-basis: 20%;
                     cursor: pointer;
-                    transition: all 0.3s ease;
+                    transition: all 0.5s ease;
+                    padding: 20px 0;
+                    border-radius: 31px;
 
                     &:hover {
                         transform: scale(0.97);
