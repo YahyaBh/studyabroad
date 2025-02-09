@@ -19,6 +19,7 @@
         overflow: hidden; /* Prevents pseudo-element from leaking */
         padding: 5dvh;
         gap: 20px;
+        max-width: 1400px;
 
         &::before {
             content: "";
@@ -72,6 +73,11 @@
                 overflow: hidden; /* Prevents pseudo-element from leaking */
                 padding: 5dvh;
                 gap: 20px;
+                transition: all .3s ease;
+
+                &:hover {
+                    filter: grayscale(100%);
+                }
 
                 &::before {
                     content: "";
@@ -101,6 +107,13 @@
                     align-items: center;
                     gap: 20px;
                     flex-basis: 20%;
+                    cursor: pointer;
+                    transition: all .3s ease;
+
+                    &:hover {
+                        transform: scale(.97);
+                        filter: grayscale(0%) !important;
+                    } 
 
                     img {
                         width: 60%;
