@@ -48,8 +48,6 @@ nav {
             }
         }
 
-        
-
         .get_consult {
             display: flex;
             align-items: center;
@@ -64,10 +62,11 @@ nav {
             background-color: #5e1a98; /* Purple text */
             color: #fff;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .get_consult:hover {
-            color: #000; /* Black text on hover */
+            opacity: .7;
         }
     }
 }

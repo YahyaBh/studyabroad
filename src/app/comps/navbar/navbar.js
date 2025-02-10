@@ -17,7 +17,7 @@ const Navbar = () => {
 
                 
 
-                <button className="get_consult">Get Consultation</button>
+                <a href='/consultation' className="get_consult">Get Consultation</a>
             </div>
         </nav >
     )

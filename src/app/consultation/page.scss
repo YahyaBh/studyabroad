@@ -138,16 +138,17 @@
             .infos-cont {
                 display: flex;
                 justify-content: space-evenly;
-                align-items: center;
+                align-items: flex-start;
                 width: 70%;
-
 
                 .inps {
                     display: flex;
                     flex-direction: column;
                     justify-items: flex-start;
-                    align-items: center;
+                    align-items: flex-start;
                     gap: 20px;
+                    width: 100%;
+                    flex-basis: 30%;
 
                     .inp {
                         display: flex;
@@ -155,11 +156,10 @@
                         justify-items: center;
                         align-items: flex-start;
                         gap: 10px;
-
+                        width: 100%;
 
                         label {
                             font-size: 1em;
-                            
                         }
 
                         input {
@@ -168,15 +168,61 @@
                             outline: none;
                             border-radius: 5px;
                             padding: 10px;
+                            box-sizing: border-box;
                             font-size: 1.2em;
                             font-family: "Poppins", sans-serif;
                             font-weight: 500;
+                        }
+
+                        .option {
+                            width: 100%;
+                            border: 1px solid #410071;
+                            outline: none;
+                            border-radius: 5px;
+                            padding: 10px;
+                            font-size: 1.2em;
+                            font-family: "Poppins", sans-serif;
+                            font-weight: 500;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            gap: 10px;
+
+                            input {
+                                appearance: none;
+                                border: 2px solid gray;
+                                border-radius: 50%;
+                                position: relative;
+                                width: 16px;
+                                height: 16px;
+
+                                &:checked {
+                                    border-color: purple;
+                                    background-color: white;
+
+                                    &::before {
+                                        content: "";
+                                        width: 8px;
+                                        height: 8px;
+                                        background: purple;
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                        border-radius: 50%;
+                                    }
+                                }
+                            }
+
+                            span {
+                                flex-basis: 90%;
+                            }
                         }
                     }
                 }
             }
 
-            button {
+            .next-but {
                 font-size: 1.4em;
                 padding: 10px 30px;
                 border: none;
@@ -247,6 +293,168 @@
                 flex: 1;
                 height: 1.5px;
                 background: grey;
+            }
+        }
+    }
+}
+
+.calendar-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 50%;
+    position: relative;
+    background: white; /* Inner background */
+    border-radius: 20px;
+    z-index: 1; /* Ensures it stays above the gradient */
+    overflow: hidden; /* Prevents pseudo-element from leaking */
+    padding: 5dvh 8dvh;
+    gap: 20px;
+    max-width: 1400px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 2px; /* Border thickness */
+        background: linear-gradient(to bottom, #5d1a9888 10%, #ffffff00 80%);
+        border-radius: 25px;
+        z-index: -1; /* Keeps it behind the card */
+        mask:
+            linear-gradient(white, white) content-box,
+            linear-gradient(white, white);
+        mask-composite: exclude;
+        -webkit-mask:
+            linear-gradient(white, white) content-box,
+            linear-gradient(white, white);
+        -webkit-mask-composite: destination-out;
+    }
+
+    .time-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        width: 100%;
+        max-width: 300px;
+        padding: 10px;
+        border-radius: 20px;
+        background: #ffffff;
+        flex-basis: 30%;
+
+        h4 {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .time-slots {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+
+            .selected {
+                background-color: #5d1a98;
+                color: #fff;
+                border: 2px solid #5d1a98;
+            }
+
+            .time-slot {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 50px;
+                border-radius: 10px;
+                outline: none;
+                border: 2px solid #000;
+                color: #000;
+                background-color: #fff;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: #5d1a98;
+                    color: #fff;
+                    border: 2px solid #5d1a98;
+                }
+            }
+        }
+    }
+
+    .calendar {
+        flex-basis: 70%;
+
+        .react-calendar {
+            border: none;
+
+            .react-calendar__navigation {
+                display: flex;
+                justify-content: flex-start;
+                height: 20px;
+                margin-bottom: 1em;
+                align-items: center;
+                position: relative;
+
+                button {
+                    font-size: 1em;
+                    background-color: transparent !important;
+
+                    &:nth-child(1),
+                    &:nth-child(5) {
+                        display: none;
+                    }
+
+                    &:nth-child(3) {
+                        text-align: left;
+                        margin-left: 2%;
+
+                        span {
+                            font-weight: 600 !important;
+                        }
+                    }
+
+                    &:nth-child(4) {
+                        font-size: 1.8em;
+                        color: #410071;
+                    }
+
+                    &:nth-child(2) {
+                        position: absolute;
+                        right: 8%;
+                        font-size: 1.8em;
+                        color: #410071;
+                    }
+                }
+            }
+
+            .react-calendar__tile--now {
+                background-color: #5d1a98ae;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            .react-calendar__tile--active:enabled:hover,
+            .react-calendar__tile--active:enabled:focus,
+            .react-calendar__tile--active {
+                background-color: #410071 !important;
+                border-radius: 5px !important;
+            }
+
+            .react-calendar__viewContainer {
+                .react-calendar__month-view__weekdays {
+                    abbr {
+                        text-decoration: none;
+                        font-size: 1.2em;
+                    }
+                }
             }
         }
     }
