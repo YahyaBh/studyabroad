@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react"
 import Navbar from "../comps/navbar/navbar"
 import './page.scss'
+import { MdArrowRight } from "react-icons/md"
 
 const page = () => {
 
@@ -13,25 +14,10 @@ const page = () => {
         setCurrentPage('country');
     }, []);
 
+
     return (
         <>
             <Navbar />
-            {/* 
-            <div className="progress-bar">
-                <div className="container">
-                    <div className={currentPage === 'country' ? 'active' : ''} ><span>1</span> <h3>Select country</h3>
-                        <div className="line" ></div>
-                    </div>
-                    <div className={currentPage === 'contact' ? 'active' : ''}><span>2</span> <h3>Contact information</h3>
-                        <div className="line" ></div>
-                    </div>
-                    <div className={currentPage === 'payment' ? 'active' : ''}><span>3</span> <h3>Select Date</h3>
-                        <div className="line" ></div>
-                    </div>
-                    <div className={currentPage === 'payment' ? 'active' : ''}><span>4</span> <h3>Payment</h3></div>
-
-                </div>
-            </div> */}
 
             <div className="gen-cont">
                 <div className="back-img">
@@ -58,7 +44,10 @@ const page = () => {
                     </div>
 
 
-                    {currentPage === 'country' && <CountryPage country={country} setCountry={setCountry} />}
+                    {currentPage === 'country' && <CountryPage country={country} setCountry={setCountry} setCurrentPage={setCurrentPage} />}
+                    {currentPage === 'contact' && <ContactPage country={country} setCountry={setCountry} setCurrentPage={setCurrentPage} />}
+
+
                 </div>
 
             </div>
@@ -69,7 +58,7 @@ const page = () => {
 export default page
 
 
-const CountryPage = ({country , setCountry}) => {
+const CountryPage = ({ country, setCountry, setCurrentPage }) => {
     return (
         <div className="page-cont">
             <h2>Click on the country you are interested in studying in and choose the date.</h2>
@@ -108,7 +97,68 @@ const CountryPage = ({country , setCountry}) => {
                     <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
                     <h3>Canada</h3>
                 </div>
+
             </section >
+
+            {country ? <button onClick={() => setCurrentPage('contact')}>Next <MdArrowRight /></button> : null}
+
+
+        </div >
+    )
+}
+
+const ContactPage = ({ country, setCountry, setCurrentPage }) => {
+    return (
+        <div className="page-cont">
+            <h2>Fill in your contact information So we contact you right away</h2>
+
+            <section className="infos-cont">
+                <div className="inps">
+                    <div className="inp">
+                        <label>Full Name</label>
+                        <input type="text" />
+                    </div>
+
+                    <div className="inp">
+                        <label>Email Address</label>
+                        <input type="email" />
+                    </div>
+
+                    <div className="inp">
+                        <label>Phone Number</label>
+                        <input type="tel" />
+                    </div>
+                </div>
+
+                <div className="inps">
+                    <div className="inp">
+                        <label>Study Level</label>
+                        <input type="text" placeholder="Full Name" />
+                    </div>
+
+                    <div className="inp">
+                        <label>Study Field</label>
+                        <input type="email" placeholder="email@example.com" />
+                    </div>
+
+                    <div className="inp">
+                        <label>Study Field</label>
+                        <input type="email" />
+                    </div>
+                </div>
+
+                <div className="inps">
+                    <div className="inp">
+                        <label>I want my meeting to be</label>
+
+
+                    </div>
+                </div>
+            </section >
+
+            {country ? <button onClick={() => setCurrentPage('contact')}>Next <MdArrowRight /></button> : null}
+
+
         </div >
     )
 }
