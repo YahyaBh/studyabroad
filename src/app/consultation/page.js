@@ -116,9 +116,9 @@ const page = () => {
                         {currentPage === 'payment' && (
                             <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
                         )}
-                        {/*{currentPage === 'complete' && (
-                            <CompletePage key="complete" country={country} setCurrentPage={setCurrentPage} />
-                        )} */}
+                        {currentPage === 'complete' && (
+                            <CompletePage key="complete" country={country} date={date} time={time} payment={payment} user={user} />
+                        )}
                     </AnimatePresence>
 
                 </div>
