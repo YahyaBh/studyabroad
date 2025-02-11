@@ -7,7 +7,8 @@ import { AnimatePresence, motion } from "framer-motion"
 
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Import the CSS for the calendar
-
+import { validate } from 'react-email-validator';
+import { formatPhoneNumber } from 'react-phone-number-input'
 
 const page = () => {
 
@@ -15,15 +16,43 @@ const page = () => {
     const [country, setCountry] = useState();
     const [date, setDate] = useState();
     const [time, setTime] = useState();
+    const [payment, setPayment] = useState();
+
+    const [user, setUser] = useState({
+        country: '',
+        name: '',
+        phone: '',
+        email: '',
+        study_level: '',
+        study_field: '',
+        grade: '',
+        meeting: '',
+        date: '',
+        time: '',
+        payment: '',
+    });
 
 
-    const steps = ['country', 'contact', 'date', 'payment'];
+
+    const steps = ['country', 'contact', 'date', 'payment', 'complete'];
     const currentIndex = steps.indexOf(currentPage);
 
     useEffect(() => {
         setCurrentPage('country');
     }, []);
 
+
+    useEffect(() => {
+        if (currentPage === 'complete') {
+            // Perform any actions you want to take when the form is completed
+            console.log('Form completed!');
+        }
+    }, []);
+
+
+    useEffect(() => {
+        console.log(user);
+    }, [user])
 
 
 
@@ -37,26 +66,41 @@ const page = () => {
                 <div className="back-img">
 
 
-                    {/* <div className="progress-bar">
+                    <div className="progress-bar">
                         {steps.map((step, index) => (
-                            <>
+                            <React.Fragment key={step + index}>
                                 <div
-                                    key={step + 'L'}
                                     className={index <= currentIndex ? 'step active' : 'step'}
                                     onClick={() => {
-                                        if (index < currentIndex) { // Allow only previous steps
+                                        if (index < currentIndex) {
                                             setCurrentPage(step);
                                         }
                                     }}
-                                    style={{ cursor: index < currentIndex ? 'pointer' : 'not-allowed', opacity: index > currentIndex ? 0.5 : 1 }}
+                                    style={{
+                                        cursor: index < currentIndex ? 'pointer' : 'not-allowed',
+                                        opacity: index > currentIndex ? 0.5 : 1,
+                                    }}
                                 >
                                     <span className="number">{index + 1}</span>
-                                    <span className="text">{step === `country` ? 'Choose Country' : step === `contact` ? 'Contact Details' : step === `date` ? 'Choose Date' : step === `payment` ? 'Payment' : step === `complete` ? 'Complete' : ''}</span>
+                                    <span className="text">
+                                        {step === `country`
+                                            ? 'Choose Country'
+                                            : step === `contact`
+                                                ? 'Contact Details'
+                                                : step === `date`
+                                                    ? 'Choose Date'
+                                                    : step === `payment`
+                                                        ? 'Payment'
+                                                        : step === `complete`
+                                                            ? 'Complete'
+                                                            : ''}
+                                    </span>
                                 </div>
                                 {index < steps.length - 1 && <div className="line"></div>}
-                            </>
+                            </React.Fragment>
                         ))}
-                    </div> */}
+                    </div>
+
 
 
                     <AnimatePresence mode="wait">
@@ -64,15 +108,15 @@ const page = () => {
                             <CountryPage key="country" country={country} setCountry={setCountry} setCurrentPage={setCurrentPage} />
                         )}
                         {currentPage === 'contact' && (
-                            <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} />
+                            <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} user={user} setUser={setUser} />
                         )}
                         {currentPage === 'date' && (
                             <DatePage key="date" country={country} setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
                         )}
-                        {/* {currentPage === 'payment' && (
-                            <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} />
+                        {currentPage === 'payment' && (
+                            <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
                         )}
-                        {currentPage === 'complete' && (
+                        {/*{currentPage === 'complete' && (
                             <CompletePage key="complete" country={country} setCurrentPage={setCurrentPage} />
                         )} */}
                     </AnimatePresence>
@@ -92,7 +136,7 @@ const CountryPage = ({ country, setCountry, setCurrentPage }) => {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }} // Fade out on exit
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
             className="page-cont">
             <h2>Click on the country you are interested in studying in and choose the date.</h2>
@@ -134,19 +178,69 @@ const CountryPage = ({ country, setCountry, setCurrentPage }) => {
 
             </section >
 
-            {country ? <button className="next-but" onClick={() => setCurrentPage('contact')}>Next <MdArrowRight /></button> : null}
-
+            {
+                country && (
+                    <motion.button
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 20 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => setCurrentPage('contact')} className="next-but">
+                        Next <MdArrowRight />
+                    </motion.button>
+                )
+            }
 
         </motion.div >
     )
 }
 
-const ContactPage = ({ country, setCurrentPage }) => {
+const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
+
+
+
+    const FullNameFunc = (e) => {
+        const words = e.trim().split(/\s+/);
+        if (words.length <= 2) {
+            setUser({ ...user, name: e });
+        } else {
+            console.error('Enter a valid name');
+        }
+    };
+
+    const EmailFunc = (e) => {
+        setUser({ ...user, email: e });
+
+
+        if (validate(e)) {
+            console.log('Email entered is valid');
+        } else {
+            console.error('Enter a valid email');
+        }
+
+    };
+
+    const PhoneFunc = (e) => {
+        setUser({ ...user, phone: e });
+
+        console.log(formatPhoneNumber(e));
+
+
+        // if (e.length < 12) {
+        //     if (formatPhoneNumber(e)) {
+        //     } else {
+        //         console.error('Enter a valid phone number');
+        //     }
+        // } else {
+        //     console.log('Phone number is too long');
+        // }
+    }
+
     return (
         <motion.div className="page-cont"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }} // Fade out on exit
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
         >
             <h2>Fill in your contact information So we contact you right away</h2>
@@ -155,17 +249,17 @@ const ContactPage = ({ country, setCurrentPage }) => {
                 <div className="inps">
                     <div className="inp">
                         <label>Full Name</label>
-                        <input type="text" placeholder="Jhon Smith" />
+                        <input type="text" placeholder="Jhon Smith" value={user.name} onChange={(e) => FullNameFunc(e.target.value)} />
                     </div>
 
                     <div className="inp">
                         <label>Email Address</label>
-                        <input type="email" placeholder="example@email.com" />
+                        <input type="email" placeholder="example@email.com" value={user.email} onChange={(e) => EmailFunc(e.target.value)} />
                     </div>
 
                     <div className="inp">
                         <label>Phone Number</label>
-                        <input type="tel" placeholder="+212 600 000 000" />
+                        <input type="number" placeholder="+212 600 000 000" value={user.phone} onChange={(e) => PhoneFunc(e.target.value)} />
                     </div>
                 </div>
 
@@ -209,9 +303,13 @@ const ContactPage = ({ country, setCurrentPage }) => {
         </motion.div >
     )
 }
+
 const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => {
 
-    const today = new Date();
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
     const maxDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 
 
@@ -224,12 +322,14 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }} // Fade out on exit
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
             className="page-cont"
 
         >
             <h2>Choose the most suitable date for you so we get in touch</h2>
+
+
 
             <div className="calendar-container">
 
@@ -239,7 +339,7 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
                         value={date}
                         prevLabel={'<'}
                         nextLabel={'>'}
-                        minDate={today}
+                        minDate={tomorrow}
                         maxDate={maxDate} // Show only month view
                         tileDisabled={disableWeekends}
                         className="minimal-calendar"
@@ -249,22 +349,99 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
                 <div className="time-container">
                     {date ? <>
                         <h4>Time</h4>
-                        <div className="time-slots">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            className="time-slots">
                             <button className={time === '10:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('10:00') : () => setTime()} >10:00</button>
-                            <button className={time === '10:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('11:00') : () => setTime()} >11:00</button>
-                            <button className={time === '10:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('12:00') : () => setTime()} >12:00</button>
-                            <button className={time === '10:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('13:00') : () => setTime()} >13:00</button>
-                        </div></> : <><h4>Time</h4></>}
+                            <button className={time === '11:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('11:00') : () => setTime()} >11:00</button>
+                            <button className={time === '12:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('12:00') : () => setTime()} >12:00</button>
+                            <button className={time === '13:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('13:00') : () => setTime()} >13:00</button>
+                        </motion.div></> : <><h4>Time</h4></>}
                 </div>
             </div>
 
             {
-                country && (
-                    <button onClick={() => setCurrentPage('payment')} className="next-but">
+                country && date && time && (
+                    <motion.button
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => setCurrentPage('payment')} className="next-but">
                         Next <MdArrowRight />
-                    </button>
+                    </motion.button>
                 )
             }
         </motion.div >
+    )
+}
+
+const PaymentPage = ({ country, date, time, setPayment, payment, setCurrentPage }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="page-cont">
+
+
+            <h2>You'll be directly notified after the payment for the next steps</h2>
+
+            <div className="payment-container">
+
+                <div className="inps">
+                    <div className="inp">
+                        <label>Choose your payment method</label>
+
+                        <label className="option" onClick={() => setPayment('Meeting')}>
+                            <input type="radio" name="meeting" value="Meeting" />
+                            <span className="text">Bank Transfer</span>
+                        </label>
+                        <label className="option" onClick={() => setPayment('Cash')}>
+                            <input type="radio" name="meeting" value="Agency" />
+                            <span className="text">Cash (in Agency)</span>
+                        </label>
+
+                    </div>
+                </div>
+
+            </div>
+
+            {
+                country && date && time && payment && (
+                    <motion.button
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={() => setCurrentPage('complete')} className="next-but">
+                        Next <MdArrowRight />
+                    </motion.button>
+                )
+            }
+
+        </motion.div>
+    )
+}
+
+
+const CompletePage = () => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="page-cont">
+
+            <h2>Thank you for your trust, we will contact you as soon as possible</h2>
+
+            <button className="next-but">Next <MdArrowRight /></button>
+
+        </motion.div>
     )
 }

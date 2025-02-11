@@ -11,6 +11,8 @@ const page = ({ params }) => {
 
     if (!params || !params.slug) return <p>Loading...</p>;
 
+    
+
     return (
         <>
 

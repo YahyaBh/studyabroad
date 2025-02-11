@@ -117,11 +117,11 @@
                     flex-direction: column;
                     justify-content: space-evenly;
                     align-items: center;
-                    gap: 20px;
+                    gap: 10px;
                     flex-basis: 20%;
                     cursor: pointer;
                     transition: all 0.5s ease;
-                    padding: 20px 0;
+                    padding: 10px 0;
                     border-radius: 31px;
 
                     &:hover {
@@ -136,10 +136,39 @@
             }
 
             .infos-cont {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: flex-start;
                 width: 70%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                position: relative;
+                background: white; /* Inner background */
+                border-radius: 20px;
+                z-index: 1; /* Ensures it stays above the gradient */
+                overflow: hidden; /* Prevents pseudo-element from leaking */
+                padding: 5dvh;
+                gap: 20px;
+                max-width: 1400px;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    padding: 2px; /* Border thickness */
+                    background: linear-gradient(to bottom, #5d1a9888 10%, #ffffff00 80%);
+                    border-radius: 25px;
+                    z-index: -1; /* Keeps it behind the card */
+                    mask:
+                        linear-gradient(white, white) content-box,
+                        linear-gradient(white, white);
+                    mask-composite: exclude;
+                    -webkit-mask:
+                        linear-gradient(white, white) content-box,
+                        linear-gradient(white, white);
+                    -webkit-mask-composite: destination-out;
+                }
 
                 .inps {
                     display: flex;
@@ -216,6 +245,102 @@
 
                             span {
                                 flex-basis: 90%;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .payment-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 50px;
+                width: 100%;
+
+                .inps {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    flex-direction: column;
+                    position: relative;
+                    background: white; /* Inner background */
+                    border-radius: 20px;
+                    z-index: 1; /* Ensures it stays above the gradient */
+                    overflow: hidden; /* Prevents pseudo-element from leaking */
+                    padding: 5dvh;
+                    padding-top: 2dvh;
+                    width: 40%;
+                    max-width: 1400px;
+                    min-height: 30dvh;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        padding: 2px; /* Border thickness */
+                        background: linear-gradient(to bottom, #5d1a9888 10%, #ffffff00 80%);
+                        border-radius: 25px;
+                        z-index: -1; /* Keeps it behind the card */
+                        mask:
+                            linear-gradient(white, white) content-box,
+                            linear-gradient(white, white);
+                        mask-composite: exclude;
+                        -webkit-mask:
+                            linear-gradient(white, white) content-box,
+                            linear-gradient(white, white);
+                        -webkit-mask-composite: destination-out;
+                    }
+
+                    .inp {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        gap: 20px;
+                        width: 100%;
+
+                        .option {
+                            width: 100%;
+                            border: 1px solid #410071;
+                            outline: none;
+                            border-radius: 5px;
+                            padding: 10px;
+                            font-size: 1.2em;
+                            font-family: "Poppins", sans-serif;
+                            font-weight: 500;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            gap: 10px;
+
+                            input {
+                                appearance: none;
+                                border: 2px solid gray;
+                                border-radius: 50%;
+                                position: relative;
+                                width: 16px;
+                                height: 16px;
+
+                                &:checked {
+                                    border-color: purple;
+                                    background-color: white;
+
+                                    &::before {
+                                        content: "";
+                                        width: 8px;
+                                        height: 8px;
+                                        background: purple;
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                        border-radius: 50%;
+                                    }
+                                }
                             }
                         }
                     }
@@ -359,9 +484,9 @@
             width: 100%;
 
             .selected {
-                background-color: #5d1a98;
-                color: #fff;
-                border: 2px solid #5d1a98;
+                background-color: #5d1a98 !important;
+                color: #fff !important;
+                border: 2px solid #5d1a98 !important;
             }
 
             .time-slot {
@@ -436,9 +561,9 @@
             }
 
             .react-calendar__tile--now {
-                background-color: #5d1a98ae;
+                background-color: #5d1a9846;
                 color: #fff;
-                border-radius: 5px;
+                border-radius: 0px;
             }
 
             .react-calendar__tile--active:enabled:hover,
