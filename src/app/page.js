@@ -34,11 +34,6 @@ export default function Home() {
             <img className="absol per1" src="/assets/images/Hero/PersonGirl.svg" />
             <img className="absol per2" src="/assets/images/Hero/PersonBoy.svg" />
 
-
-
-
-
-
             <img className="absol icon" src="/assets/images/Hero/TurkeyIcon.svg" />
             <img className="absol icon2" src="/assets/images/Hero/FranceIcon.svg" />
             <img className="absol icon3" src="/assets/images/Hero/UKIcon.svg" />

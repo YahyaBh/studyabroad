@@ -24,7 +24,6 @@ export async function POST(request) {
     });
 
     try {
-
         const mail = await transporter.sendMail({
             from: 'bohsineyahya@gmail.com',
             to: clientEmail,
