@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react"
 import Navbar from "../comps/navbar/navbar"
 import './page.scss'
-import { MdArrowRight } from "react-icons/md"
+import { MdArrowBack, MdArrowRight } from "react-icons/md"
 import { AnimatePresence, motion } from "framer-motion"
 
 import Calendar from 'react-calendar';
@@ -12,11 +12,16 @@ import { formatPhoneNumber } from 'react-phone-number-input'
 
 const page = () => {
 
+    const [loading, setLoading] = useState(false);
+
     const [currentPage, setCurrentPage] = useState();
     const [country, setCountry] = useState();
     const [date, setDate] = useState();
     const [time, setTime] = useState();
     const [payment, setPayment] = useState();
+    const [meetLink, setMeetLink] = useState(null);
+
+
 
     const [user, setUser] = useState({
         country: '',
@@ -42,19 +47,35 @@ const page = () => {
     }, []);
 
 
-    useEffect(() => {
-        if (currentPage === 'complete') {
-            // Perform any actions you want to take when the form is completed
-            console.log('Form completed!');
+
+    const sendVerificationEmail = async () => {
+        setLoading(true);
+
+
+        try {
+            const response = await fetch('/api/send-verification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ clientEmail: user.email }),
+            });
+
+            if (!response.ok) {
+                console.log("falling over")
+                throw new Error(`response status: ${response.status}`);
+            }
+            const responseData = await response.json();
+            console.log(responseData['message'])
+
+            alert('Message successfully sent');
+        } catch (err) {
+            console.error(err);
+            alert("Error, please try resubmitting the form");
         }
-    }, []);
 
-
-    useEffect(() => {
-        console.log(user);
-    }, [user])
-
-
+        setLoading(false);
+    };
 
 
 
@@ -117,7 +138,7 @@ const page = () => {
                             <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
                         )}
                         {currentPage === 'complete' && (
-                            <CompletePage key="complete" country={country} date={date} time={time} payment={payment} user={user} />
+                            <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} />
                         )}
                     </AnimatePresence>
 
@@ -176,20 +197,22 @@ const CountryPage = ({ country, setCountry, setCurrentPage }) => {
                     <h3>Canada</h3>
                 </div>
 
+                {
+                    country && (
+                        <motion.button
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={() => setCurrentPage('contact')} className="next-but">
+                            Next <MdArrowRight />
+                        </motion.button>
+                    )
+                }
+
             </section >
 
-            {
-                country && (
-                    <motion.button
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 0.3 }}
-                        onClick={() => setCurrentPage('contact')} className="next-but">
-                        Next <MdArrowRight />
-                    </motion.button>
-                )
-            }
+
 
         </motion.div >
     )
@@ -212,28 +235,13 @@ const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
         setUser({ ...user, email: e });
 
 
-        if (validate(e)) {
-            console.log('Email entered is valid');
-        } else {
-            console.error('Enter a valid email');
-        }
 
     };
 
     const PhoneFunc = (e) => {
         setUser({ ...user, phone: e });
 
-        console.log(formatPhoneNumber(e));
 
-
-        // if (e.length < 12) {
-        //     if (formatPhoneNumber(e)) {
-        //     } else {
-        //         console.error('Enter a valid phone number');
-        //     }
-        // } else {
-        //     console.log('Phone number is too long');
-        // }
     }
 
     return (
@@ -295,9 +303,13 @@ const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
 
                     </div>
                 </div>
+
+                {country ? <button className="prev-but" onClick={() => setCurrentPage('date')}> <MdArrowBack /></button> : null}
+
+                {country ? <button className="next-but" onClick={() => setCurrentPage('date')}>Next <MdArrowRight /></button> : null}
+
             </section >
 
-            {country ? <button className="next-but" onClick={() => setCurrentPage('date')}>Next <MdArrowRight /></button> : null}
 
 
         </motion.div >
@@ -429,7 +441,7 @@ const PaymentPage = ({ country, date, time, setPayment, payment, setCurrentPage 
 }
 
 
-const CompletePage = () => {
+const EmailVerification = ({ sendVerificationEmail }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -438,9 +450,18 @@ const CompletePage = () => {
             transition={{ duration: 0.3 }}
             className="page-cont">
 
-            <h2>Thank you for your trust, we will contact you as soon as possible</h2>
+            <h2>You'll receive a verification email</h2>
 
-            <button className="next-but">Next <MdArrowRight /></button>
+
+            <div className="email-container" >
+                <img src="/assets/images/Consult/EmailSVG.svg" />
+
+                <p>Alle'nora has been a titan in Pakistan's fashion industry since the 90's. Boasting a rich history of over 30 years in business.</p>
+
+                <button className="confirm-email" onClick={() => sendVerificationEmail()}>Confirm Email</button>
+
+            </div>
+
 
         </motion.div>
     )
