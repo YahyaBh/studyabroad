@@ -1,5 +1,4 @@
 import './navbar.scss'
-import { IoIosArrowDown } from 'react-icons/io'
 
 const Navbar = () => {
     return (
@@ -11,11 +10,12 @@ const Navbar = () => {
 
                 <div className="nav-links">
                     <a href="/">Home</a>
-                    <a href="/infos">Information <IoIosArrowDown /></a>
+                    <a href="/#services">Services</a>
+                    <a href="/universities">Universities</a>
                     <a href="/about">About Us</a>
                 </div>
 
-                
+
 
                 <a href='/consultation' className="get_consult">Get Consultation</a>
             </div>
