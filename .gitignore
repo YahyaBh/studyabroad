@@ -39,3 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+"src/app/api/create-meet/studyabroad-451010-52c5829f07e0.json" 
