@@ -1,18 +1,26 @@
 'use client'
 import React, { useEffect, useState } from "react"
+
 import Navbar from "../comps/navbar/navbar"
+import Loading from "../comps/loading/page"
+
 import './page.scss'
+
 import { MdArrowBack, MdArrowRight } from "react-icons/md"
 import { AnimatePresence, motion } from "framer-motion"
 
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Import the CSS for the calendar
 import { validate } from 'react-email-validator';
-import { formatPhoneNumber } from 'react-phone-number-input'
-
+import Calendar from 'react-calendar';
+import { client, urlFor } from "../lib/sanityClient"
+import {phone} from 'phone';
 const page = () => {
 
-    const [loading, setLoading] = useState(false);
+
+    const [loading, setLoading] = useState(true);
+
+
+    const [data, setData] = useState();
 
     const [currentPage, setCurrentPage] = useState();
     const [country, setCountry] = useState();
@@ -44,7 +52,30 @@ const page = () => {
 
     useEffect(() => {
         setCurrentPage('country');
+        loadData();
     }, []);
+
+
+    const loadData = async () => {
+        const query = `*[_type == "consultation"] {
+        title,
+        description,
+        countries[] {
+        country,
+        description,
+        image
+        },
+        study_level[] {
+            level
+        }
+        }`;
+
+        const consultData = await client.fetch(query);
+
+        setData(consultData);
+
+        setLoading(false);
+    }
 
 
 
@@ -80,79 +111,80 @@ const page = () => {
 
 
     return (
-        <>
-            <Navbar />
+        loading ? <Loading /> :
+            <>
+                <Navbar />
 
-            <div className="gen-cont">
-                <div className="back-img">
+                <div className="gen-cont">
+                    <div className="back-img">
 
 
-                    <div className="progress-bar">
-                        {steps.map((step, index) => (
-                            <React.Fragment key={step + index}>
-                                <div
-                                    className={index <= currentIndex ? 'step active' : 'step'}
-                                    onClick={() => {
-                                        if (index < currentIndex) {
-                                            setCurrentPage(step);
-                                        }
-                                    }}
-                                    style={{
-                                        cursor: index < currentIndex ? 'pointer' : 'not-allowed',
-                                        opacity: index > currentIndex ? 0.5 : 1,
-                                    }}
-                                >
-                                    <span className="number">{index + 1}</span>
-                                    <span className="text">
-                                        {step === `country`
-                                            ? 'Choose Country'
-                                            : step === `contact`
-                                                ? 'Contact Details'
-                                                : step === `date`
-                                                    ? 'Choose Date'
-                                                    : step === `payment`
-                                                        ? 'Payment'
-                                                        : step === `complete`
-                                                            ? 'Complete'
-                                                            : ''}
-                                    </span>
-                                </div>
-                                {index < steps.length - 1 && <div className="line"></div>}
-                            </React.Fragment>
-                        ))}
+                        <div className="progress-bar">
+                            {steps.map((step, index) => (
+                                <React.Fragment key={step + index}>
+                                    <div
+                                        className={index <= currentIndex ? 'step active' : 'step'}
+                                        onClick={() => {
+                                            if (index < currentIndex) {
+                                                setCurrentPage(step);
+                                            }
+                                        }}
+                                        style={{
+                                            cursor: index < currentIndex ? 'pointer' : 'not-allowed',
+                                            opacity: index > currentIndex ? 0.5 : 1,
+                                        }}
+                                    >
+                                        <span className="number">{index + 1}</span>
+                                        <span className="text">
+                                            {step === `country`
+                                                ? 'Choose Country'
+                                                : step === `contact`
+                                                    ? 'Contact Details'
+                                                    : step === `date`
+                                                        ? 'Choose Date'
+                                                        : step === `payment`
+                                                            ? 'Payment'
+                                                            : step === `complete`
+                                                                ? 'Complete'
+                                                                : ''}
+                                        </span>
+                                    </div>
+                                    {index < steps.length - 1 && <div className="line"></div>}
+                                </React.Fragment>
+                            ))}
+                        </div>
+
+                        <AnimatePresence mode="wait">
+                            {currentPage === 'country' && (
+                                <CountryPage key="country" selCountry={country} setCountry={setCountry} setCurrentPage={setCurrentPage} data={data} />
+                            )}
+                            {currentPage === 'contact' && (
+                                <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
+                            )}
+                            {currentPage === 'date' && (
+                                <DatePage key="date" country={country} setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
+                            )}
+                            {currentPage === 'payment' && (
+                                <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
+                            )}
+                            {currentPage === 'complete' && (
+                                <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} />
+                            )}
+                        </AnimatePresence>
+
                     </div>
 
-
-
-                    <AnimatePresence mode="wait">
-                        {currentPage === 'country' && (
-                            <CountryPage key="country" country={country} setCountry={setCountry} setCurrentPage={setCurrentPage} />
-                        )}
-                        {currentPage === 'contact' && (
-                            <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} user={user} setUser={setUser} />
-                        )}
-                        {currentPage === 'date' && (
-                            <DatePage key="date" country={country} setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
-                        )}
-                        {currentPage === 'payment' && (
-                            <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
-                        )}
-                        {currentPage === 'complete' && (
-                            <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} />
-                        )}
-                    </AnimatePresence>
-
                 </div>
-
-            </div>
-        </>
+            </>
     )
 }
 
 export default page
 
 
-const CountryPage = ({ country, setCountry, setCurrentPage }) => {
+const CountryPage = ({ selCountry, setCountry, setCurrentPage, data }) => {
+
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -163,42 +195,17 @@ const CountryPage = ({ country, setCountry, setCurrentPage }) => {
             <h2>Click on the country you are interested in studying in and choose the date.</h2>
 
             <section className="cards-cont">
-                <div className={country === 'Canada' ? 'active card' : 'card'} onClick={country !== 'Canada' ? () => setCountry('Canada') : () => setCountry()} >
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
-                <div className="card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
-                <div className="card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
-                <div className="card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
 
-                <div className="card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
-                <div className="card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
-                <div className="card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
-                <div className="card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" />
-                    <h3>Canada</h3>
-                </div>
+
+                {data[0].countries?.map((country, index) => (
+                    <div key={country.country + index} className={selCountry === country ? 'active card' : 'card'} onClick={selCountry !== country ? () => setCountry(country) : () => setCountry()} >
+                        <img src={urlFor(country.image).url()} alt={country.country} />
+                        <h3>{country.country}</h3>
+                    </div>
+                ))}
 
                 {
-                    country && (
+                    selCountry && (
                         <motion.button
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -218,8 +225,7 @@ const CountryPage = ({ country, setCountry, setCurrentPage }) => {
     )
 }
 
-const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
-
+const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
 
 
     const FullNameFunc = (e) => {
@@ -231,17 +237,54 @@ const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
         }
     };
 
-    const EmailFunc = (e) => {
-        setUser({ ...user, email: e });
 
+    // Function to handle input change and format dynamically
+    const gradeFunc = (e) => {
+        let value = e.replace(/[^0-9]/g, ''); // Ensure only digits are allowed
 
+        // If the user has entered more than 2 characters, add the dot
+        if (value.length > 2) {
+            value = value.slice(0, 2) + '.' + value.slice(2);
+        }
 
-    };
+        // Limit to 5 characters total (including the dot)
+        if (value.length > 5) {
+            value = value.slice(0, 5);
+        }
 
-    const PhoneFunc = (e) => {
-        setUser({ ...user, phone: e });
+        setUser({ ...user, grade: value }); // Update the state with the formatted value
+    }
 
-
+    const handleSubmit = async (e) => {
+        if (user.name) {
+            if (validate(user.email)) {
+                if (phone(user.phone)) {
+                    if (user.study_level) {
+                        if (user.study_field) {
+                            if (user.grade) {
+                                if (user.meeting) {
+                                    setCurrentPage('date')
+                                } else {
+                                    alert('Please choose a meeting method')
+                                }
+                            } else {
+                                alert('Enter a valid grade');
+                            }
+                        } else {
+                            alert('Enter a valid study field');
+                        }
+                    } else {
+                        alert('Enter choose a study field');
+                    }
+                } else {
+                    alert('Enter a valid phone number');
+                }
+            } else {
+                alert('please enter a valid email')
+            }
+        } else {
+            alert('please enter a valid name')
+        }
     }
 
     return (
@@ -262,29 +305,33 @@ const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
 
                     <div className="inp">
                         <label>Email Address</label>
-                        <input type="email" placeholder="example@email.com" value={user.email} onChange={(e) => EmailFunc(e.target.value)} />
+                        <input type="email" placeholder="example@email.com" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} />
                     </div>
 
                     <div className="inp">
                         <label>Phone Number</label>
-                        <input type="number" placeholder="+212 600 000 000" value={user.phone} onChange={(e) => PhoneFunc(e.target.value)} />
+                        <input type="number" placeholder="+212 600 000 000" value={user.phone} maxLength={14} onChange={(e) => setUser({ ...user, phone: e.target.value })} />
                     </div>
                 </div>
 
                 <div className="inps">
                     <div className="inp">
                         <label>Study Level</label>
-                        <input type="text" placeholder="Baccalaurete" />
+                        <select name="level" value={user.study_level} onChange={(e) => setUser({ ...user, study_level: e.target.value })}>
+                            {data[0].study_level?.map((level, index) => (
+                                <option key={level.level + index} value={level.level}>{level.level}</option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="inp">
                         <label>Study Field</label>
-                        <input type="text" placeholder="Economics" />
+                        <input type="text" placeholder="Economics" maxLength={40} value={user.study_field} onChange={(e) => setUser({ ...user, study_field: e.target.value })} />
                     </div>
 
                     <div className="inp">
                         <label>Grade</label>
-                        <input type="text" placeholder="16.45" />
+                        <input type="text" placeholder="16.45" maxLength={5} value={user.grade} onChange={(e) => gradeFunc(e.target.value)} />
                     </div>
                 </div>
 
@@ -292,11 +339,11 @@ const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
                     <div className="inp">
                         <label>I want my meeting to be</label>
 
-                        <label className="option">
+                        <label className="option" onClick={(e) => setUser({ ...user, meeting: 'meeting' })}>
                             <input type="radio" name="meeting" value="Meeting" />
                             <span className="text">Online Meeting</span>
                         </label>
-                        <label className="option">
+                        <label className="option" onClick={(e) => setUser({ ...user, meeting: 'agency' })}>
                             <input type="radio" name="meeting" value="Agency" />
                             <span className="text">In Agency</span>
                         </label>
@@ -304,9 +351,9 @@ const ContactPage = ({ country, setCurrentPage, setUser, user }) => {
                     </div>
                 </div>
 
-                {country ? <button className="prev-but" onClick={() => setCurrentPage('date')}> <MdArrowBack /></button> : null}
+                {country ? <button className="prev-but" onClick={() => setCurrentPage('country')}> <MdArrowBack /></button> : null}
 
-                {country ? <button className="next-but" onClick={() => setCurrentPage('date')}>Next <MdArrowRight /></button> : null}
+                {country ? <button className="next-but" onClick={() => handleSubmit()}>Next <MdArrowRight /></button> : null}
 
             </section >
 

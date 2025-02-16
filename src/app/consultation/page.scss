@@ -43,10 +43,11 @@
         }
 
         .page-cont {
+            min-height: 80dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 1em;
             width: 100%;
             position: relative;
@@ -112,7 +113,7 @@
                     opacity: 1;
 
                     img {
-                        opacity: 1;
+                        opacity: 1 !important;
                     }
                 }
 
@@ -145,7 +146,7 @@
                 justify-content: center;
                 align-items: flex-start;
                 position: relative;
-                background: white;
+                background: transparent;
                 border-radius: 20px;
                 z-index: 1;
                 padding: 5dvh;
@@ -204,6 +205,21 @@
                             font-size: 1.2em;
                             font-family: "Poppins", sans-serif;
                             font-weight: 500;
+                            background: linear-gradient(to bottom, #fff, #ebcfff79);
+                        }
+
+                        select {
+                            width: 100%;
+                            border: 1px solid #410071;
+                            outline: none;
+                            border-radius: 5px;
+                            padding: 10px;
+                            box-sizing: border-box;
+                            font-size: 1.2em;
+                            font-family: "Poppins", sans-serif;
+                            font-weight: 500;
+                            background: linear-gradient(to bottom, #fff, #ebcfff79);
+                            color: #0000008a;
                         }
 
                         .option {
@@ -219,6 +235,7 @@
                             justify-content: flex-start;
                             align-items: center;
                             gap: 10px;
+                            background: linear-gradient(to bottom, #fff, #ebcfff79);
 
                             input {
                                 appearance: none;
@@ -227,6 +244,7 @@
                                 position: relative;
                                 width: 16px;
                                 height: 16px;
+                                background-color: grey;
 
                                 &:checked {
                                     border-color: purple;
@@ -366,7 +384,6 @@
                 max-width: 1400px;
                 min-height: 30dvh;
                 gap: 2em;
-
 
                 &::before {
                     content: "";
@@ -521,7 +538,7 @@
     justify-content: space-evenly;
     width: 50%;
     position: relative;
-    background: white; /* Inner background */
+    background: transparent; /* Inner background */
     border-radius: 20px;
     z-index: 1; /* Ensures it stays above the gradient */
     overflow: hidden; /* Prevents pseudo-element from leaking */

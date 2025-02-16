@@ -1,12 +1,13 @@
+import Link from 'next/link'
 import './navbar.scss'
 
 const Navbar = () => {
     return (
         <nav>
             <div className="nav-container">
-                <a href="/">
+                <Link href="/">
                     <img src="/assets/images/Logo.svg" />
-                </a>
+                </Link>
 
                 <div className="nav-links">
                     <a href="/">Home</a>
