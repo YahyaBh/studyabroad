@@ -1,29 +1,52 @@
+"use client"
 import { FaArrowDown, FaLocationArrow, FaSchool, FaStar } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import "./page.scss";
 import Footer from "./comps/footer/footer";
 import Navbar from "./comps/navbar/navbar";
 
-import { client, urlFor } from '../sanity';
+import { client, urlFor } from './lib/sanityClient';
+import { useEffect, useState } from "react";
 
-export async function getStaticProps() {
-  const query = `*[_type == "home"] {
-    description,
-  }`;
 
-  // Fetch the data from Sanity
-  const homeData = await client.fetch(query);
 
-  return {
-    props: {
-      homeData,
-    },
-    revalidate: 10, 
-  };
-}
+export default function Home() {
 
-  export default function Home() {
-    return (
+
+  const [loading, setLoading] = useState(true);
+
+  const [homeData, setHomeData] = useState([])
+
+  useEffect(() => {
+    loadData();
+  }, [])
+
+
+  const loadData = async () => {
+    const query = `*[_type == "home"] {
+      description,
+      title,
+      services[]->{
+      _id,
+      title,
+      description,
+      image
+      },
+      universities,
+
+    }`;
+
+    const homeData = await client.fetch(query);
+    console.log(homeData);
+
+    setHomeData(homeData[0]);
+
+    setLoading(false)
+  }
+
+
+  return (
+    loading ? <div className="loading">Loading...</div> :
       <>
 
         <Navbar />
@@ -71,9 +94,9 @@ export async function getStaticProps() {
 
               <h3 className="title-main"><span className="line-l"></span> About Us <span className="line-r"></span></h3>
 
-              <h2>BEDAYA : Your Gateway to Educational Excellence</h2>
+              <h2>{homeData.title} : Your Gateway to Educational Excellence</h2>
 
-              <p>Beginning, established in 2017, is dedicated to supporting ambitious students in achieving their educational dreams abroad. We have successfully assisted numerous students in gaining admission to top global universities and institutions. Our comprehensive advisory services cover everything from selecting the right university to adapting to life abroad, ensuring a smooth and rewarding study experience. With extensive expertise and a committed team, Beginning has become a trusted leader in study abroad consultation ...</p>
+              <p>{homeData.description}</p>
 
               <button>Learn More</button>
 
@@ -109,8 +132,8 @@ export async function getStaticProps() {
                   <img src="/assets/images/Services/VisaIcon.svg" />
 
                   <div className="content">
-                    <h4>Preparing the Visa file</h4>
-                    <p>Our advisory services cover everything from selecting the right university to adapting to life abroad, ensuring a smooth and rewarding study experience.</p>
+                    <h4>{homeData?.services[0]?.title}</h4>
+                    <p>{homeData?.services[0]?.description}</p>
                   </div>
                 </div>
 
@@ -120,66 +143,23 @@ export async function getStaticProps() {
 
 
             <div className="services-cards">
+              {homeData?.services?.slice(1, 4).map((service, index) => (
 
-              <div className="service-card">
+                <div className="service-card" key={index + service.title}>
 
-                <div className="images-container">
-                  <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
-                  <img src="/assets/images/Services/StudyIcon.svg" />
-                  <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+                  <div className="images-container">
+                    <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
+                    <img src="/assets/images/Services/StudyIcon.svg" />
+                    <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
+                  </div>
+
+
+                  <div className="content">
+                    <h4>{service.title}</h4>
+                    <p>{service.description}</p>
+                  </div>
                 </div>
-
-
-                <div className="content">
-                  <h4>Education Consultation</h4>
-                  <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
-                </div>
-              </div>
-
-              <div className="service-card">
-
-                <div className="images-container">
-                  <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
-                  <img src="/assets/images/Services/StudyIcon.svg" />
-                  <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
-                </div>
-
-
-                <div className="content">
-                  <h4>Education Consultation</h4>
-                  <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
-                </div>
-              </div>
-
-              <div className="service-card">
-
-                <div className="images-container">
-                  <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
-                  <img src="/assets/images/Services/StudyIcon.svg" />
-                  <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
-                </div>
-
-
-                <div className="content">
-                  <h4>Education Consultation</h4>
-                  <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
-                </div>
-              </div>
-
-              <div className="service-card">
-
-                <div className="images-container">
-                  <img className="brick-left" src="/assets/images/Services/BricksWall.svg" />
-                  <img src="/assets/images/Services/StudyIcon.svg" />
-                  <img className="brick-right" src="/assets/images/Services/BricksWall.svg" />
-                </div>
-
-
-                <div className="content">
-                  <h4>Education Consultation</h4>
-                  <p>With our expert teams, you’ll be able to find the perfect path in your education , with suitable demanded programs</p>
-                </div>
-              </div>
+              ))}
 
             </div>
           </div>
@@ -530,5 +510,5 @@ export async function getStaticProps() {
 
         <Footer />
       </>
-    );
-  }
+  );
+}
