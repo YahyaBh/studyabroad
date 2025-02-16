@@ -538,10 +538,10 @@
     justify-content: space-evenly;
     width: 50%;
     position: relative;
-    background: transparent; /* Inner background */
+    background: transparent;
     border-radius: 20px;
-    z-index: 1; /* Ensures it stays above the gradient */
-    overflow: hidden; /* Prevents pseudo-element from leaking */
+    z-index: 1;
+    overflow: hidden;
     padding: 5dvh 8dvh;
     gap: 20px;
     max-width: 1400px;
