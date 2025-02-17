@@ -238,21 +238,18 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
     };
 
 
-    // Function to handle input change and format dynamically
     const gradeFunc = (e) => {
-        let value = e.replace(/[^0-9]/g, ''); // Ensure only digits are allowed
+        let value = e.replace(/[^0-9]/g, '');
 
-        // If the user has entered more than 2 characters, add the dot
         if (value.length > 2) {
             value = value.slice(0, 2) + '.' + value.slice(2);
         }
 
-        // Limit to 5 characters total (including the dot)
         if (value.length > 5) {
             value = value.slice(0, 5);
         }
 
-        setUser({ ...user, grade: value }); // Update the state with the formatted value
+        setUser({ ...user, grade: value }); 
     }
 
     const handleSubmit = async (e) => {
@@ -374,7 +371,7 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
 
     const disableWeekends = ({ date }) => {
         const day = date.getDay();
-        return day === 0 || day === 6; // Disable Sunday (0) and Saturday (6)
+        return day === 0 || day === 6;
     };
 
     return (
@@ -399,7 +396,7 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
                         prevLabel={'<'}
                         nextLabel={'>'}
                         minDate={tomorrow}
-                        maxDate={maxDate} // Show only month view
+                        maxDate={maxDate}
                         tileDisabled={disableWeekends}
                         className="minimal-calendar"
                     />
