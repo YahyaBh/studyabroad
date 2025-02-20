@@ -9,9 +9,11 @@ import './page.scss'
 import { MdArrowBack, MdArrowRight } from "react-icons/md"
 import { AnimatePresence, motion } from "framer-motion"
 
-import 'react-calendar/dist/Calendar.css'; // Import the CSS for the calendar
 import { validate } from 'react-email-validator';
+
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
 import { client, urlFor } from "../lib/sanityClient"
 import {phone} from 'phone';
 const page = () => {
@@ -384,8 +386,6 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
 
         >
             <h2>Choose the most suitable date for you so we get in touch</h2>
-
-
 
             <div className="calendar-container">
 
