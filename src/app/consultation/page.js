@@ -84,7 +84,6 @@ const page = () => {
 
 
     const sendVerificationEmail = async () => {
-        setLoading(true);
 
         try {
             const response = await fetch('/api/send-verification', {
@@ -92,15 +91,13 @@ const page = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ clientEmail: user.email }),
+                body: JSON.stringify({ user: user }),
             });
 
             if (!response.ok) {
-                console.log("falling over")
-                throw new Error(`response status: ${response.status}`);
+                console.log(response)
             }
-            const responseData = await response.json();
-            console.log(responseData['message'])
+
 
             toast.success("EMAIL SENT SUCCESSFULLY")
         } catch (err) {
@@ -108,7 +105,6 @@ const page = () => {
             toast.error("EMAIL DID NOT SENT , PLEASE TRY AGAIN")
         }
 
-        setLoading(false);
     };
 
 
