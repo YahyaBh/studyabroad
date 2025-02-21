@@ -15,7 +15,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 import { client, urlFor } from "../lib/sanityClient"
-import {phone} from 'phone';
+import { phone } from 'phone';
 const page = () => {
 
 
@@ -251,7 +251,7 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
             value = value.slice(0, 5);
         }
 
-        setUser({ ...user, grade: value }); 
+        setUser({ ...user, grade: value });
     }
 
     const handleSubmit = async (e) => {
@@ -317,6 +317,7 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
                     <div className="inp">
                         <label>Study Level</label>
                         <select name="level" value={user.study_level} onChange={(e) => setUser({ ...user, study_level: e.target.value })}>
+                            <option disabled selected hidden value="">Please select</option>
                             {data[0].study_level?.map((level, index) => (
                                 <option key={level.level + index} value={level.level}>{level.level}</option>
                             ))}

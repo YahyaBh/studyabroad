@@ -206,6 +206,10 @@
                             font-family: "Poppins", sans-serif;
                             font-weight: 500;
                             background: linear-gradient(to bottom, #fff, #ebcfff79);
+
+                            &[type="number"] {
+                                appearance: none; /* Remove default browser arrow */
+                            }
                         }
 
                         select {
@@ -219,7 +223,6 @@
                             font-family: "Poppins", sans-serif;
                             font-weight: 500;
                             background: linear-gradient(to bottom, #fff, #ebcfff79);
-                            color: #0000008a;
                         }
 
                         .option {
@@ -337,6 +340,7 @@
                             justify-content: flex-start;
                             align-items: center;
                             gap: 10px;
+                            color: #000;
 
                             input {
                                 appearance: none;
@@ -628,7 +632,7 @@
 
         .react-calendar {
             border: none;
-            background: transparent ;
+            background: transparent;
 
             .react-calendar__navigation {
                 display: flex;
