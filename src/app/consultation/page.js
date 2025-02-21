@@ -16,6 +16,8 @@ import 'react-calendar/dist/Calendar.css';
 
 import { client, urlFor } from "../lib/sanityClient"
 import { phone } from 'phone';
+import { toast } from 'react-hot-toast';
+
 const page = () => {
 
 
@@ -84,7 +86,6 @@ const page = () => {
     const sendVerificationEmail = async () => {
         setLoading(true);
 
-
         try {
             const response = await fetch('/api/send-verification', {
                 method: 'POST',
@@ -101,10 +102,10 @@ const page = () => {
             const responseData = await response.json();
             console.log(responseData['message'])
 
-            alert('Message successfully sent');
+            toast.success("EMAIL SENT SUCCESSFULLY")
         } catch (err) {
             console.error(err);
-            alert("Error, please try resubmitting the form");
+            toast.error("EMAIL DID NOT SENT , PLEASE TRY AGAIN")
         }
 
         setLoading(false);
@@ -113,71 +114,72 @@ const page = () => {
 
 
     return (
-        loading ? <Loading /> :
-            <>
-                <Navbar />
 
-                <div className="gen-cont">
-                    <div className="back-img">
+        <>
+            {loading ? <Loading /> : ''}
+            <Navbar />
+
+            <div className="gen-cont">
+                <div className="back-img">
 
 
-                        <div className="progress-bar">
-                            {steps.map((step, index) => (
-                                <React.Fragment key={step + index}>
-                                    <div
-                                        className={index <= currentIndex ? 'step active' : 'step'}
-                                        onClick={() => {
-                                            if (index < currentIndex) {
-                                                setCurrentPage(step);
-                                            }
-                                        }}
-                                        style={{
-                                            cursor: index < currentIndex ? 'pointer' : 'not-allowed',
-                                            opacity: index > currentIndex ? 0.5 : 1,
-                                        }}
-                                    >
-                                        <span className="number">{index + 1}</span>
-                                        <span className="text">
-                                            {step === `country`
-                                                ? 'Choose Country'
-                                                : step === `contact`
-                                                    ? 'Contact Details'
-                                                    : step === `date`
-                                                        ? 'Choose Date'
-                                                        : step === `payment`
-                                                            ? 'Payment'
-                                                            : step === `complete`
-                                                                ? 'Complete'
-                                                                : ''}
-                                        </span>
-                                    </div>
-                                    {index < steps.length - 1 && <div className="line"></div>}
-                                </React.Fragment>
-                            ))}
-                        </div>
-
-                        <AnimatePresence mode="wait">
-                            {currentPage === 'country' && (
-                                <CountryPage key="country" selCountry={country} setCountry={setCountry} setCurrentPage={setCurrentPage} data={data} />
-                            )}
-                            {currentPage === 'contact' && (
-                                <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
-                            )}
-                            {currentPage === 'date' && (
-                                <DatePage key="date" country={country} setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
-                            )}
-                            {currentPage === 'payment' && (
-                                <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
-                            )}
-                            {currentPage === 'complete' && (
-                                <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} />
-                            )}
-                        </AnimatePresence>
-
+                    <div className="progress-bar">
+                        {steps.map((step, index) => (
+                            <React.Fragment key={step + index}>
+                                <div
+                                    className={index <= currentIndex ? 'step active' : 'step'}
+                                    onClick={() => {
+                                        if (index < currentIndex) {
+                                            setCurrentPage(step);
+                                        }
+                                    }}
+                                    style={{
+                                        cursor: index < currentIndex ? 'pointer' : 'not-allowed',
+                                        opacity: index > currentIndex ? 0.5 : 1,
+                                    }}
+                                >
+                                    <span className="number">{index + 1}</span>
+                                    <span className="text">
+                                        {step === `country`
+                                            ? 'Choose Country'
+                                            : step === `contact`
+                                                ? 'Contact Details'
+                                                : step === `date`
+                                                    ? 'Choose Date'
+                                                    : step === `payment`
+                                                        ? 'Payment'
+                                                        : step === `complete`
+                                                            ? 'Complete'
+                                                            : ''}
+                                    </span>
+                                </div>
+                                {index < steps.length - 1 && <div className="line"></div>}
+                            </React.Fragment>
+                        ))}
                     </div>
 
+                    <AnimatePresence mode="wait">
+                        {currentPage === 'country' && (
+                            <CountryPage key="country" selCountry={country} setCountry={setCountry} setCurrentPage={setCurrentPage} data={data} />
+                        )}
+                        {currentPage === 'contact' && (
+                            <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
+                        )}
+                        {currentPage === 'date' && (
+                            <DatePage key="date" country={country} setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
+                        )}
+                        {currentPage === 'payment' && (
+                            <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
+                        )}
+                        {currentPage === 'complete' && (
+                            <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} />
+                        )}
+                    </AnimatePresence>
+
                 </div>
-            </>
+
+            </div>
+        </>
     )
 }
 
@@ -199,7 +201,7 @@ const CountryPage = ({ selCountry, setCountry, setCurrentPage, data }) => {
             <section className="cards-cont">
 
 
-                {data[0].countries?.map((country, index) => (
+                {data?.length > 0 && data[0]?.countries?.map((country, index) => (
                     <div key={country.country + index} className={selCountry === country ? 'active card' : 'card'} onClick={selCountry !== country ? () => setCountry(country) : () => setCountry()} >
                         <img src={urlFor(country.image).url()} alt={country.country} />
                         <h3>{country.country}</h3>
@@ -316,9 +318,9 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
                 <div className="inps">
                     <div className="inp">
                         <label>Study Level</label>
-                        <select name="level" value={user.study_level} onChange={(e) => setUser({ ...user, study_level: e.target.value })}>
-                            <option disabled selected hidden value="">Please select</option>
-                            {data[0].study_level?.map((level, index) => (
+                        <select name="level" value={user.study_level} className={user.study_level ? 'selected' : ''} onChange={(e) => setUser({ ...user, study_level: e.target.value })}>
+                            <option disabled defaultValue={""} hidden value="">Please select</option>
+                            {data?.length > 0 && data[0]?.study_level?.map((level, index) => (
                                 <option key={level.level + index} value={level.level}>{level.level}</option>
                             ))}
                         </select>

@@ -207,9 +207,6 @@
                             font-weight: 500;
                             background: linear-gradient(to bottom, #fff, #ebcfff79);
 
-                            &[type="number"] {
-                                appearance: none; /* Remove default browser arrow */
-                            }
                         }
 
                         select {
@@ -223,6 +220,19 @@
                             font-family: "Poppins", sans-serif;
                             font-weight: 500;
                             background: linear-gradient(to bottom, #fff, #ebcfff79);
+                            color: #0000008a;
+
+                            &.selected {
+                                color: black; 
+                            }
+
+                            option {
+                                color: black; 
+                            }
+
+                            option:disabled {
+                                color: #0000008a;
+                            }
                         }
 
                         .option {
@@ -289,10 +299,10 @@
                     align-items: center;
                     flex-direction: column;
                     position: relative;
-                    background: white; /* Inner background */
+                    background: transparent; 
                     border-radius: 20px;
-                    z-index: 1; /* Ensures it stays above the gradient */
-                    overflow: hidden; /* Prevents pseudo-element from leaking */
+                    z-index: 1; 
+                    overflow: hidden;
                     padding: 5dvh;
                     padding-top: 2dvh;
                     width: 40%;
@@ -612,7 +622,7 @@
                 outline: none;
                 border: 2px solid #000;
                 color: #000;
-                background-color: #fff;
+                background-color: transparent;
                 font-size: 16px;
                 font-weight: bold;
                 cursor: pointer;
