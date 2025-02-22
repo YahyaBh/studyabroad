@@ -209,7 +209,7 @@ const CountryPage = ({ user, setUser, setCurrentPage, data }) => {
 
 
                 {data?.length > 0 && data[0]?.countries?.map((country, index) => (
-                    <div key={country._id + index} className={user.country._ref === country._id ? 'active card' : 'card'} onClick={user.country._ref !== country._id ? () => setUser({ ...user, country: { _ref: country._id } }) : () => setUser({ ...user, country: { _ref: '' } })}>
+                    <div key={country._id + index} className={user.country._ref === country._id ? 'active card' : 'card'} onClick={() => setUser({ ...user, country: user.country._ref === country._id ? { _ref: '' } : { _ref: country._id } })}>
                         <img src={country.image ? urlFor(country.image).url() : '/assets/images/Hero/GraduateGirl.png'} alt={country.name} />
                         <h3>{country.name}</h3>
                     </div>
@@ -490,7 +490,7 @@ const PaymentPage = ({ setPayment, payment, setCurrentPage }) => {
             </div>
 
             {
-                payment(
+                payment && (
                     <motion.button
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

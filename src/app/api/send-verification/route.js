@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { client } from '@/app/lib/sanityClient';
+import { stringify } from 'querystring';
 
 export async function POST(request) {
 
@@ -34,24 +35,24 @@ export async function POST(request) {
             token: verificationToken,
             country_chosen: {
                 _type: 'reference',
-                _ref: user.country,
+                _ref: user.country._ref,
             },
             level: {
                 _type: 'reference',
-                _ref: user.study_level,
+                _ref: user.study_level._ref,
             },
-            field: user.study_field,
+            field: user.study_field,  
             grade: user.grade,
-            meetingDate: user.date,
-            meetingTime: user.time,
-            meetingType: user.meeting,
-            payment_method: user.payment,
+            meetingDate: user.date,  
+            meetingTime: user.time,  
+            meetingType: Array.isArray(user.meeting) ? user.meeting : [user.meeting],  // Ensure it's an array
+            payment_method: Array.isArray(user.payment) ? user.payment : [user.payment],  // Ensure it's an array
         };
 
+        // Save the new user document in Sanity
         const result = await client.create(newUser);
 
-        console.log(result);
-        
+
 
         try {
             await transporter.sendMail({
@@ -141,16 +142,17 @@ export async function POST(request) {
                             </tr>
                             <tr>
                                 <td class="content">
-                                <p>Hello,</p>
+                                <p>Hello ${user.name},</p>
                                 <p>Thank you for registering. Please verify your email address by clicking the button below.</p>
                                 <a href="${process.env.NEXT_PUBLIC_URL}/api/verify-email?token=${verificationToken}" class="button">Verify Email</a>
+                                <p>This Emaill will be invalid after 24 hours</p>
                                 <p>If you didn’t create an account, you can safely ignore this email.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="footer">
-                                <p>&copy; 2025 Your Company. All rights reserved.</p>
-                                <p><a href="#">Privacy Policy</a> | <a href="#">Contact Support</a></p>
+                                <p>&copy; 2025 BEDAYA. All rights reserved.</p>
+                                <p><a href="https://bedaya.com/">Privacy Policy</a> | <a href="https://bedaya.com/contact">Contact Support</a></p>
                                 </td>
                             </tr>
                             </table>
@@ -167,7 +169,7 @@ export async function POST(request) {
             return NextResponse.json(user)
         }
     } catch (error) {
-        return NextResponse.json({ error: error  })
+        return NextResponse.json({ error: error })
     }
 
 
