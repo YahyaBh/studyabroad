@@ -442,7 +442,7 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
             </div>
 
             {
-                country && date && time && (
+                date && time && (
                     <motion.button
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -457,7 +457,7 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
     )
 }
 
-const PaymentPage = ({ country, date, time, setPayment, payment, setCurrentPage }) => {
+const PaymentPage = ({ setPayment, payment, setCurrentPage }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -490,7 +490,7 @@ const PaymentPage = ({ country, date, time, setPayment, payment, setCurrentPage 
             </div>
 
             {
-                country && date && time && payment && (
+                payment(
                     <motion.button
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
