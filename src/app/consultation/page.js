@@ -36,17 +36,23 @@ const page = () => {
 
 
     const [user, setUser] = useState({
-        country: '',
-        name: '',
-        phone: '',
-        email: '',
-        study_level: '',
-        study_field: '',
-        grade: '',
-        meeting: '',
-        date: '',
-        time: '',
-        payment: '',
+        country: {
+            _ref: "",
+            _type: "reference"
+        },
+        name: 'ASd asd',
+        phone: '21312312',
+        email: 'yahyabouhsine@protonmail.com',
+        study_level: {
+            _ref: "",
+            _type: "reference"
+        },
+        study_field: 'Economics',
+        grade: '12.54',
+        meeting: 'In Agency',
+        date: '2025-10-05',
+        time: '11:00',
+        payment: 'Bank Transfer',
     });
 
 
@@ -64,18 +70,20 @@ const page = () => {
         const query = `*[_type == "consultation"] {
         title,
         description,
-        countries[] {
+        countries[] -> {
+        _id,
         name,
         code,
         image,
         description,
         },
         levels[]-> {
+            _id,
             title,
         }
         }`;
 
-        
+
 
         const consultData = await client.fetch(query);
 
@@ -159,7 +167,7 @@ const page = () => {
 
                     <AnimatePresence mode="wait">
                         {currentPage === 'country' && (
-                            <CountryPage key="country" selCountry={country} setCountry={setCountry} setCurrentPage={setCurrentPage} data={data} />
+                            <CountryPage key="country" setUser={setUser} user={user} setCurrentPage={setCurrentPage} data={data} />
                         )}
                         {currentPage === 'contact' && (
                             <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
@@ -185,7 +193,7 @@ const page = () => {
 export default page
 
 
-const CountryPage = ({ selCountry, setCountry, setCurrentPage, data }) => {
+const CountryPage = ({ user, setUser, setCurrentPage, data }) => {
 
 
     return (
@@ -201,14 +209,14 @@ const CountryPage = ({ selCountry, setCountry, setCurrentPage, data }) => {
 
 
                 {data?.length > 0 && data[0]?.countries?.map((country, index) => (
-                    <div key={country.country + index} className={selCountry === country ? 'active card' : 'card'} onClick={selCountry !== country ? () => setCountry(country) : () => setCountry()} >
-                        <img src={country.image ? urlFor(country.image).url() : '/assets/images/Hero/GraduateGirl.png'} alt={country.country} />
+                    <div key={country._id + index} className={user.country._ref === country._id ? 'active card' : 'card'} onClick={user.country._ref !== country._id ? () => setUser({ ...user, country: { _ref: country._id } }) : () => setUser({ ...user, country: { _ref: '' } })}>
+                        <img src={country.image ? urlFor(country.image).url() : '/assets/images/Hero/GraduateGirl.png'} alt={country.name} />
                         <h3>{country.name}</h3>
                     </div>
                 ))}
 
                 {
-                    selCountry && (
+                    user.country._ref && (
                         <motion.button
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -317,13 +325,25 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
                 <div className="inps">
                     <div className="inp">
                         <label>Study Level</label>
-                        <select name="level" value={user.levels} className={user.levels ? 'selected' : ''} onChange={(e) => setUser({ ...user, levels: e.target.value })}>
-                            <option disabled defaultValue={""} hidden value="">Please select</option>
-                            {data?.length > 0 && data[0]?.study_level?.map((level, index) => (
-                                <option key={level.title + index} value={level.title}>{level.title}</option>
-                            ))}
+                        <select
+                            name="level"
+                            value={user.study_level._ref}
+                            className={user.study_level._ref ? 'selected' : ''}
+                            onChange={(e) => setUser({ ...user, study_level: { _ref: e.target.value } })}
+                        >
+                            <option disabled defaultValue hidden value="">
+                                Please select
+                            </option>
+                            {data?.length > 0 &&
+                                data[0]?.levels?.map((level, index) => (
+                                    <option key={level._id} value={level._id}>
+                                        {level.title}
+                                    </option>
+                                ))}
                         </select>
                     </div>
+
+
 
                     <div className="inp">
                         <label>Study Field</label>
@@ -352,9 +372,9 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
                     </div>
                 </div>
 
-                {country ? <button className="prev-but" onClick={() => setCurrentPage('country')}> <MdArrowBack /></button> : null}
+                <button className="prev-but" onClick={() => setCurrentPage('country')}> <MdArrowBack /></button>
 
-                {country ? <button className="next-but" onClick={() => handleSubmit()}>Next <MdArrowRight /></button> : null}
+                {user.country._ref ? <button className="next-but" onClick={() => handleSubmit()}>Next <MdArrowRight /></button> : null}
 
             </section >
 

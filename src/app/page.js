@@ -94,9 +94,9 @@ export default function Home() {
 
               <h3 className="title-main"><span className="line-l"></span> About Us <span className="line-r"></span></h3>
 
-              <h2>{homeData.title} : Your Gateway to Educational Excellence</h2>
+              <h2>{homeData?.title} : Your Gateway to Educational Excellence</h2>
 
-              <p>{homeData.description}</p>
+              <p>{homeData?.description}</p>
 
               <button>Learn More</button>
 

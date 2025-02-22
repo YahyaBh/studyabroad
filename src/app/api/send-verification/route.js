@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
+import { client } from '@/app/lib/sanityClient';
 
 export async function POST(request) {
 
@@ -48,6 +49,9 @@ export async function POST(request) {
         };
 
         const result = await client.create(newUser);
+
+        console.log(result);
+        
 
         try {
             await transporter.sendMail({
@@ -160,10 +164,10 @@ export async function POST(request) {
             return NextResponse.json({ message: 'Email sent' })
 
         } catch (error) {
-            return NextResponse.status(500).json(user)
+            return NextResponse.json(user)
         }
     } catch (error) {
-        return NextResponse.status(500).json({ error: 'Something went wrong please try again' })
+        return NextResponse.json({ error: error  })
     }
 
 
