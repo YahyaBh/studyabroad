@@ -1,21 +1,22 @@
-import { useState } from "react";
 
 export async function GET(req) {
-    const [storedToken, setStoredToken] = useState();
+
+    let tokenDate = '';
+
 
     const { searchParams } = new URL(req.url);
     const token = searchParams.get('token');
 
 
-    const fetchUserByToken = async (token) => {
+    fetchUserByToken = async (token) => {
         try {
             const query = `*[_type == "user" && token == $token][0]`;
             const params = { token };
 
-            const user = await client.fetch(query, params); 
+            const user = await client.fetch(query, params);
 
             if (user) {
-                setStoredToken(user.token);
+                tokenDate = user.token;
             } else {
                 console.log('No user found with this token');
                 return null;
@@ -28,14 +29,14 @@ export async function GET(req) {
 
 
 
-    if (storedToken === '') {
+    if (tokenDate === '') {
         return new Response(
             JSON.stringify({ error: 'Verification token or email not found in cookies' }),
             { status: 400 }
         );
     }
 
-    if (token === storedToken) {
+    if (token === tokenDate) {
         try {
             // Find the user with the matching token
             const user = await client.fetch(

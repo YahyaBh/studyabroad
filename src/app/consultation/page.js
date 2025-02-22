@@ -65,14 +65,17 @@ const page = () => {
         title,
         description,
         countries[] {
-        country,
+        name,
+        code,
+        image,
         description,
-        image
         },
-        study_level[] {
-            level
+        levels[]-> {
+            title,
         }
         }`;
+
+        
 
         const consultData = await client.fetch(query);
 
@@ -199,8 +202,8 @@ const CountryPage = ({ selCountry, setCountry, setCurrentPage, data }) => {
 
                 {data?.length > 0 && data[0]?.countries?.map((country, index) => (
                     <div key={country.country + index} className={selCountry === country ? 'active card' : 'card'} onClick={selCountry !== country ? () => setCountry(country) : () => setCountry()} >
-                        <img src={urlFor(country.image).url()} alt={country.country} />
-                        <h3>{country.country}</h3>
+                        <img src={country.image ? urlFor(country.image).url() : '/assets/images/Hero/GraduateGirl.png'} alt={country.country} />
+                        <h3>{country.name}</h3>
                     </div>
                 ))}
 
@@ -314,10 +317,10 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
                 <div className="inps">
                     <div className="inp">
                         <label>Study Level</label>
-                        <select name="level" value={user.study_level} className={user.study_level ? 'selected' : ''} onChange={(e) => setUser({ ...user, study_level: e.target.value })}>
+                        <select name="level" value={user.levels} className={user.levels ? 'selected' : ''} onChange={(e) => setUser({ ...user, levels: e.target.value })}>
                             <option disabled defaultValue={""} hidden value="">Please select</option>
                             {data?.length > 0 && data[0]?.study_level?.map((level, index) => (
-                                <option key={level.level + index} value={level.level}>{level.level}</option>
+                                <option key={level.title + index} value={level.title}>{level.title}</option>
                             ))}
                         </select>
                     </div>

@@ -5,6 +5,8 @@ import lottie from 'lottie-web';
 const LottieAnimation = ({ animationData, loop = true, autoplay = true }) => {
     const containerRef = useRef(null);
 
+    
+
     useEffect(() => {
         const animation = lottie.loadAnimation({
             container: containerRef.current, // the container where animation will be rendered
