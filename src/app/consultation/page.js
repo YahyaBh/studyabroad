@@ -40,19 +40,19 @@ const page = () => {
             _ref: "",
             _type: "reference"
         },
-        name: 'ASd asd',
-        phone: '21312312',
-        email: 'yahyabouhsine@protonmail.com',
+        name: '',
+        phone: '',
+        email: '',
         study_level: {
             _ref: "",
             _type: "reference"
         },
-        study_field: 'Economics',
-        grade: '12.54',
-        meeting: 'In Agency',
-        date: '2025-10-05',
-        time: '11:00',
-        payment: 'Bank Transfer',
+        study_field: '',
+        grade: '',
+        meeting: '',
+        date: '',
+        time: '',
+        payment: '',
     });
 
 
