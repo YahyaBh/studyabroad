@@ -112,7 +112,6 @@ const page = () => {
 
         setData(consultData);
 
-        setLoading(false);
     }
 
 
@@ -148,7 +147,7 @@ const page = () => {
     return (
 
         <>
-            {loading ? <Loading /> : ''}
+            {loading ? <Loading loading={loading} /> : ''}
             <Navbar />
 
             <div className="gen-cont">
