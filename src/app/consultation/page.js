@@ -112,6 +112,7 @@ const page = () => {
 
         setData(consultData);
 
+        setLoading(false);
     }
 
 
