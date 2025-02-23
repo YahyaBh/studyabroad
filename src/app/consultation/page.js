@@ -118,7 +118,7 @@ const page = () => {
 
 
     const sendVerificationEmail = async () => {
-
+        setLoading(true);
         try {
             const response = await fetch('/api/send-verification', {
                 method: 'POST',
@@ -140,7 +140,7 @@ const page = () => {
             console.error(err);
             toast.error("EMAIL DID NOT SENT , PLEASE TRY AGAIN")
         }
-
+        setLoading(false);
     };
 
 
@@ -564,7 +564,7 @@ const EmailVerification = ({ sendVerificationEmail, verificationSent, timer }) =
             <div className="email-container" >
                 <img src="/assets/images/Consult/EmailSVG.svg" />
 
-                <p>Alle'nora has been a titan in Pakistan's fashion industry since the 90's. Boasting a rich history of over 30 years in business.</p>
+                <p>To verify your email we have sent you a verification link , it'll redirect you to the confirmation page directly. Don't Forget to Cechk your SPAM !</p>
 
 
                 {verificationSent ? <motion.button
@@ -572,14 +572,15 @@ const EmailVerification = ({ sendVerificationEmail, verificationSent, timer }) =
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="next-but disabled">
-                    Please Wait {timer}'s <MdArrowRight />
+                    className="next-but-email disabled">
+                    Please Wait {timer}'s
                 </motion.button> : <motion.button
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    onClick={() => sendVerificationEmail()} className="next-but">
+                    onClick={() => sendVerificationEmail()}
+                    className="next-but-email">
                     Confirm Email <MdArrowRight />
                 </motion.button>}
 

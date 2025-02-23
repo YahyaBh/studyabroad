@@ -206,7 +206,6 @@
                             font-family: "Poppins", sans-serif;
                             font-weight: 500;
                             background: linear-gradient(to bottom, #fff, #ebcfff79);
-
                         }
 
                         select {
@@ -223,11 +222,11 @@
                             color: #0000008a;
 
                             &.selected {
-                                color: black; 
+                                color: black;
                             }
 
                             option {
-                                color: black; 
+                                color: black;
                             }
 
                             option:disabled {
@@ -299,9 +298,9 @@
                     align-items: center;
                     flex-direction: column;
                     position: relative;
-                    background: transparent; 
+                    background: transparent;
                     border-radius: 20px;
-                    z-index: 1; 
+                    z-index: 1;
                     padding: 5dvh;
                     padding-top: 2dvh;
                     width: 40%;
@@ -441,10 +440,41 @@
                         opacity: 0.7;
                     }
                 }
+
+                .next-but-email {
+                    font-size: 1.4em;
+                    padding: 10px 30px;
+                    height: 50px;
+                    border: none;
+                    outline: none;
+                    position: absolute;
+                    bottom: -10%;
+                    z-index: 4;
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    background-color: #410071;
+                    color: #fff;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+
+                    &:hover {
+                        transform: scale(0.97);
+                        opacity: 0.7;
+                    }
+                }
+
+                .disabled {
+                    opacity: .5 !important;
+                    cursor: not-allowed;
+                    filter: grayscale(100%);
+                }
             }
 
             .disabled {
-                opacity: 0.5;
+                opacity: 0.5 !important;
                 cursor: not-allowed;
                 filter: grayscale(100%);
             }
@@ -456,7 +486,8 @@
                 border: none;
                 outline: none;
                 position: absolute;
-                bottom: -10%;
+                bottom: -5%;
+                right: 2%;
                 z-index: 4;
                 border-radius: 10px;
                 display: flex;
