@@ -27,13 +27,12 @@ const page = () => {
     const [data, setData] = useState();
 
     const [currentPage, setCurrentPage] = useState();
-    const [country, setCountry] = useState();
     const [date, setDate] = useState();
     const [time, setTime] = useState();
     const [payment, setPayment] = useState();
-    const [meetLink, setMeetLink] = useState(null);
 
-
+    const [verificationSent, setVerificationSent] = useState(false);
+    const [timer, setTimer] = useState(0);
 
     const [user, setUser] = useState({
         country: {
@@ -62,8 +61,32 @@ const page = () => {
 
     useEffect(() => {
         setCurrentPage('country');
+        const lastRequestTime = localStorage.getItem("lastVerificationTime");
+
+        if (lastRequestTime) {
+            const timePassed = Math.floor((Date.now() - lastRequestTime) / 1000);
+
+            if (timePassed < 300) {
+                setVerificationSent(true);
+                setTimer(300 - timePassed);
+            }
+        }
         loadData();
     }, []);
+
+    useEffect(() => {
+        let countdown;
+        if (verificationSent && timer > 0) {
+            countdown = setInterval(() => {
+                setTimer((prevTimer) => prevTimer - 1);
+            }, 1000);
+        } else if (timer <= 0) {
+            setVerificationSent(false);
+            clearInterval(countdown);
+        }
+
+        return () => clearInterval(countdown); // Clean up interval on unmount
+    }, [verificationSent, timer]);
 
 
     const loadData = async () => {
@@ -105,12 +128,14 @@ const page = () => {
                 body: JSON.stringify({ user: user }),
             });
 
-            if (!response.ok) {
-                console.log(response)
+
+            if (response.ok) {
+                toast.success("EMAIL SENT SUCCESSFULLY");
+                localStorage.setItem("lastVerificationTime", Date.now().toString());
+                setTimer(300);
+                setVerificationSent(true);
             }
 
-
-            toast.success("EMAIL SENT SUCCESSFULLY")
         } catch (err) {
             console.error(err);
             toast.error("EMAIL DID NOT SENT , PLEASE TRY AGAIN")
@@ -170,16 +195,16 @@ const page = () => {
                             <CountryPage key="country" setUser={setUser} user={user} setCurrentPage={setCurrentPage} data={data} />
                         )}
                         {currentPage === 'contact' && (
-                            <ContactPage key="contact" country={country} setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
+                            <ContactPage key="contact" setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
                         )}
                         {currentPage === 'date' && (
-                            <DatePage key="date" country={country} setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
+                            <DatePage key="date" setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
                         )}
                         {currentPage === 'payment' && (
-                            <PaymentPage key="payment" country={country} setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
+                            <PaymentPage key="payment" setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
                         )}
                         {currentPage === 'complete' && (
-                            <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} />
+                            <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} verificationSent={verificationSent} timer={timer} />
                         )}
                     </AnimatePresence>
 
@@ -236,7 +261,7 @@ const CountryPage = ({ user, setUser, setCurrentPage, data }) => {
     )
 }
 
-const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
+const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
 
 
     const FullNameFunc = (e) => {
@@ -247,6 +272,18 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
             console.error('Enter a valid name');
         }
     };
+
+    const setPhoneNumber = (e) => {
+        let input = e.target.value;
+
+        input = input.replace(/[^\d+]/g, "");
+
+        // Add '+' at the start if not present
+        if (input && input[0] !== "+") {
+            input = "+" + input;
+        }
+        setUser({ ...user, phone: input })
+    }
 
 
     const gradeFunc = (e) => {
@@ -318,7 +355,7 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
 
                     <div className="inp">
                         <label>Phone Number</label>
-                        <input type="number" placeholder="+212 600 000 000" value={user.phone} maxLength={14} onChange={(e) => setUser({ ...user, phone: e.target.value })} />
+                        <input type="text" placeholder="+212 600 000 000" value={user.phone} maxLength={14} onChange={(e) => setPhoneNumber(e)} />
                     </div>
                 </div>
 
@@ -374,7 +411,7 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
 
                 <button className="prev-but" onClick={() => setCurrentPage('country')}> <MdArrowBack /></button>
 
-                {user.country._ref ? <button className="next-but" onClick={() => handleSubmit()}>Next <MdArrowRight /></button> : null}
+                {user.country._ref && user.name && user.email && user.phone && user.study_field && user.study_level && user.grade && user.meeting ? <button className="next-but" onClick={() => handleSubmit()}>Next <MdArrowRight /></button> : null}
 
             </section >
 
@@ -384,7 +421,7 @@ const ContactPage = ({ country, setCurrentPage, setUser, user, data }) => {
     )
 }
 
-const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => {
+const DatePage = ({ setDate, date, setTime, time, setCurrentPage }) => {
 
     const today = new Date()
     const tomorrow = new Date(today)
@@ -439,20 +476,22 @@ const DatePage = ({ country, setDate, date, setTime, time, setCurrentPage }) => 
                             <button className={time === '13:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('13:00') : () => setTime()} >13:00</button>
                         </motion.div></> : <><h4>Time</h4></>}
                 </div>
+
+                {
+                    date && time && (
+                        <motion.button
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            onClick={() => setCurrentPage('payment')} className="next-but">
+                            Next <MdArrowRight />
+                        </motion.button>
+                    )
+                }
             </div>
 
-            {
-                date && time && (
-                    <motion.button
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        onClick={() => setCurrentPage('payment')} className="next-but">
-                        Next <MdArrowRight />
-                    </motion.button>
-                )
-            }
+
         </motion.div >
     )
 }
@@ -485,29 +524,32 @@ const PaymentPage = ({ setPayment, payment, setCurrentPage }) => {
                         </label>
 
                     </div>
+
+                    {
+                        payment && (
+                            <motion.button
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -20 }}
+                                transition={{ duration: 0.3 }}
+                                onClick={() => setCurrentPage('complete')} className="next-but">
+                                Finish <MdArrowRight />
+                            </motion.button>
+                        )
+                    }
                 </div>
+
 
             </div>
 
-            {
-                payment && (
-                    <motion.button
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        onClick={() => setCurrentPage('complete')} className="next-but">
-                        Next <MdArrowRight />
-                    </motion.button>
-                )
-            }
+
 
         </motion.div>
     )
 }
 
 
-const EmailVerification = ({ sendVerificationEmail }) => {
+const EmailVerification = ({ sendVerificationEmail, verificationSent, timer }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -524,7 +566,22 @@ const EmailVerification = ({ sendVerificationEmail }) => {
 
                 <p>Alle'nora has been a titan in Pakistan's fashion industry since the 90's. Boasting a rich history of over 30 years in business.</p>
 
-                <button className="confirm-email" onClick={() => sendVerificationEmail()}>Confirm Email</button>
+
+                {verificationSent ? <motion.button
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="next-but disabled">
+                    Please Wait {timer}'s <MdArrowRight />
+                </motion.button> : <motion.button
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => sendVerificationEmail()} className="next-but">
+                    Confirm Email <MdArrowRight />
+                </motion.button>}
 
             </div>
 
