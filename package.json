@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "lottie-web": "^5.12.2",
     "next": "15.1.4",
+    "next-auth": "^4.24.11",
     "next-sanity": "^9.8.57",
     "nodemailer": "^6.10.0",
     "path": "^0.12.7",

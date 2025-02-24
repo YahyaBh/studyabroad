@@ -15,7 +15,7 @@ export async function POST(request) {
         service: "gmail",
         port: 587,
         auth: {
-            user: process.env.EMAIL,
+            user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASSWORD
         }
     });
@@ -57,7 +57,7 @@ export async function POST(request) {
         // Send the verification email
         try {
             await transporter.sendMail({
-                from: process.env.EMAIL,
+                from: process.env.EMAIL_USER,
                 to: user.email,
                 subject: `BEDAYA EMAIL VERIFICATION REQUIRED`,
                 html: `
