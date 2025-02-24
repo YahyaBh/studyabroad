@@ -1,67 +1,67 @@
 import { google } from 'googleapis';
-import { readFileSync } from 'fs';
+import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
+import { readFileSync } from 'fs';
 
-export default async function handler(req, res) {
+export async function POST(req, res) {
     if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+        return new Response(JSON.stringify({ error: 'Method Not Allowed' }), { status: 400 });
     }
-
-    const { cName, date } = req.body;
-
-    if (!cName || !date) {
-        return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    // Load service account credentials from JSON file
-    const keyFilePath = path.join(process.cwd(), './studyabroad-451010-52c5829f07e0.json');
-    const credentials = JSON.parse(readFileSync(keyFilePath, 'utf8'));
-
-    const auth = new google.auth.JWT(
-        credentials.client_email,
-        null,
-        credentials.private_key,
-        ['https://www.googleapis.com/auth/calendar']
-    );
-
-    const calendar = google.calendar({ version: 'v3', auth });
-
-    // Create event start and end times based on provided date and duration
-    const startDateTime = new Date(date);
-    const endDateTime = new Date(startDateTime.getTime() + duration * 60000); // Add duration in minutes
-
-    const event = {
-        summary: `Meeting with ${cName}`,
-        description: `Meeting with ${cName}`,
-        start: {
-            dateTime: startDateTime.toISOString(),
-            timeZone: timeZone,
-        },
-        end: {
-            dateTime: endDateTime.toISOString(),
-            timeZone: timeZone,
-        },
-        conferenceData: {
-            createRequest: {
-                requestId: "random-string", // Make sure this is a unique string for each event
-                conferenceSolutionKey: { type: "hangoutsMeet" },
-            },
-        },
-    };
 
     try {
+        const keyFilePath = path.join(process.cwd(), 'src/app/api/create-meet/studyabroadapi-451919-64f2d95608c9.json');
+        const credentials = JSON.parse(readFileSync(keyFilePath, 'utf8'));
+
+        const auth = new google.auth.JWT(
+            credentials.client_email,
+            null,
+            credentials.private_key,
+            ['https://www.googleapis.com/auth/calendar']
+        );
+
+        const calendar = google.calendar({ version: 'v3', auth });
+
+        const event = {
+            summary: 'Google Meet Meeting',
+            description: 'Automatically created meeting',
+            start: {
+                dateTime: new Date().toISOString(), 
+                timeZone: 'America/New_York', 
+            },
+            end: {
+                dateTime: new Date(Date.now() + 30 * 60000).toISOString(), 
+                timeZone: 'America/New_York',
+            },
+            conferenceData: {
+                createRequest: {
+                    requestId: uuidv4(),
+                    conferenceSolutionKey: {
+                        type: 'hangoutsMeet',
+                    },
+                },
+            },
+        };
+
         const createdEvent = await calendar.events.insert({
-            calendarId: 'primary', // Use 'primary' for the default calendar
+            calendarId: 'primary',
             resource: event,
             conferenceDataVersion: 1,
         });
 
-        res.status(200).json({
-            meetLink: createdEvent.data.hangoutLink,
-            eventDetails: createdEvent.data,
-        });
+        console.log(createdEvent);
+
+
+        const meetLink = createdEvent.data.conferenceData.entryPoints?.find(
+            (entry) => entry.entryPointType === 'video'
+        )?.uri;
+
+        if (!meetLink) {
+            return new Response(JSON.stringify({ error: 'Unable to generate Meeting Link' }), { status: 405 });
+        }
+
+        return new Response(JSON.stringify({ meetLink }), { status: 200 });
     } catch (error) {
-        console.error('Error creating event: ', error);
-        res.status(500).json({ error: 'Error creating Google Meet event' });
+        console.error('Error creating meeting:', error);
+        return new Response(JSON.stringify({ error: 'Internal Server Error', message: error }), { status: 500 });
     }
 }
