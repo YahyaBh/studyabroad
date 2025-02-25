@@ -9,14 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-apps/meet": "^0.3.0",
+    "@google-cloud/local-auth": "^2.1.0",
     "@sanity/client": "^6.28.0",
     "@sanity/image-url": "^1.1.0",
+    "axios": "^1.7.9",
     "cookies-next": "^5.1.0",
     "crypto": "^1.0.1",
     "framer-motion": "^12.4.1",
     "fs": "^0.0.1-security",
     "googleapis": "^144.0.0",
     "jsonwebtoken": "^9.0.2",
+    "lottie-react": "^2.4.1",
     "lottie-web": "^5.12.2",
     "next": "15.1.4",
     "next-auth": "^4.24.11",

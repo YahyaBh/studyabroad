@@ -1,11 +1,13 @@
 import { client } from '../../lib/sanityClient';
 import jwt from 'jsonwebtoken';
 
-export async function GET(req) {
+export async function POST(req) {
 
+    const url = new URL(req.url);
 
-    const { searchParams } = new URL(req.url);
-    const token = searchParams.get('token');
+    // Extract the token from the query string
+    const token = url.searchParams.get('token');
+
 
     if (!token) {
         return new Response(JSON.stringify({ error: 'Unable to retrieve authorization token' }), { status: 400 });
@@ -32,10 +34,9 @@ export async function GET(req) {
                     .set({ token: '' })
                     .commit();
 
-                return new Response(JSON.stringify({ error: 'Token is no longer available , please reverify user' }), { status: 400 });
-            } else {
-
-
+                return new Response(JSON.stringify({ error: 'Token is no longer available , please resubmit verification' }), { status: 400 });
+            }
+            else {
                 try {
                     const baseUrl = `${req.headers.get('x-forwarded-proto') || 'http'}://${req.headers.get('host')}`;
                     const response = await fetch(`${baseUrl}/api/create-meet`, {
@@ -67,6 +68,6 @@ export async function GET(req) {
 
 
     } catch (err) {
-        return new Response(JSON.stringify({ error: 'Invalid or expired token' }), { status: 400 });
+        return new Response(JSON.stringify({ error: 'Invalid or expired token', message: err }), { status: 400 });
     }
 }

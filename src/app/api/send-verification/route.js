@@ -21,7 +21,7 @@ export async function POST(request) {
     });
 
     try {
-        // Create the user first
+
         const newUser = {
             _type: 'user',
             name: user.name,
@@ -45,7 +45,6 @@ export async function POST(request) {
 
         const result = await client.create(newUser);
 
-        // Now create the token after user creation
         const token = jwt.sign({ userId: result._id, email: user.email }, process.env.JWT_SECRET_KEY, { expiresIn: '24h' });
 
         // Patch the user to add the token
@@ -317,7 +316,7 @@ export async function POST(request) {
                                                                     <w:anchorlock/>
                                                                     <v:textbox inset="0px,0px,0px,0px">
                                                                     <center dir="false" style="color:#ffffff;font-family:sans-serif;font-size:16px">
-                                                                    <![endif]--><a href="${process.env.NEXT_PUBLIC_URL}api/verify-email/?token=${token}" class="button" style="background-color: #1aa19c; border-bottom: 0px solid transparent; border-left: 0px solid transparent; border-radius: 60px; border-right: 0px solid transparent; border-top: 0px solid transparent; color: #ffffff; display: inline-block; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 16px; font-weight: undefined; mso-border-alt: none; padding-bottom: 15px; padding-top: 15px; padding-left: 30px; padding-right: 30px; text-align: center; width: auto; word-break: keep-all; letter-spacing: normal;"><span style="margin: 0; word-break: break-word; line-height: 32px;"><strong>Confirm Your Email</strong></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+                                                                    <![endif]--><a href="${process.env.NEXT_PUBLIC_URL}/consultation/email-verification/?token=${token}" class="button" style="background-color: #1aa19c; border-bottom: 0px solid transparent; border-left: 0px solid transparent; border-radius: 60px; border-right: 0px solid transparent; border-top: 0px solid transparent; color: #ffffff; display: inline-block; font-family: Montserrat, Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif; font-size: 16px; font-weight: undefined; mso-border-alt: none; padding-bottom: 15px; padding-top: 15px; padding-left: 30px; padding-right: 30px; text-align: center; width: auto; word-break: keep-all; letter-spacing: normal;"><span style="margin: 0; word-break: break-word; line-height: 32px;"><strong>Confirm Your Email</strong></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
 															</td>
 														</tr>
 													</table>
