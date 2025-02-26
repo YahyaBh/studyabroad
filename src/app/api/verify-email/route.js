@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { client } from '../../lib/sanityClient';
 import jwt from 'jsonwebtoken';
 
@@ -5,7 +6,6 @@ export async function POST(req) {
 
     const url = new URL(req.url);
 
-    // Extract the token from the query string
     const token = url.searchParams.get('token');
 
 
@@ -19,10 +19,10 @@ export async function POST(req) {
         const currentTime = Math.floor(Date.now() / 1000);
         const tokenAge = currentTime - decoded.iat;
 
-
         const user = await client.fetch(`*[_type == "user" && token == $token][0]`, {
             token: token,
         });
+
 
         if (!user) {
             return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
@@ -44,20 +44,24 @@ export async function POST(req) {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ user: user }),
+                        body: JSON.stringify({ name: user.name, email: user.email  }),
                     });
 
 
-                    if (response.ok) {
+                    try {
                         await client
                             .patch(user._id)
                             .set({ verified: true, token: '' })
                             .commit();
 
-                        localStorage.setItem("lastVerificationTime", Date.now().toString());
+                        Cookies.set("lastVerificationTime", Date.now().toString());
+
+                        return new Response(JSON.stringify({ error: 'User has been successfully verified', }), { status: 200 });
+                    } catch (err) {
+                        return new Response(JSON.stringify({ error: 'Unable to verify user', message: err.message }), { status: 500 });
                     }
 
-                    return new Response(null, { status: 302, headers: { Location: `/consultation/verified/${user._id}` } });
+
                 } catch (err) {
                     console.log(err);
                     return new Response(JSON.stringify({ error: 'Unable to create meeting link', }), { status: 500 });

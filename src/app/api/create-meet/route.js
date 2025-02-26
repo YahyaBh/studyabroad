@@ -1,12 +1,10 @@
 import { google } from 'googleapis';
 import { v4 as uuidv4 } from 'uuid';
 
-export async function POST({ req }) {
+export async function POST(req) {
 
+    const user = await req.json();
 
-    const userData = { ...req.body }
-    
-    
     try {
         const auth = new google.auth.OAuth2({
             clientId: process.env.GOOGLE_CLIENT_ID,
@@ -21,14 +19,14 @@ export async function POST({ req }) {
         const calendar = google.calendar({ version: 'v3', auth });
 
         const event = {
-            summary: 'Meeting With StudyAbroad Agency',
+            summary: `Meeting With ${user.name}`,
             description: "We'll be happy joining you , be ready to discuss your future study plans",
             start: {
-                dateTime: new Date().toISOString(),
+                dateTime: user.date.toISOString,
                 timeZone: 'UTC',
             },
             end: {
-                dateTime: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
+                dateTime: (user.date + 60 * 60 * 1000).toISOString(),
                 timeZone: 'UTC',
             },
             conferenceData: {
@@ -47,9 +45,8 @@ export async function POST({ req }) {
             conferenceDataVersion: 1,
         });
 
-        // Return the Google Meet link
         const meetData = response.data;
-        return new Response(JSON.stringify({ meetData }), { status: 200 });
+        return new Response(JSON.stringify({ meetData: meetData }), { status: 200 });
     } catch (error) {
         console.error('Error creating event:', error);
         return new Response(JSON.stringify({ error: 'Failed to create event' }), { status: 500 });

@@ -27,7 +27,18 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
-        <Toaster/>
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 5000, 
+            style: {
+              background: '#fff', 
+              color: '#000', 
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)', 
+              padding: '16px',
+              borderRadius: '8px',
+            },
+          }} />
       </body>
     </html>
   );

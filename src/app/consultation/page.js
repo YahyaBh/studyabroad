@@ -17,6 +17,7 @@ import 'react-calendar/dist/Calendar.css';
 import { client, urlFor } from "../lib/sanityClient"
 import { phone } from 'phone';
 import { toast } from 'react-hot-toast';
+import Cookies from "js-cookie"
 
 const page = () => {
 
@@ -55,13 +56,12 @@ const page = () => {
     });
 
 
-
     const steps = ['country', 'contact', 'date', 'payment', 'complete'];
     const currentIndex = steps.indexOf(currentPage);
 
     useEffect(() => {
         setCurrentPage('country');
-        const lastRequestTime = localStorage.getItem("lastVerificationTime");
+        const lastRequestTime = Cookies.get("lastVerificationTime");
 
         if (lastRequestTime) {
             const timePassed = Math.floor((Date.now() - lastRequestTime) / 1000);
@@ -85,8 +85,24 @@ const page = () => {
             clearInterval(countdown);
         }
 
-        return () => clearInterval(countdown); // Clean up interval on unmount
+        return () => clearInterval(countdown);
     }, [verificationSent, timer]);
+
+    useEffect(() => {
+
+        const dateF = new Date(date);
+
+        if (isNaN(dateF.getTime())) {
+            console.error('Invalid date string');
+        } else {
+            const isoString = dateF.toISOString();
+            const formattedDate = isoString.split('T')[0];
+
+            console.log("date ", formattedDate, "time ", time)
+
+        }
+
+    }, [date, time])
 
 
     const loadData = async () => {
@@ -129,18 +145,17 @@ const page = () => {
             });
 
             setVerificationSent(true);
-            setTimer(300);
+            setTimer(5);
 
             if (response.status == 200) {
                 toast.success("EMAIL SENT SUCCESSFULLY");
-                localStorage.setItem("lastVerificationTime", Date.now().toString());
+                Cookies.set("lastVerificationTime", Date.now().toString());
             } else if (response.status == 409) {
                 toast.error("EMAIL ALREADY EXIST");
             } else {
                 toast.error(response.data.message)
             }
         } catch (err) {
-            console.error(err);
             toast.error("EMAIL DID NOT SENT , PLEASE TRY AGAIN")
         }
 
@@ -273,7 +288,7 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
         if (words.length <= 2) {
             setUser({ ...user, name: e });
         } else {
-            console.error('Enter a valid name');
+            toast.error('Please enter your full name');
         }
     };
 
@@ -282,10 +297,10 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
 
         input = input.replace(/[^\d+]/g, "");
 
-        // Add '+' at the start if not present
         if (input && input[0] !== "+") {
             input = "+" + input;
         }
+
         setUser({ ...user, phone: input })
     }
 
@@ -293,7 +308,11 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
     const gradeFunc = (e) => {
         let value = e.replace(/[^0-9]/g, '');
 
-        if (value.length > 2) {
+        if (value.length >= 1 && parseInt(value[0]) > 1) {
+            value = '';
+        }
+
+        if (value.length >= 2) {
             value = value.slice(0, 2) + '.' + value.slice(2);
         }
 
@@ -301,11 +320,14 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
             value = value.slice(0, 5);
         }
 
+        if (parseFloat(value) > 19.99) {
+            value = '19.99';
+        }
         setUser({ ...user, grade: value });
-    }
+    };
 
     const handleSubmit = async (e) => {
-        if (user.name) {
+        if (user.name || user.name.slice(" ") < 2) {
             if (validate(user.email)) {
                 if (phone(user.phone)) {
                     if (user.study_level) {
@@ -314,25 +336,25 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
                                 if (user.meeting) {
                                     setCurrentPage('date')
                                 } else {
-                                    alert('Please choose a meeting method')
+                                    toast.error('Please choose a meeting method')
                                 }
                             } else {
-                                alert('Enter a valid grade');
+                                toast.error('Please enter your grade');
                             }
                         } else {
-                            alert('Enter a valid study field');
+                            toast.error('Please enter your study field');
                         }
                     } else {
-                        alert('Enter choose a study field');
+                        toast.error('Please choose your study level');
                     }
                 } else {
-                    alert('Enter a valid phone number');
+                    toast.error('Please enter your phone number');
                 }
             } else {
-                alert('please enter a valid email')
+                toast.error('Please enter a valid email')
             }
         } else {
-            alert('please enter a valid name')
+            toast.error('Please enter your full name');
         }
     }
 
@@ -401,12 +423,12 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
                     <div className="inp">
                         <label>I want my meeting to be</label>
 
-                        <label className="option" onClick={(e) => setUser({ ...user, meeting: 'meeting' })}>
-                            <input type="radio" name="meeting" value="Online" />
+                        <label className="option" onClick={(e) => setUser({ ...user, meeting: 'Online' })}>
+                            <input type="radio" name="meeting" value={user.meeting} />
                             <span className="text">Online Meeting</span>
                         </label>
-                        <label className="option" onClick={(e) => setUser({ ...user, meeting: 'agency' })}>
-                            <input type="radio" name="meeting" value="In Agency" />
+                        <label className="option" onClick={(e) => setUser({ ...user, meeting: 'In Agency' })}>
+                            <input type="radio" name="meeting" value={user.meeting} />
                             <span className="text">In Agency</span>
                         </label>
 
@@ -500,7 +522,7 @@ const DatePage = ({ setDate, date, setTime, time, setCurrentPage }) => {
     )
 }
 
-const PaymentPage = ({ setPayment, payment, setCurrentPage , user }) => {
+const PaymentPage = ({ setPayment, payment, setCurrentPage, user }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -518,14 +540,17 @@ const PaymentPage = ({ setPayment, payment, setCurrentPage , user }) => {
                     <div className="inp">
                         <label>Choose your payment method</label>
 
-                        <label className="option" onClick={() => setPayment('Meeting')}>
-                            <input type="radio" name="meeting" value="Meeting" />
+                        <label className="option" onClick={() => setPayment('bank')}>
+                            <input type="radio" name="payment" value="bank" />
                             <span className="text">Bank Transfer</span>
                         </label>
-                        <label disabled={user.meeting == 'In Agency' ? true : false} className="option" onClick={() => setPayment('Cash')}>
-                            <input type="radio" name="meeting" value="Agency" />
+                        <label className="option" onClick={() => setPayment('cash')}>
+                            {user.meeting == 'In Agency' ? <input disabled="true" type="radio" name="payment" /> :
+                                <input type="radio" name="payment" value="Agency" />}
                             <span className="text">Cash (in Agency)</span>
                         </label>
+
+
 
                     </div>
 
