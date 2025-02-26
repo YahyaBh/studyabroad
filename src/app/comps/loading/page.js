@@ -1,7 +1,7 @@
 "use client"
 import LottieAnimation from "@/app/lib/lottieAnimation"
 import animationData from "../../assets/images/KGi7Y2yrRW.json"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 const Loading = ({ loading }) => {
@@ -17,7 +17,6 @@ const Loading = ({ loading }) => {
             document.body.style.overflow = "auto";
         }
 
-        // Cleanup function to restore scrolling when the component unmounts
         return () => {
             document.body.style.overflow = "auto";
         };
@@ -26,7 +25,7 @@ const Loading = ({ loading }) => {
     return (
         <div className="loading">
 
-            <div style={{ height: '50dvh', width: '50dvh' }}>
+            <div style={{ height: '100dvh', width: '100%' }}>
                 <LottieAnimation animationData={animationData} />
             </div>
         </div>

@@ -1,25 +1,31 @@
 "use client"
 import { useEffect, useRef } from 'react';
-import lottie from 'lottie-web';
 
 const LottieAnimation = ({ animationData, loop = true, autoplay = true }) => {
+
     const containerRef = useRef(null);
 
-    
+    async function getLottie() {
+        const lot = await import("lottie-web");
 
-    useEffect(() => {
-        const animation = lottie.loadAnimation({
-            container: containerRef.current, // the container where animation will be rendered
-            renderer: 'svg', // use SVG renderer
+        lot.default.loadAnimation({
+            container: containerRef.current,
+            renderer: 'svg',
             loop: loop,
             autoplay: autoplay,
-            animationData: animationData, // Lottie animation data (JSON)
-        });
+            animationData: animationData, 
+        })
 
-        return () => animation.destroy(); // Cleanup the animation when the component is unmounted
-    }, [animationData, loop, autoplay]);
+    }
+    useEffect(() => {
+
+        getLottie();
+
+    }, []);
+
 
     return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
 };
 
 export default LottieAnimation;
+

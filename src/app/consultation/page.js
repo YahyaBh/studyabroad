@@ -116,9 +116,9 @@ const page = () => {
     }
 
 
-
     const sendVerificationEmail = async () => {
         setLoading(true);
+
         try {
             const response = await fetch('/api/send-verification', {
                 method: 'POST',
@@ -128,18 +128,22 @@ const page = () => {
                 body: JSON.stringify({ user: user }),
             });
 
+            setVerificationSent(true);
+            setTimer(300);
 
-            if (response.ok) {
+            if (response.status == 200) {
                 toast.success("EMAIL SENT SUCCESSFULLY");
                 localStorage.setItem("lastVerificationTime", Date.now().toString());
-                setTimer(300);
-                setVerificationSent(true);
+            } else if (response.status == 409) {
+                toast.error("EMAIL ALREADY EXIST");
+            } else {
+                toast.error(response.data.message)
             }
-
         } catch (err) {
             console.error(err);
             toast.error("EMAIL DID NOT SENT , PLEASE TRY AGAIN")
         }
+
         setLoading(false);
     };
 
@@ -201,7 +205,7 @@ const page = () => {
                             <DatePage key="date" setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
                         )}
                         {currentPage === 'payment' && (
-                            <PaymentPage key="payment" setCurrentPage={setCurrentPage} date={date} time={time} payment={payment} setPayment={setPayment} />
+                            <PaymentPage key="payment" setCurrentPage={setCurrentPage} user={user} date={date} time={time} payment={payment} setPayment={setPayment} />
                         )}
                         {currentPage === 'complete' && (
                             <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} verificationSent={verificationSent} timer={timer} />
@@ -398,11 +402,11 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
                         <label>I want my meeting to be</label>
 
                         <label className="option" onClick={(e) => setUser({ ...user, meeting: 'meeting' })}>
-                            <input type="radio" name="meeting" value="Meeting" />
+                            <input type="radio" name="meeting" value="Online" />
                             <span className="text">Online Meeting</span>
                         </label>
                         <label className="option" onClick={(e) => setUser({ ...user, meeting: 'agency' })}>
-                            <input type="radio" name="meeting" value="Agency" />
+                            <input type="radio" name="meeting" value="In Agency" />
                             <span className="text">In Agency</span>
                         </label>
 
@@ -496,7 +500,7 @@ const DatePage = ({ setDate, date, setTime, time, setCurrentPage }) => {
     )
 }
 
-const PaymentPage = ({ setPayment, payment, setCurrentPage }) => {
+const PaymentPage = ({ setPayment, payment, setCurrentPage , user }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -518,7 +522,7 @@ const PaymentPage = ({ setPayment, payment, setCurrentPage }) => {
                             <input type="radio" name="meeting" value="Meeting" />
                             <span className="text">Bank Transfer</span>
                         </label>
-                        <label className="option" onClick={() => setPayment('Cash')}>
+                        <label disabled={user.meeting == 'In Agency' ? true : false} className="option" onClick={() => setPayment('Cash')}>
                             <input type="radio" name="meeting" value="Agency" />
                             <span className="text">Cash (in Agency)</span>
                         </label>

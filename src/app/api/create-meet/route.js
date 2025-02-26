@@ -5,12 +5,8 @@ export async function POST({ req }) {
 
 
     const userData = { ...req.body }
-
-    console.log(userData);
     
-    return new Response(JSON.stringify(userData), { status: 200 });
-
-    return;
+    
     try {
         const auth = new google.auth.OAuth2({
             clientId: process.env.GOOGLE_CLIENT_ID,

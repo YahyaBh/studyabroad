@@ -20,7 +20,6 @@
     "fs": "^0.0.1-security",
     "googleapis": "^144.0.0",
     "jsonwebtoken": "^9.0.2",
-    "lottie-react": "^2.4.1",
     "lottie-web": "^5.12.2",
     "next": "15.1.4",
     "next-auth": "^4.24.11",
