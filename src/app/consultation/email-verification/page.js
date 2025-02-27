@@ -3,14 +3,17 @@ import React, { useEffect } from "react"
 import './page.scss'
 import toast from 'react-hot-toast';
 import Loading from "@/app/comps/loading/page";
+import { useSearchParams } from "next/navigation";
 
-const page = ({ searchParams }) => {
+const page = () => {
 
-    const token = React.use(searchParams);
+
+    const searchParams = useSearchParams();
+    const token = searchParams.get('token');
 
     useEffect(() => {
 
-        const url = `${process.env.NEXT_PUBLIC_URL}/api/verify-email`
+        const url = `${process.env.NEXT_PUBLIC_URL}api/verify-email`
 
         fetch(url, {
             method: 'POST',
@@ -21,26 +24,31 @@ const page = ({ searchParams }) => {
                 token: token
             })
         })
-            .then(res => {
-                if (res.status === 200) {
-                    toast.success('Email Is Verified');
-
-                    window.location.href = '/consultation/verified'
-                } else if (res.status === 400) {
-                    toast.error('Token Is Expired');
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
+            .then((data) => {
+                if (data.error) {
+                    toast.success('Email Is Verified');                    
+                    window.location.href = `${process.env.NEXT_PUBLIC_URL}/consultation/verified/${data.userID}`;
+                } else {
+                    toast.error(data.message || 'Something Went Wrong');
 
                     setTimeout(() => {
-                        window.location.href = '/consultation'
+                        window.location.href = '/consultation';
                     }, 5000);
                 }
             })
-            .catch(error => {
-                toast.error('Something went wrong')
-            })
+            .catch((error) => {
+                toast.error(error?.message || 'Something Went Wrong');
+            });
     }, []);
 
 
-    const notify = () => toast('Here is your toast.');
     return (
         <>
             <Loading />

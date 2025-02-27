@@ -26,8 +26,8 @@ export async function POST(request) {
 
 			const findEmail = await client.fetch(`*[_type == "user" && email == "${user.email}"]`);
 
-			if (findEmail.length > 0) {
-				return NextResponse.json({ message: 'Email already exists' }, { status: 400 });
+			if (findEmail.length > 0 && findEmail[0].token === '') {
+				return NextResponse.json({ message: 'Email already  and verified' }, { status: 400 });
 			} else {
 
 				const newUser = {
@@ -62,7 +62,7 @@ export async function POST(request) {
 
 				try {
 
-					const verificationLink = `${process.env.NEXT_PUBLIC_URL}/consultation/email-verification/${token}`;
+					const verificationLink = `${process.env.NEXT_PUBLIC_URL}consultation/email-verification?token=${token}`;
 
 					await transporter.sendMail({
 						from: process.env.EMAIL_USER,

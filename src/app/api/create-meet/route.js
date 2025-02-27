@@ -22,11 +22,11 @@ export async function POST(req) {
             summary: `Meeting With ${user.name}`,
             description: "We'll be happy joining you , be ready to discuss your future study plans",
             start: {
-                dateTime: user.date.toISOString,
+                dateTime: '2025-02-10',
                 timeZone: 'UTC',
             },
             end: {
-                dateTime: (user.date + 60 * 60 * 1000).toISOString(),
+                dateTime: '2025-02-10',
                 timeZone: 'UTC',
             },
             conferenceData: {

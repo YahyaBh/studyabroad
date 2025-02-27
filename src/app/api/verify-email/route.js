@@ -4,13 +4,10 @@ import jwt from 'jsonwebtoken';
 
 export async function POST(req) {
 
-    const url = new URL(req.url);
-
-    const token = url.searchParams.get('token');
-
+    const { token } = await req.json();
 
     if (!token) {
-        return new Response(JSON.stringify({ error: 'Unable to retrieve authorization token' }), { status: 400 });
+        return new Response(JSON.stringify({ message: 'Unable to retrieve authorization token' }), { status: 400 });
     }
 
     try {
@@ -34,37 +31,55 @@ export async function POST(req) {
                     .set({ token: '' })
                     .commit();
 
-                return new Response(JSON.stringify({ error: 'Token is no longer available , please resubmit verification' }), { status: 400 });
+                return new Response(JSON.stringify({ message: 'Token is no longer available , please resubmit verification' }), { status: 400 });
             }
             else {
-                try {
-                    const baseUrl = `${req.headers.get('x-forwarded-proto') || 'http'}://${req.headers.get('host')}`;
-                    const response = await fetch(`${baseUrl}/api/create-meet`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ name: user.name, email: user.email  }),
-                    });
 
-
+                if (user.meetingType !== 'Online') {
                     try {
-                        await client
+                        client
                             .patch(user._id)
                             .set({ verified: true, token: '' })
                             .commit();
 
                         Cookies.set("lastVerificationTime", Date.now().toString());
-
-                        return new Response(JSON.stringify({ error: 'User has been successfully verified', }), { status: 200 });
+                        return new Response(JSON.stringify({ error: 'User has been successfully verified', user: user}), { status: 200 });
                     } catch (err) {
                         return new Response(JSON.stringify({ error: 'Unable to verify user', message: err.message }), { status: 500 });
                     }
+                }
 
 
+                try {
+                    const baseUrl = process.env.NEXT_PUBLIC_URL;
+                    await fetch(`${baseUrl}/api/create-meet`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name: user.name, email: user.email }),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            try {
+                                client
+                                    .patch(user._id)
+                                    .set({ verified: true, token: '' , meetingLink : data.meetData.url})
+                                    .commit();
+
+                                Cookies.set("lastVerificationTime", Date.now().toString());
+                                return new Response(JSON.stringify({ error: 'User has been successfully verified', user: user, meetingData: data.meetData }), { status: 200 });
+                            } catch (err) {
+                                return new Response(JSON.stringify({ error: 'Unable to verify user', message: err.message }), { status: 500 });
+                            }
+
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
                 } catch (err) {
                     console.log(err);
-                    return new Response(JSON.stringify({ error: 'Unable to create meeting link', }), { status: 500 });
+                    return new Response(JSON.stringify({ message: 'Unable to create meeting link', }), { status: 500 });
                 }
 
             }

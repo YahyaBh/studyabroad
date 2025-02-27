@@ -325,7 +325,7 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
     };
 
     const handleSubmit = async (e) => {
-        if (user.name || user.name.slice(" ") < 2) {
+        if (user.name || user.name.trim().split(/\s+/) <= 2) {
             if (validate(user.email)) {
                 if (phone(user.phone)) {
                     if (user.study_level) {
@@ -433,9 +433,25 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
                     </div>
                 </div>
 
-                <button className="prev-but" onClick={() => setCurrentPage('country')}> <MdArrowBack /></button>
 
-                {user.country._ref && user.name && user.email && user.phone && user.study_field && user.study_level && user.grade && user.meeting ? <button className="next-but" onClick={() => handleSubmit()}>Next <MdArrowRight /></button> : null}
+                <motion.button
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={() => setCurrentPage('country')} className="next-but">
+                    <MdArrowBack />
+                </motion.button>
+
+
+
+                {user.country._ref && user.name && user.email && user.phone && user.study_field && user.study_level && user.grade && user.meeting ?
+                    <motion.button
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }} className="next-but" onClick={() => handleSubmit()}>Next <MdArrowRight />
+                    </motion.button> : null}
 
             </section >
 
@@ -445,7 +461,7 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
     )
 }
 
-const DatePage = ({ setDate, date, setTime, time, setCurrentPage }) => {
+const DatePage = ({ setDate, date, setCurrentPage }) => {
 
     const today = new Date()
     const tomorrow = new Date(today)
@@ -496,15 +512,15 @@ const DatePage = ({ setDate, date, setTime, time, setCurrentPage }) => {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                             className="time-slots">
-                            <button className={time === '10:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('10:00') : () => setTime()} >10:00</button>
-                            <button className={time === '11:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('11:00') : () => setTime()} >11:00</button>
-                            <button className={time === '12:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('12:00') : () => setTime()} >12:00</button>
-                            <button className={time === '13:00' ? 'time-slot selected' : 'time-slot'} onClick={!time ? () => setTime('13:00') : () => setTime()} >13:00</button>
+                            <button className={user.time === '10:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '10:00' }) : () => setUser({ ...user, time: '' })} >10:00</button>
+                            <button className={user.time === '11:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '11:00' }) : () => setUser({ ...user, time: '' })} >11:00</button>
+                            <button className={user.time === '12:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '14:00' }) : () => setUser({ ...user, time: '' })} >12:00</button>
+                            <button className={user.time === '13:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '15:00' }) : () => setUser({ ...user, time: '' })} >13:00</button>
                         </motion.div></> : <><h4>Time</h4></>}
                 </div>
 
                 {
-                    date && time && (
+                    date && user.time && (
                         <motion.button
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
