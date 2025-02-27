@@ -29,7 +29,6 @@ const page = () => {
 
     const [currentPage, setCurrentPage] = useState();
     const [date, setDate] = useState();
-    const [time, setTime] = useState();
     const [payment, setPayment] = useState();
 
     const [verificationSent, setVerificationSent] = useState(false);
@@ -37,22 +36,22 @@ const page = () => {
 
     const [user, setUser] = useState({
         country: {
-            _ref: "",
+            _ref: "07b9779e-74dd-428a-ac8f-e0a91d8cc0f7",
             _type: "reference"
         },
-        name: '',
-        phone: '',
-        email: '',
+        name: 'Yahya Bouhsine',
+        phone: '+212665845124',
+        email: 'yahyabouhsine@protonmail.com',
         study_level: {
-            _ref: "",
+            _ref: "1454bbd6-7c7c-457a-b735-924174c10884",
             _type: "reference"
         },
-        study_field: '',
-        grade: '',
-        meeting: '',
-        date: '',
-        time: '',
-        payment: '',
+        study_field: 'Economics',
+        grade: '12.34',
+        meeting: 'Online',
+        date: '2025-10-23',
+        time: '10:00',
+        payment: 'cash',
     });
 
 
@@ -60,7 +59,7 @@ const page = () => {
     const currentIndex = steps.indexOf(currentPage);
 
     useEffect(() => {
-        setCurrentPage('country');
+        setCurrentPage('complete');
         const lastRequestTime = Cookies.get("lastVerificationTime");
 
         if (lastRequestTime) {
@@ -89,7 +88,6 @@ const page = () => {
     }, [verificationSent, timer]);
 
     useEffect(() => {
-
         const dateF = new Date(date);
 
         if (isNaN(dateF.getTime())) {
@@ -98,11 +96,9 @@ const page = () => {
             const isoString = dateF.toISOString();
             const formattedDate = isoString.split('T')[0];
 
-            console.log("date ", formattedDate, "time ", time)
-
+            setUser({ ...user, date: formattedDate });
         }
-
-    }, [date, time])
+    }, [date])
 
 
     const loadData = async () => {
@@ -147,6 +143,9 @@ const page = () => {
             setVerificationSent(true);
             setTimer(5);
 
+            console.log(response.data);
+
+
             if (response.status == 200) {
                 toast.success("EMAIL SENT SUCCESSFULLY");
                 Cookies.set("lastVerificationTime", Date.now().toString());
@@ -156,12 +155,11 @@ const page = () => {
                 toast.error(response.data.message)
             }
         } catch (err) {
-            toast.error("EMAIL DID NOT SENT , PLEASE TRY AGAIN")
+            toast.error(err.message)
         }
 
         setLoading(false);
     };
-
 
 
     return (
@@ -217,10 +215,10 @@ const page = () => {
                             <ContactPage key="contact" setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
                         )}
                         {currentPage === 'date' && (
-                            <DatePage key="date" setCurrentPage={setCurrentPage} date={date} setDate={setDate} time={time} setTime={setTime} />
+                            <DatePage key="date" setCurrentPage={setCurrentPage} date={date} setDate={setDate} />
                         )}
                         {currentPage === 'payment' && (
-                            <PaymentPage key="payment" setCurrentPage={setCurrentPage} user={user} date={date} time={time} payment={payment} setPayment={setPayment} />
+                            <PaymentPage key="payment" setCurrentPage={setCurrentPage} user={user} date={date} payment={payment} setPayment={setPayment} />
                         )}
                         {currentPage === 'complete' && (
                             <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} verificationSent={verificationSent} timer={timer} />
@@ -460,6 +458,8 @@ const DatePage = ({ setDate, date, setTime, time, setCurrentPage }) => {
         const day = date.getDay();
         return day === 0 || day === 6;
     };
+
+
 
     return (
         <motion.div
