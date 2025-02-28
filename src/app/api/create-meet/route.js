@@ -13,7 +13,6 @@ export async function POST(req) {
     const user = userData.user; // Access the actual 'user' object
 
     try {
-        console.log(user); // Now this will log the correct 'user' object
 
         const auth = new google.auth.OAuth2({
             clientId: process.env.GOOGLE_CLIENT_ID,
