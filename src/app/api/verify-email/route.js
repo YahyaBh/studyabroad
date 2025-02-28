@@ -20,7 +20,6 @@ export async function POST(req) {
             token: token,
         });
 
-
         if (!user) {
             return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
         } else {
@@ -35,36 +34,20 @@ export async function POST(req) {
             }
             else {
 
-                if (user.meetingType !== 'Online') {
-                    try {
-                        client
-                            .patch(user._id)
-                            .set({ verified: true, token: '' })
-                            .commit();
-
-                        Cookies.set("lastVerificationTime", Date.now().toString());
-                        return new Response(JSON.stringify({ error: 'User has been successfully verified', user: user}), { status: 200 });
-                    } catch (err) {
-                        return new Response(JSON.stringify({ error: 'Unable to verify user', message: err.message }), { status: 500 });
-                    }
-                }
-
-
-                try {
-                    const baseUrl = process.env.NEXT_PUBLIC_URL;
-                    await fetch(`${baseUrl}/api/create-meet`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ name: user.name, email: user.email }),
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
+                const baseUrl = process.env.NEXT_PUBLIC_URL;
+                await fetch(`${baseUrl}/api/create-meet`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user: user }),
+                })
+                    .then((response) => {
+                        if (response.status == 200 && data.meetData) {
                             try {
                                 client
                                     .patch(user._id)
-                                    .set({ verified: true, token: '' , meetingLink : data.meetData.url})
+                                    .set({ verified: true, token: '', meetingUrl: data.meetData.htmlLink })
                                     .commit();
 
                                 Cookies.set("lastVerificationTime", Date.now().toString());
@@ -72,21 +55,22 @@ export async function POST(req) {
                             } catch (err) {
                                 return new Response(JSON.stringify({ error: 'Unable to verify user', message: err.message }), { status: 500 });
                             }
+                        } else {
 
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                        });
-                } catch (err) {
-                    console.log(err);
-                    return new Response(JSON.stringify({ message: 'Unable to create meeting link', }), { status: 500 });
-                }
+                            return new Response(JSON.stringify({ error: 'Unable to create meeting' }), { status: 500 });
+                        }
+                    })
+                    .catch((err) => {
+                        return new Response(JSON.stringify({ error: 'Unable to create meeting', message: err.message }), { status: 500 });
+                    })
+
+
 
             }
         }
 
 
     } catch (err) {
-        return new Response(JSON.stringify({ error: 'Invalid or expired token', message: err }), { status: 400 });
+        return new Response(JSON.stringify({ error: 'Invalid or expired token', message: err.message }), { status: 400 });
     }
 }

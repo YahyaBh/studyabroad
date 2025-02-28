@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+    <defs>
+        <clipPath id="clip">
+            <rect width="220" height="220" x="0" y="0"></rect>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#clip)">
+        <g transform="matrix(1.5, 0, 0, 1.5, 107, 106.5)" opacity="0.002">
+            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0"
+                stroke-miterlimit="4" stroke="#13b31d" stroke-opacity="1" stroke-width="1"
+                d="M0,61.95C34.21,61.95 61.95,34.21 61.95,0 61.95,-34.21 34.21,-61.95 0,-61.95 -34.21,-61.95 -61.95,-34.21 -61.95,0 -61.95,34.21 -34.21,61.95 0,61.95z" />
+            <!-- Animate transform and opacity -->
+            <animate attributeName="transform" attributeType="XML" type="rotate" from="0 107 106.5"
+                to="360 107 106.5" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.002;0.5;0.002" dur="2s"
+                repeatCount="indefinite" />
+        </g>
+        <g transform="matrix(1.2, 0, 0, 1.2, 107, 106.5)" opacity="0.5">
+            <path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0"
+                stroke-miterlimit="4" stroke="#13b31d" stroke-opacity="1" stroke-width="1"
+                d="M0,61.95C34.21,61.95 61.95,34.21 61.95,0 61.95,-34.21 34.21,-61.95 0,-61.95 -34.21,-61.95 -61.95,-34.21 -61.95,0 -61.95,34.21 -34.21,61.95 0,61.95z" />
+            <!-- Animate transform and opacity -->
+            <animate attributeName="transform" attributeType="XML" type="rotate" from="0 107 106.5"
+                to="360 107 106.5" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.5;0.002;0.5" dur="2s"
+                repeatCount="indefinite" />
+        </g>
+        <g transform="matrix(1,0,0,1,107.36,105.86)" opacity="1">
+            <path fill="#16a348" fill-opacity="1"
+                d="M0,45.99C25.4,45.99 45.99,25.4 45.99,0 45.99,-25.4 25.4,-45.99 0,-45.99 -25.4,-45.99 -45.99,-25.4 -45.99,0 -45.99,25.4 -25.4,45.99 0,45.99z" />
+        </g>
+        <g transform="matrix(1,0,0,1,105.43,105.14)" opacity="1">
+            <path fill="#fff" fill-opacity="1"
+                d="M-6.8,8.29L-15.73,-0.64 -18.7,2.34 -6.8,14.24 18.7,-11.26 15.72,-14.24 -6.8,8.29z" />
+        </g>
+    </g>
+</svg>

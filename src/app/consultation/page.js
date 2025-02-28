@@ -27,7 +27,7 @@ const page = () => {
 
     const [data, setData] = useState();
 
-    const [currentPage, setCurrentPage] = useState();
+    const [currentPage, setCurrentPage] = useState('country');
     const [date, setDate] = useState();
     const [payment, setPayment] = useState();
 
@@ -36,22 +36,22 @@ const page = () => {
 
     const [user, setUser] = useState({
         country: {
-            _ref: "07b9779e-74dd-428a-ac8f-e0a91d8cc0f7",
+            _ref: "",
             _type: "reference"
         },
-        name: 'Yahya Bouhsine',
-        phone: '+212665845124',
-        email: 'yahyabouhsine@protonmail.com',
+        name: '',
+        phone: '',
+        email: '',
         study_level: {
-            _ref: "1454bbd6-7c7c-457a-b735-924174c10884",
+            _ref: "",
             _type: "reference"
         },
-        study_field: 'Economics',
-        grade: '12.34',
-        meeting: 'Online',
-        date: '2025-10-23',
-        time: '10:00',
-        payment: 'cash',
+        study_field: '',
+        grade: '',
+        meeting: '',
+        date: '',
+        time: '',
+        payment: '',
     });
 
 
@@ -59,7 +59,6 @@ const page = () => {
     const currentIndex = steps.indexOf(currentPage);
 
     useEffect(() => {
-        setCurrentPage('complete');
         const lastRequestTime = Cookies.get("lastVerificationTime");
 
         if (lastRequestTime) {
@@ -87,19 +86,10 @@ const page = () => {
         return () => clearInterval(countdown);
     }, [verificationSent, timer]);
 
+
     useEffect(() => {
-        const dateF = new Date(date);
-
-        if (isNaN(dateF.getTime())) {
-            console.error('Invalid date string');
-        } else {
-            const isoString = dateF.toISOString();
-            const formattedDate = isoString.split('T')[0];
-
-            setUser({ ...user, date: formattedDate });
-        }
+        console.log(date?.toISOString().split('T')[0]);
     }, [date])
-
 
     const loadData = async () => {
         const query = `*[_type == "consultation"] {
@@ -132,30 +122,28 @@ const page = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('/api/send-verification', {
+            const res = await fetch('/api/send-verification', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ user: user }),
-            });
-
+                body: JSON.stringify({ user: { ...user, date: date.toISOString().split('T')[0] } }),
+            })
+            
             setVerificationSent(true);
             setTimer(5);
 
-            console.log(response.data);
-
-
-            if (response.status == 200) {
-                toast.success("EMAIL SENT SUCCESSFULLY");
+            if (res.status == 200) {
+                toast.success("Email sent successfully");
                 Cookies.set("lastVerificationTime", Date.now().toString());
-            } else if (response.status == 409) {
-                toast.error("EMAIL ALREADY EXIST");
+            } else if (res.status == 409) {
+                toast.error("Email already verified");
             } else {
-                toast.error(response.data.message)
+                toast.error(res?.data?.message)
             }
+
         } catch (err) {
-            toast.error(err.message)
+            toast.error(err?.message)
         }
 
         setLoading(false);
@@ -215,10 +203,10 @@ const page = () => {
                             <ContactPage key="contact" setCurrentPage={setCurrentPage} user={user} setUser={setUser} data={data} />
                         )}
                         {currentPage === 'date' && (
-                            <DatePage key="date" setCurrentPage={setCurrentPage} date={date} setDate={setDate} />
+                            <DatePage key="date" setCurrentPage={setCurrentPage} setUser={setUser} user={user} date={date} setDate={setDate} />
                         )}
                         {currentPage === 'payment' && (
-                            <PaymentPage key="payment" setCurrentPage={setCurrentPage} user={user} date={date} payment={payment} setPayment={setPayment} />
+                            <PaymentPage key="payment" setCurrentPage={setCurrentPage} user={user} setUser={setUser} />
                         )}
                         {currentPage === 'complete' && (
                             <EmailVerification key="complete" sendVerificationEmail={sendVerificationEmail} verificationSent={verificationSent} timer={timer} />
@@ -439,7 +427,7 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    onClick={() => setCurrentPage('country')} className="next-but">
+                    onClick={() => setCurrentPage('country')} className="prev-but">
                     <MdArrowBack />
                 </motion.button>
 
@@ -461,7 +449,7 @@ const ContactPage = ({ setCurrentPage, setUser, user, data }) => {
     )
 }
 
-const DatePage = ({ setDate, date, setCurrentPage }) => {
+const DatePage = ({ setDate, date, setCurrentPage, user, setUser }) => {
 
     const today = new Date()
     const tomorrow = new Date(today)
@@ -538,7 +526,7 @@ const DatePage = ({ setDate, date, setCurrentPage }) => {
     )
 }
 
-const PaymentPage = ({ setPayment, payment, setCurrentPage, user }) => {
+const PaymentPage = ({ setCurrentPage, user , setUser }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -556,13 +544,13 @@ const PaymentPage = ({ setPayment, payment, setCurrentPage, user }) => {
                     <div className="inp">
                         <label>Choose your payment method</label>
 
-                        <label className="option" onClick={() => setPayment('bank')}>
-                            <input type="radio" name="payment" value="bank" />
+                        <label className="option" onClick={() => setUser({ ...user, payment: 'bank' })}>
+                            <input type="radio" name="payment" value={user.payment} />
                             <span className="text">Bank Transfer</span>
                         </label>
-                        <label className="option" onClick={() => setPayment('cash')}>
+                        <label className="option" onClick={() => setUser({ ...user, payment: 'cash' })}>
                             {user.meeting == 'In Agency' ? <input disabled="true" type="radio" name="payment" /> :
-                                <input type="radio" name="payment" value="Agency" />}
+                                <input type="radio" name="payment" value={user.payment} />}
                             <span className="text">Cash (in Agency)</span>
                         </label>
 
@@ -571,7 +559,7 @@ const PaymentPage = ({ setPayment, payment, setCurrentPage, user }) => {
                     </div>
 
                     {
-                        payment && (
+                        user.payment && (
                             <motion.button
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}

@@ -25,27 +25,17 @@ const page = () => {
             })
         })
             .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error('Something went wrong');
+                if (res.status === 200) {
+                    toast.success('Email Is Verified');
+                    window.location.href = `${process.env.NEXT_PUBLIC_URL}/consultation/verified/${data.user._id}`;
                 }
             })
-            .then((data) => {
-                if (data.error) {
-                    toast.success('Email Is Verified');                    
-                    window.location.href = `${process.env.NEXT_PUBLIC_URL}/consultation/verified/${data.userID}`;
-                } else {
-                    toast.error(data.message || 'Something Went Wrong');
+            .catch((err) => {
+                // window.location.href = `${process.env.NEXT_PUBLIC_URL}/consultation`;
+                console.log(err);
+                toast.error('Email Is Not Verified');
+            })
 
-                    setTimeout(() => {
-                        window.location.href = '/consultation';
-                    }, 5000);
-                }
-            })
-            .catch((error) => {
-                toast.error(error?.message || 'Something Went Wrong');
-            });
     }, []);
 
 
