@@ -3,16 +3,20 @@ import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req) {
 
-    const userData = await req.json(); // This gets the entire object with 'user' property
+    const userData = await req.json();
+
+    console.log(userData);
+    
 
     if (!userData || !userData.user) {
         console.log('User data', userData);
         return new Response(JSON.stringify({ message: 'Missing required fields' }), { status: 400 });
     }
 
-    const user = userData.user; // Access the actual 'user' object
+    const user = userData.user;
 
     try {
+        
 
         const auth = new google.auth.OAuth2({
             clientId: process.env.GOOGLE_CLIENT_ID,
