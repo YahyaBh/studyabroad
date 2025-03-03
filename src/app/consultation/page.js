@@ -87,9 +87,6 @@ const page = () => {
     }, [verificationSent, timer]);
 
 
-    useEffect(() => {
-        console.log(date?.toISOString().split('T')[0]);
-    }, [date])
 
     const loadData = async () => {
         const query = `*[_type == "consultation"] {
@@ -139,7 +136,7 @@ const page = () => {
             } else if (res.status == 409) {
                 toast.error("Email already verified");
             } else {
-                toast.error(res?.data?.message)
+                toast.error(res?.message)
             }
 
         } catch (err) {

@@ -118,7 +118,7 @@ export async function POST(request) {
 
 
 		} catch (error) {
-			return NextResponse.json({ error: 'Failed to create user or send email', message: error.message }, { status: 500 });
+			return NextResponse.json({ message: 'Failed to create user or send email', error: error.message }, { status: 500 });
 		}
 	}
 

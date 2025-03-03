@@ -43,21 +43,14 @@ export async function POST(req) {
                     body: JSON.stringify({ user: user }),
                 })
                     .then((response) => {
-                        if (response.status == 200 && data.meetData) {
-                            try {
-                                client
-                                    .patch(user._id)
-                                    .set({ verified: true, token: '', meetingUrl: data.meetData.htmlLink })
-                                    .commit();
+                        if (response.ok) {
+                            client
+                                .patch(user._id)
+                                .set({ verified: true, token: '', meetingUrl: data.meetData.htmlLink })
+                                .commit();
 
-                                Cookies.set("lastVerificationTime", Date.now().toString());
-                                return new Response(JSON.stringify({ error: 'User has been successfully verified', user: user, meetingData: data.meetData }), { status: 200 });
-                            } catch (err) {
-                                return new Response(JSON.stringify({ error: 'Unable to verify user', message: err.message }), { status: 500 });
-                            }
-                        } else {
-
-                            return new Response(JSON.stringify({ error: 'Unable to create meeting' }), { status: 500 });
+                            Cookies.set("lastVerificationTime", Date.now().toString());
+                            return new Response(JSON.stringify({ error: 'User has been successfully verified', user: user, meetingData: data.meetData }), { status: 200 });
                         }
                     })
                     .catch((err) => {
