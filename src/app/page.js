@@ -1,13 +1,14 @@
 "use client"
-import { FaArrowDown, FaLocationArrow, FaSchool, FaStar } from "react-icons/fa";
-import { MdArrowOutward } from "react-icons/md";
+import { FaArrowDown, FaLocationArrow, FaSchool, FaSearch, FaStar } from "react-icons/fa";
+import { MdArrowOutward, MdKeyboardArrowDown } from "react-icons/md";
 import "./page.scss";
 import Footer from "./comps/footer/footer";
 import Navbar from "./comps/navbar/navbar";
 
 import { client, urlFor } from './lib/sanityClient';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Loading from "./comps/loading/page";
+import { IoArrowDownOutline } from "react-icons/io5";
 
 
 
@@ -16,7 +17,23 @@ export default function Home() {
 
   const [loading, setLoading] = useState(true);
 
-  const [homeData, setHomeData] = useState([])
+  const [homeData, setHomeData] = useState([]);
+  const [countryOpen, setCountryOpen] = useState(false)
+  const [programOpen, setProgramOpen] = useState(false)
+  const [selectedCountry, setSelectedCountry] = useState("")
+  const [selectedProgram, setSelectedProgram] = useState("")
+
+  const countries = ["United States", "Canada", "United Kingdom", "Australia", "Germany"]
+  const programs = ["Bachelor's Degree", "Master's Degree", "PhD Program", "Certificate Course", "Diploma Program"]
+
+  const handleSearch = () => {
+    console.log("Searching for:", { country: selectedCountry, program: selectedProgram })
+  }
+
+
+  const handleProgramDropdownClick = useCallback(() => {
+    setProgramOpen(!programOpen);
+  }, [programOpen]);
 
   useEffect(() => {
     loadData();
@@ -25,17 +42,17 @@ export default function Home() {
 
   const loadData = async () => {
     const query = `*[_type == "home"] {
-      description,
-      title,
-      services[]->{
-      _id,
-      title,
-      description,
-      image
-      },
-      universities,
+        description,
+        title,
+        services[]->{
+        _id,
+        title,
+        description,
+        image
+        },
+        universities,
 
-    }`;
+      }`;
 
     const homeData = await client.fetch(query);
     console.log(homeData);
@@ -61,9 +78,61 @@ export default function Home() {
 
             <p>Find Your Dream University and Transform Your Future Unlock unparalleled opportunities with top global institutions. Immerse yourself in diverse cultures, gain cutting-edge knowledge, and build a successful career. Your journey to excellence starts here.</p>
 
-            <div className="buttons">
-              <button className="get_consult">Get Consultation</button>
-              <button className="explore">Explore Universities</button>
+            <div className="search-container">
+
+              <div className="search-input" onClick={() => setCountryOpen(!countryOpen)}>
+                <label>Country</label>
+                <div className="dropdown">
+                  <div className="dropdown-btn" >
+                    {selectedCountry ? selectedCountry : <span style={{ opacity : '.6'}}>Choose Country</span>}
+                    <MdKeyboardArrowDown />
+                  </div>
+                  <div className={`dropdown-content ${countryOpen ? 'active' : ''}`}>
+                    {countries.map((country) => (
+                      <div
+                        key={country}
+                        onClick={() => {
+                          setSelectedCountry(country);
+                          setCountryOpen(false);
+                        }}
+                        className="dropdown-item"
+                      >
+                        {country}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="search-input" onBlur={() => setProgramOpen(!programOpen)} onClick={() => setProgramOpen(!programOpen)}>
+                <label>Country</label>
+                <div className="dropdown">
+                  <div className="dropdown-btn" >
+                    {selectedProgram ? selectedProgram :  <span style={{ opacity : '.6'}}>Choose Progam</span>}
+                    <MdKeyboardArrowDown />
+                  </div>
+                  <div className={`dropdown-content ${programOpen ? 'active' : ''}`}>
+                    {programs.map((country) => (
+                      <div
+                        key={country}
+                        onClick={() => {
+                          setSelectedProgram(country);
+                          setProgramOpen(false);
+                        }}
+                        className="dropdown-item"
+                      >
+                        {country }
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+
+              <button className="search-button" onClick={handleSearch}>
+                <span className="search-icon"><FaSearch /> </span>
+              </button>
             </div>
           </div>
 
@@ -83,7 +152,7 @@ export default function Home() {
         </div>
 
 
-      </header>
+      </header >
 
 
 
