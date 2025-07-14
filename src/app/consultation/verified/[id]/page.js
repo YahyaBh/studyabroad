@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import './page.scss';
 import Cookies from "js-cookie";
 import Link from "next/link";
-import { FaMousePointer } from "react-icons/fa";
 import { IoOpenOutline } from "react-icons/io5";
 
 export default function Page({ params }) {

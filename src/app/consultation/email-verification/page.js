@@ -1,49 +1,50 @@
 'use client'
-import React, { useEffect } from "react"
-import './page.scss'
+import React, { useEffect } from "react";
+import './page.scss';
 import toast from 'react-hot-toast';
 import Loading from "@/app/comps/loading/page";
 import { useSearchParams } from "next/navigation";
 
-const page = () => {
-
-
+const Page = () => {
     const searchParams = useSearchParams();
     const token = searchParams.get('token');
 
     useEffect(() => {
+        if (!token) {
+            toast.error("No verification token found");
+            window.location.href = `/consultation`;
+            return;
+        }
 
-        const url = `${process.env.NEXT_PUBLIC_URL}api/verify-email`
+        const url = `/api/verify-email`; 
 
         fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                token: token
-            })
+            body: JSON.stringify({ token }),
         })
-            .then((res) => {
-                if (res.status === 200) {
-                    toast.success('Email Is Verified');
-                    window.location.href = `${process.env.NEXT_PUBLIC_URL}/consultation/verified/${data.user._id}`;
+            .then(res => res.json())
+            .then(data => {
+                if (data.userId) {
+                    toast.success('Email is verified!');
+                    Cookies.set("user", JSON.stringify(data.user), { expires: 30 });
+                    window.location.href = `/consultation/verified/${data.userId}`;
+                } else {
+                    toast.error(data.message || 'Verification failed');
+                    window.location.href = `/consultation`;
                 }
             })
             .catch((err) => {
-                // window.location.href = `${process.env.NEXT_PUBLIC_URL}/consultation`;
-                console.log(err);
-                toast.error('Email Is Not Verified');
-            })
 
-    }, []);
+                console.error('Verification error:', err);
+                toast.error('Something went wrong');
+                window.location.href = `/consultation`;
+            });
+}, [token]);
 
+return <Loading />;
+};
 
-    return (
-        <>
-            <Loading />
-        </>
-    )
-}
-
-export default page
+export default Page;

@@ -66,7 +66,7 @@ header {
         width: 100%;
         display: flex;
         justify-content: flex-start;
-        align-items: stretch; 
+        align-items: stretch;
         color: #000;
 
         .search-input {
@@ -86,7 +86,7 @@ header {
           cursor: pointer;
 
           &:nth-child(2) {
-            border-radius: 0 ;
+            border-radius: 0;
           }
 
           label {
@@ -96,7 +96,7 @@ header {
           }
 
           .dropdown {
-            width: 100% ;
+            width: 100%;
             .dropdown-btn {
               width: 100%;
               display: flex;
@@ -177,7 +177,7 @@ header {
         .search-button {
           height: auto;
           background-color: #f7c607;
-          border-radius: 0  10px 10px 0;
+          border-radius: 0 10px 10px 0;
           padding: 10px 20px;
           box-sizing: border-box;
           border: none;
@@ -710,6 +710,17 @@ header {
           }
         }
       }
+    }
+
+    .explore {
+      background-color: #fcc51f;
+      color: #5e1a98;
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      padding: 15px 30px;
+      font-weight: 600;
+      font-size: 1em;
     }
   }
 }

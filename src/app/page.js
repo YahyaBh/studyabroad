@@ -395,7 +395,7 @@ export default function Home() {
 
           </div>
 
-          <button className="explore">Explore The Countries</button>
+          <button className="explore">Explore The Universities</button>
 
         </div>
       </section>
