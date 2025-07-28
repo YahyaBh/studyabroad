@@ -1,0 +1,101 @@
+.universities-card {
+    flex-basis: 25%;
+    min-width: 300px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
+    box-sizing: border-box;
+    border-radius: 20px; /* Rounded corners */
+    border: transparent 3px solid;
+
+    background:
+        linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 1) 55%,
+                rgb(255, 244, 212) 74%,
+                rgba(255, 255, 255, 1) 89%,
+                rgba(255, 255, 255, 1) 100%
+            )
+            padding-box,
+        linear-gradient(to bottom, #f7c607, #870ae6) border-box;
+    padding: 10px;
+
+    .top {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 5px;
+
+            svg {
+                color: #fcc51f;
+            }
+        }
+
+        h4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            svg {
+                color: #5e1a98;
+            }
+        }
+
+        h3 {
+            color: #870ae6;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        p {
+            width: 100% !important;
+            opacity: 0.8;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+    }
+
+    a {
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        border: transparent;
+        background: #5e1a98;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 1em;
+        text-decoration: none;
+
+        svg {
+            color: #ffc300;
+        }
+
+        &:hover {
+            background: #870ae6;
+        }
+    }
+}

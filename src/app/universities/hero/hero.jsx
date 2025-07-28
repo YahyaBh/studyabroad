@@ -1,36 +1,66 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./hero.scss"
 import Navbar from "@/app/comps/navbar/navbar"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { FaSearch } from "react-icons/fa"
+import { client } from "@/app/lib/sanityClient"
 
 export default function HeroSection() {
 
-    const [countryOpen, setCountryOpen] = useState(false)
-    const [programOpen, setProgramOpen] = useState(false)
-
-    const countries = ["United States", "Canada", "United Kingdom", "Australia", "Germany"]
-    const programs = ["Bachelor's Degree", "Master's Degree", "PhD Program", "Certificate Course", "Diploma Program"]
 
 
-    const [formData, setFormData] = useState({
-        programs: "",
-        country: "",
-        universityType: "",
-        budget: "",
-    })
+    const [countries, setCountries] = useState([])
+    const [programs, setPrograms] = useState([])
 
-    const handleSelectChange = (field, value) => {
-        setFormData((prev) => ({
-            ...prev,
-            [field]: value,
-        }))
-    }
+
+    const [selectedCountry, setSelectedCountry] = useState("")
+    const [selectedProgram, setSelectedProgram] = useState("")
+
+    useEffect(() => {
+        loadData();
+    }, [])
+
+    const loadData = async () => {
+
+
+        const data = await client.fetch(`*[_type == "university"]{
+            country,
+            courses[]->{course}
+        }`)
+
+        console.log(data);
+
+
+        // Get unique countries
+        const countriesSet = new Set(data.map(univ => univ.country).filter(Boolean))
+        setCountries(Array.from(countriesSet))
+
+        // Get unique programs
+        const allPrograms = data.flatMap(univ => univ.courses?.map(p => p.course) || [])
+        setPrograms(Array.from(new Set(allPrograms)))
+
+
+        setLoading(false);
+    };
+
+
+
 
     const handleSearch = () => {
-        console.log("Search with:", formData)
+
+        if (selectedCountry && selectedProgram) {
+            window.location.href = `/universities?country=${selectedCountry}&program=${selectedProgram}`
+        } else if (selectedCountry) {
+            window.location.href = `/universities?country=${selectedCountry}`
+        } else if (selectedProgram) {
+            window.location.href = `/universities?program=${selectedProgram}`
+        } else {
+            toast.error("Please select a country or program")
+        }
+
+
     }
 
     return (
@@ -41,70 +71,33 @@ export default function HeroSection() {
                     <p>Discover the opportunities and benefits of studying in your dream country.</p>
 
                     <div className="search-container">
+                        <label className="sidedrop">
+                            Country
+                            <select className="select" onChange={(e) => setSelectedCountry(e.target.value)}>
+                                <option value="">Select Country</option>
+                                {countries.map((country, index) => (
+                                    <option key={index} value={country}>{country}</option>
+                                ))}
+                            </select>
+                        </label>
 
-                        <div className="search-input" onClick={() => setCountryOpen(!countryOpen)} onBlur={() => setCountryOpen(!countryOpen)}>
-                            <label>Country</label>
-                            <div className="dropdown">
-                                <div className="dropdown-btn" >
-                                    {formData.country ? formData.country : <span style={{ opacity: '.6' }}>Choose Country</span>}
-                                    <MdKeyboardArrowDown />
-                                </div>
-                                <div className={`dropdown-content ${countryOpen ? 'active' : ''}`}>
-                                    {countries.map((country) => (
-                                        <div
-                                            key={country}
-                                            onClick={() => {
-                                                setFormData((prev) => ({
-                                                    ...prev,
-                                                    country: country,
-                                                }))
-                                                setCountryOpen(false);
-                                            }}
-                                            className="dropdown-item"
-                                        >
-                                            {country}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        <div className="line"></div>
 
+                        <label className="sidedrop">
+                            Program
+                            <select className="select" onChange={(e) => setSelectedProgram(e.target.value)}>
+                                <option value="">Select Program</option>
+                                {programs.map((program, index) => (
+                                    <option key={index} value={program}>{program}</option>
+                                ))}
+                            </select>
+                        </label>
 
-                        <div className="search-input" onBlur={() => setProgramOpen(!programOpen)} onClick={() => setProgramOpen(!programOpen)}>
-                            <label>Country</label>
-                            <div className="dropdown">
-                                <div className="dropdown-btn" >
-                                    {formData.programs ? formData.programs : <span style={{ opacity: '.6' }}>Choose Progam</span>}
-                                    <MdKeyboardArrowDown />
-                                </div>
-                                <div className={`dropdown-content ${programOpen ? 'active' : ''}`}>
-                                    {programs.map((program) => (
-                                        <div
-                                            key={program}
-                                            onClick={() => {
-                                                setFormData((prev) => ({
-                                                    ...prev,
-                                                    programs: program,
-                                                }))
-                                                setProgramOpen(false);
-                                            }}
-                                            className="dropdown-item"
-                                        >
-                                            {program}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <button className="search-button" onClick={handleSearch}>
-                            <span className="search-icon"><FaSearch /> </span>
-                        </button>
+                        <button onClick={handleSearch}><FaSearch /></button>
                     </div>
                 </div>
                 <div className="right">
-                    <img src="/assets/images/Unis/backpack.svg" alt="Backpack Icon"/>
+                    <img src="/assets/images/Unis/backpack.svg" alt="Backpack Icon" />
                 </div>
 
             </div>

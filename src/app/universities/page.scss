@@ -1,3 +1,79 @@
+.universities-cards {
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 20px;
+    box-sizing: border-box;
+    
+}
+
+.search-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    z-index: 12;
+    background-color: #fcc51f;
+
+    .search-container {
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+        width: 60%;
+        flex-wrap: wrap;
+        background-color: #fff;
+        border-radius: 12px;
+        margin: 10px 0;
+
+        .sidedrop {
+            display: flex;
+            flex-direction: column;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 5px 10px;
+            color: #5e1a98;
+            width: 18%;
+
+            select {
+                border: none;
+                outline: none;
+                background-color: transparent;
+                color: #949494;
+                font-size: 14px;
+                padding: 0px 10px;
+                cursor: pointer;
+            }
+        }
+
+        .line {
+            width: 1px;
+            height: 40px;
+            background: #ccc;
+            margin: 15px 10px;
+        }
+
+        button {
+            min-height: 100%;
+            min-width: 60px;
+            background-color: #5e1a98;
+            color: #fff;
+            border: none;
+            outline: none;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
 header {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/images/HeroBack.svg);
     background-position: center;
@@ -181,97 +257,7 @@ header {
             box-sizing: border-box;
             padding-top: 20px;
 
-            .universities-card {
-                flex-basis: 22%;
-                height: 100%;
-                display: flex;
-                align-items: flex-start;
-                justify-content: center;
-                flex-direction: column;
-                gap: 5px;
-                box-sizing: border-box;
-                border-radius: 20px; /* Rounded corners */
-                border: transparent 3px solid;
-                background:
-                    linear-gradient(
-                            180deg,
-                            rgba(255, 255, 255, 1) 55%,
-                            rgb(255, 244, 212) 74%,
-                            rgba(255, 255, 255, 1) 89%,
-                            rgba(255, 255, 255, 1) 100%
-                        )
-                        padding-box,
-                    linear-gradient(to bottom, #f7c607, #870ae6) border-box;
-                padding: 10px;
 
-                img {
-                    width: 100%;
-                    height: 200px;
-                    object-fit: cover;
-                    border-radius: 20px;
-                    margin-bottom: 10px;
-                }
-
-                .rating {
-                    display: flex;
-                    justify-content: center;
-                    align-items: flex-start;
-                    gap: 5px;
-
-                    svg {
-                        color: #fcc51f;
-                        font-size: 1.4em;
-                    }
-                }
-
-                h4 {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 10px;
-
-                    svg {
-                        color: #5e1a98;
-                    }
-                }
-
-                h3 {
-                    color: #870ae6;
-                    font-size: 1em;
-                    font-weight: 600;
-                }
-
-                p {
-                    width: 100%;
-                    opacity: 0.8;
-                    margin-bottom: 10px;
-                    text-align: justify;
-                }
-
-                button {
-                    width: 100%;
-                    height: 40px;
-                    border-radius: 10px;
-                    border: transparent;
-                    background: #5e1a98;
-                    color: white;
-                    cursor: pointer;
-                    transition: 0.3s;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 10px;
-                    font-size: 1em;
-
-                    svg {
-                        color: #ffc300;
-                    }
-
-                    &:hover {
-                        background: #870ae6;
-                    }
-                }
-            }
         }
     }
 }

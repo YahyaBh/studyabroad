@@ -376,6 +376,11 @@
                                     }
                                 }
                             }
+
+                            &:has(input:disabled) { 
+                                opacity: 0.4;
+                                filter: grayscale(100%);
+                            }
                         }
                     }
                 }
@@ -467,7 +472,7 @@
                 }
 
                 .disabled {
-                    opacity: .5 !important;
+                    opacity: 0.5 !important;
                     cursor: not-allowed;
                     filter: grayscale(100%);
                 }

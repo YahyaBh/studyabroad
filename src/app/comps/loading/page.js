@@ -25,7 +25,7 @@ const Loading = ({ loading }) => {
     return (
         <div className="loading">
 
-            <div style={{ height: '100dvh', width: '100%' }}>
+            <div style={{ height: '60dvh' }}>
                 <LottieAnimation animationData={animationData} />
             </div>
         </div>

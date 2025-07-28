@@ -39,15 +39,15 @@ const page = () => {
             _ref: "",
             _type: "reference"
         },
-        name: '',
-        phone: '',
-        email: '',
+        name: 'Yahya Bh',
+        phone: '212665845124',
+        email: 'gamesy865@gmail.com',
         study_level: {
             _ref: "",
             _type: "reference"
         },
-        study_field: '',
-        grade: '',
+        study_field: 'Economics',
+        grade: '12.32',
         meeting: '',
         date: '',
         time: '',
@@ -126,7 +126,7 @@ const page = () => {
                 },
                 body: JSON.stringify({ user: { ...user, date: date.toISOString().split('T')[0] } }),
             })
-            
+
             setVerificationSent(true);
             setTimer(5);
 
@@ -499,8 +499,8 @@ const DatePage = ({ setDate, date, setCurrentPage, user, setUser }) => {
                             className="time-slots">
                             <button className={user.time === '10:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '10:00' }) : () => setUser({ ...user, time: '' })} >10:00</button>
                             <button className={user.time === '11:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '11:00' }) : () => setUser({ ...user, time: '' })} >11:00</button>
-                            <button className={user.time === '12:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '14:00' }) : () => setUser({ ...user, time: '' })} >12:00</button>
-                            <button className={user.time === '13:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '15:00' }) : () => setUser({ ...user, time: '' })} >13:00</button>
+                            <button className={user.time === '12:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '12:00' }) : () => setUser({ ...user, time: '' })} >12:00</button>
+                            <button className={user.time === '13:00' ? 'time-slot selected' : 'time-slot'} onClick={!user.time ? () => setUser({ ...user, time: '13:00' }) : () => setUser({ ...user, time: '' })} >13:00</button>
                         </motion.div></> : <><h4>Time</h4></>}
                 </div>
 
@@ -523,7 +523,7 @@ const DatePage = ({ setDate, date, setCurrentPage, user, setUser }) => {
     )
 }
 
-const PaymentPage = ({ setCurrentPage, user , setUser }) => {
+const PaymentPage = ({ setCurrentPage, user, setUser }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -541,15 +541,31 @@ const PaymentPage = ({ setCurrentPage, user , setUser }) => {
                     <div className="inp">
                         <label>Choose your payment method</label>
 
-                        <label className="option" onClick={() => setUser({ ...user, payment: 'bank' })}>
-                            <input type="radio" name="payment" value={user.payment} />
-                            <span className="text">Bank Transfer</span>
-                        </label>
-                        <label className="option" onClick={() => setUser({ ...user, payment: 'cash' })}>
-                            {user.meeting == 'In Agency' ? <input disabled="true" type="radio" name="payment" /> :
-                                <input type="radio" name="payment" value={user.payment} />}
-                            <span className="text">Cash (in Agency)</span>
-                        </label>
+
+                        {user.meeting == 'Online' ?
+
+                            <label className="option" onClick={() => setUser({ ...user, payment: 'bank' })}>
+                                <input type="radio" name="payment" value={user.payment} />
+                                <span className="text">Bank Transfer</span>
+                            </label> :
+
+
+                            <label className="option">
+                                <input type="radio" disabled />
+                                <span className="text">Bank Transfer</span>
+                            </label>
+                        }
+
+                        {user.meeting == 'In Agency' ?
+                            <label className="option" onClick={() => setUser({ ...user, payment: 'cash' })}>
+                                <input type="radio" name="payment" value={user.payment} />
+                                <span className="text">Cash (in Agency)</span>
+                            </label> :
+                            <label className="option">
+                                <input type="radio" disabled />
+                                <span className="text">Cash (in Agency)</span>
+                            </label>
+                        }
 
 
 
