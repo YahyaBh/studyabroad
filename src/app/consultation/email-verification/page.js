@@ -1,12 +1,12 @@
 'use client'
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './page.scss';
 import toast from 'react-hot-toast';
 import Loading from "@/app/comps/loading/page";
-import { useSearchParams } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Page = () => {
-    const [token, setToken] = React.useState(null);
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -15,6 +15,8 @@ const Page = () => {
     }, []);
 
     useEffect(() => {
+        if (!token) return;
+
         if (!token) {
             toast.error("No verification token found");
             window.location.href = `/consultation`;
@@ -42,14 +44,15 @@ const Page = () => {
                 }
             })
             .catch((err) => {
-
                 console.error('Verification error:', err);
                 toast.error('Something went wrong');
                 window.location.href = `/consultation`;
             });
     }, [token]);
 
-    return <Loading />;
+    if (!token) return <Loading />;
+
+    return null;
 };
 
 export default Page;
