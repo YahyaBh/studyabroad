@@ -1,27 +1,34 @@
 'use client';
 
-import { Link as ScrollLink, scroller } from 'react-scroll';
+import { useState } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
 import { usePathname, useRouter } from 'next/navigation';
 import './navbar.scss';
 
 const Navbar = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
 
     const handleNavigateToServices = (e) => {
         e.preventDefault();
         router.push('/#services');
+        setMenuOpen(false);
+    };
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
     };
 
     return (
         <nav>
             <div className="nav-container">
-                <a href="/">
+                <a href="/" className="logo">
                     <img src="/favicon.svg" />
                 </a>
 
-                <div className="nav-links">
-                    <a href="/">Home</a>
+                <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
+                    <a href="/" onClick={() => setMenuOpen(false)}>Home</a>
 
                     {pathname === '/' ? (
                         <ScrollLink
@@ -29,6 +36,7 @@ const Navbar = () => {
                             smooth={true}
                             duration={500}
                             offset={-80}
+                            onClick={() => setMenuOpen(false)}
                         >
                             Services
                         </ScrollLink>
@@ -38,11 +46,17 @@ const Navbar = () => {
                         </a>
                     )}
 
-                    <a href="/universities">Universities</a>
-                    <a href="/about">About Us</a>
+                    <a href="/universities" onClick={() => setMenuOpen(false)}>Universities</a>
+                    <a href="/about" onClick={() => setMenuOpen(false)}>About Us</a>
                 </div>
 
                 <a href='/consultation' className="get_consult">Get Consultation</a>
+
+                <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </nav>
     );
