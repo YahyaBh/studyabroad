@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 import Footer from '../comps/footer/footer'
 import Navbar from '../comps/navbar/navbar'
 import HeroSection from './hero/hero'
@@ -14,11 +13,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import CardUni from '../comps/universityCard/CardUni'
 
 const Page = () => {
-    const searchParams = useSearchParams();
-    const country = searchParams.get("country");
-    const program = searchParams.get("program");
-    const type = searchParams.get("type");
-    const budget = searchParams.get("budget");
+    const [country, setCountry] = useState('');
+    const [program, setProgram] = useState('');
+    const [type, setType] = useState('');
+    const [budget, setBudget] = useState('');
+
 
     const [loading, setLoading] = useState(true);
     const [universities, setUniversities] = useState([]);
@@ -33,6 +32,12 @@ const Page = () => {
     const [budgets, setBudgets] = useState(["0-2000", "2000-5000", "5000-10000"]);
 
     useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setCountry(params.get('country') || '');
+        setProgram(params.get('program') || '');
+        setType(params.get('type') || '');
+        setBudget(params.get('budget') || '');
+
         getNavData();
     }, [])
 
@@ -170,7 +175,7 @@ const Page = () => {
 
                     <motion.div className="universities-cards" layout>
                         <AnimatePresence>
-                            {universities.map((university , index) => {
+                            {universities.map((university, index) => {
                                 return (
                                     <motion.div
                                         key={university._id}
