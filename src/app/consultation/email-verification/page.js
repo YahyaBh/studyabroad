@@ -6,8 +6,13 @@ import Loading from "@/app/comps/loading/page";
 import { useSearchParams } from "next/navigation";
 
 const Page = () => {
-    const searchParams = useSearchParams();
-    const token = searchParams.get('token');
+    const [token, setToken] = React.useState(null);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const t = params.get('token');
+        setToken(t);
+    }, []);
 
     useEffect(() => {
         if (!token) {
@@ -16,7 +21,7 @@ const Page = () => {
             return;
         }
 
-        const url = `/api/verify-email`; 
+        const url = `/api/verify-email`;
 
         fetch(url, {
             method: 'POST',
@@ -42,9 +47,9 @@ const Page = () => {
                 toast.error('Something went wrong');
                 window.location.href = `/consultation`;
             });
-}, [token]);
+    }, [token]);
 
-return <Loading />;
+    return <Loading />;
 };
 
 export default Page;
