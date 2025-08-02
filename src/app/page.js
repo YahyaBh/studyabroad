@@ -207,13 +207,13 @@ export default function Home() {
 
             <p>{homeData?.description}</p>
 
-            <button>Learn More</button>
+            <Link href="/about">Learn More</Link>
 
             <img src="/assets/images/Hero/ArrowButton.svg" alt="arrow" />
           </div>
 
           <div className="right">
-            <img src="/assets/images/Hero/GraduateGirl.png" />
+            <img src="/assets/images/Hero/GraduateGirl.png" alt="woman holding graduate" />
           </div>
         </div>
       </section>
