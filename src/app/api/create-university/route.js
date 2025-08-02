@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { client } from '@/sanity/lib/client' // adjust path as needed
+import { client } from '../../lib/sanityClient' // adjust path as needed
 
 export async function POST(req) {
     const body = await req.json()
