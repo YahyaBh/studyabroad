@@ -18,6 +18,7 @@ import {
 } from 'react-icons/fa';
 import { MdArrowOutward, MdOutlineUpload } from 'react-icons/md';
 import CardUni from '@/app/comps/universityCard/CardUni';
+import Loading from '@/app/comps/loading/page';
 
 const page = ({ params }) => {
     const { slug } = use(params);
@@ -89,7 +90,7 @@ const page = ({ params }) => {
     }, [slug]);
 
 
-    if (!university) return <p>Loading...</p>;
+    if (!university) return <Loading/>;
 
     return (
         <>

@@ -4,7 +4,11 @@
     align-items: stretch;
     gap: 20px;
     box-sizing: border-box;
-    
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
 }
 
 .search-bar {
@@ -256,8 +260,6 @@ header {
             gap: 20px;
             box-sizing: border-box;
             padding-top: 20px;
-
-
         }
     }
 }

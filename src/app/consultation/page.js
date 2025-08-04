@@ -232,15 +232,20 @@ const CountryPage = ({ user, setUser, setCurrentPage, data }) => {
             className="page-cont">
             <h2>Click on the country you are interested in studying in and choose the date.</h2>
 
-            <section className="cards-cont">
 
 
+            <section className={`cards-cont${user.country._ref ? ' has-selection' : ''}`}>
                 {data?.length > 0 && data[0]?.countries?.map((country, index) => (
-                    <div key={country._id + index} className={user.country._ref === country._id ? 'active card' : 'card'} onClick={() => setUser({ ...user, country: user.country._ref === country._id ? { _ref: '' } : { _ref: country._id } })}>
+                    <div
+                        key={country._id + index}
+                        className={user.country._ref === country._id ? 'active card' : 'card'}
+                        onClick={() => setUser({ ...user, country: user.country._ref === country._id ? { _ref: '' } : { _ref: country._id } })}
+                    >
                         <img src={country.image ? urlFor(country.image).url() : '/assets/images/Hero/GraduateGirl.png'} alt={country.name} />
                         <h3>{country.name}</h3>
                     </div>
                 ))}
+
 
                 {
                     user.country._ref && (
@@ -254,8 +259,10 @@ const CountryPage = ({ user, setUser, setCurrentPage, data }) => {
                         </motion.button>
                     )
                 }
+            </section>
 
-            </section >
+
+
 
 
 

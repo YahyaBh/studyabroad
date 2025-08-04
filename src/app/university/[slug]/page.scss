@@ -203,8 +203,8 @@
 
                 .images-container {
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
+                    justify-content: flex-start;
+                    align-items: flex-start;
                     width: 100%;
                     gap: 10px;
 
@@ -217,6 +217,8 @@
                         img {
                             width: 100%;
                             height: 100px;
+                            object-fit: cover;
+                            border-radius: 10px;
                         }
 
                         &:nth-child(5) {
@@ -295,6 +297,87 @@
             }
         }
     }
+
+    @media screen and (max-width: 992px) {
+        flex-direction: column;
+
+        .header-container {
+            flex-direction: column;
+            border-radius: 0;
+            margin-top: 0;
+
+            .left {
+                h2 {
+                    font-size: 1.8em;
+
+                    svg {
+                        display: none;
+                    }
+                }
+
+                p {
+                    font-size: 1.2em;
+                }
+
+                .info {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    gap: 1rem;
+
+                    .info-item {
+                        border-bottom: 1px solid #5e1a98;
+                        border-right: none;
+                        width: 100%;
+                        padding: 10px;
+                        box-sizing: border-box;
+                    }
+                }
+
+                .degree {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    gap: 1rem;
+
+                    .info-item {
+                        border-bottom: 1px solid #5e1a98;
+                        width: 100%;
+                        padding: 10px;
+                        box-sizing: border-box;
+
+                        &:nth-child(2) {
+                            border-left: none;
+                            padding-left: 10px;
+                            flex-basis: unset;
+                            border-bottom: none;
+                        }
+                    }
+                }
+
+                .fields {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    gap: 1rem;
+
+                    .info-item {
+                        border-bottom: 1px solid #5e1a98;
+                        width: 100%;
+                        padding: 10px;
+                        box-sizing: border-box;
+
+                        &:nth-child(2) {
+                            border-left: none;
+                            padding-left: 10px;
+                            flex-basis: unset;
+                            border-bottom: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .title-main {
@@ -317,6 +400,16 @@
         width: 6em;
         height: 3px;
     }
+
+    @media screen and (max-width: 992px) {
+        font-size: 1.4em;
+
+        .line-l,
+        .line-r {
+            width: 20vw;
+            height: 2px;
+        }
+    }
 }
 
 .informations-uni {
@@ -327,6 +420,7 @@
     gap: 1em;
     margin-top: 2em;
     margin-bottom: 2em;
+
     .informations-container {
         width: 100%;
         display: flex;
@@ -420,6 +514,33 @@
             }
         }
     }
+
+    @media screen and (max-width: 992px) {
+        .informations-container {
+            flex-direction: column;
+
+            .left,
+            .right {
+                flex-basis: 100%;
+                align-items: center;
+                text-align: center;
+            }
+
+            .rules-list {
+                justify-content: center;
+            }
+
+            .cards {
+                flex-direction: column;
+                align-items: center;
+
+                .rank {
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
 }
 
 .description-uni {
@@ -453,6 +574,24 @@
 
         p {
             font-size: 1em;
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .description-uni-container {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
         }
     }
 }
@@ -557,6 +696,36 @@
                     h3 {
                         font-size: 1em;
                     }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .degrees-offered-container {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+
+            .left,
+            .right {
+                flex-basis: 100%;
+                align-items: center;
+
+                h2 {
+                    font-size: 1.4em;
+                }
+            }
+
+            .cards-cont {
+                flex-direction: column;
+                align-items: center;
+
+                .card {
+                    width: 100%;
+                    margin-bottom: 20px;
                 }
             }
         }
@@ -697,6 +866,61 @@
             }
         }
     }
+
+    @media screen and (max-width: 992px) {
+        .req-container {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .top-cont,
+            .bottom-cont {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+
+                .left,
+                .right {
+                    flex-basis: 100%;
+                    margin-bottom: 20px;
+
+                    h2 {
+                        font-size: 1.4em;
+                    }
+                }
+
+                .right {
+                    .card {
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            padding: 5px; /* Border thickness */
+                            background: linear-gradient(to bottom, #5d1a9888 20%, #ffffff00 90%);
+                            border-radius: 25px;
+                            z-index: -1; /* Keeps it behind the card */
+                            mask:
+                                linear-gradient(white, white) content-box,
+                                linear-gradient(white, white);
+                            mask-composite: exclude;
+                            -webkit-mask:
+                                linear-gradient(white, white) content-box,
+                                linear-gradient(white, white);
+                            -webkit-mask-composite: destination-out;
+                        }
+                    }
+                }
+
+                .card {
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
 }
 
 .fees {
@@ -782,6 +1006,48 @@
             }
         }
     }
+
+    @media screen and (max-width: 992px) {
+        justify-content: flex-start;
+        align-items: center;
+        .fees-container {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .left,
+            .right {
+                flex-basis: 100%;
+                margin-bottom: 20px;
+            }
+
+            .left {
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+
+                h2 {
+                    font-size: 1.6em;
+                }
+
+                p {
+                    font-size: 1em;
+                    text-align: justify;
+                }
+            }
+
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+
+                .card {
+                    width: 100%;
+                    margin-bottom: 20px;
+                    padding: 20px;
+                }
+            }
+        }
+    }
 }
 
 .why {
@@ -821,6 +1087,44 @@
 
             img {
                 height: 100%;
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+
+        .why-container {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            .left,
+            .right {
+                flex-basis: 100%;
+                margin-bottom: 20px;
+            }
+
+            .left {
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+
+                h2 {
+                    font-size: 1.4em;
+                }
+
+                p {
+                    font-size: 1em;
+                }
+            }
+
+            img {
+                width: 100%;
+                height: auto;
             }
         }
     }
@@ -889,6 +1193,49 @@
 
             &:hover {
                 color: #000; /* Black text on hover */
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .scholarship-container {
+            flex-direction: column-reverse;
+            align-items: center;
+            text-align: center;
+
+            .left,
+            .right {
+                flex-basis: 100%;
+                margin-bottom: 20px;
+            }
+
+            .right {
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+
+                h2 {
+                    font-size: 1.4em;
+                }
+
+                p {
+                    font-size: 1em;
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            button {
+                width: 100%;
+                padding: 15px 0;
             }
         }
     }
@@ -981,6 +1328,37 @@
                     h5 {
                         font-size: 0.8em;
                         color: #410071;
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .graduates-container {
+            padding: 20px;
+            text-align: center;
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            h4 {
+                width: 100%;
+                font-size: 0.9em;
+            }
+
+            .bottom-content {
+                flex-direction: column;
+                align-items: center;
+
+                .per-card {
+                    width: 80%;
+                    margin-bottom: 20px;
+
+                    img {
+                        width: 100%;
+                        height: auto;
                     }
                 }
             }
@@ -1131,6 +1509,42 @@
             padding: 15px 30px;
             font-weight: 600;
             font-size: 1em;
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        .universities-container {
+            padding: 20px;
+            text-align: center;
+
+            h2 {
+                font-size: 2em;
+            }
+
+            p {
+                width: 100%;
+                font-size: 0.9em;
+            }
+
+            .universities-cards {
+                flex-direction: column;
+                align-items: center;
+
+                .universities-card {
+                    width: 100%;
+                    margin-bottom: 20px;
+
+                    img {
+                        height: auto;
+                        max-height: 200px;
+                    }
+                }
+            }
+
+            .explore {
+                width: 100%;
+                padding: 15px 0;
+            }
         }
     }
 }
