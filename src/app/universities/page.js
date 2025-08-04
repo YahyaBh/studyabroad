@@ -161,7 +161,7 @@ const Page = () => {
                         </div>
                     </nav>
                 ) : (
-                    <HeroSection program={searchParams.program} country={searchParams.country} />
+                    <HeroSection program={program} country={country} />
                 )}
 
                 <div className="container">

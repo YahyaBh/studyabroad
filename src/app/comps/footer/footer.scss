@@ -26,17 +26,17 @@ footer {
         }
 
         .cont {
-            flex: 1 1 100%;
+            flex-basis: 22%;
             display: flex;
             flex-direction: column;
             gap: 15px;
 
             @media screen and (min-width: 600px) {
-                flex: 1 1 45%;
+                flex-basis: 50%;;
             }
 
             @media screen and (min-width: 992px) {
-                flex: 1 1 23%;
+                flex-basis: 22%;
             }
 
             h4 {
@@ -80,6 +80,7 @@ footer {
             }
 
             input {
+                max-width: 25rem;
                 width: 100%;
                 padding: 10px 15px;
                 border-radius: 15px;
@@ -111,6 +112,8 @@ footer {
                 border-radius: 10px;
                 cursor: pointer;
                 transition: all 0.3s ease;
+                max-width: 25rem;
+                width: 100%;
 
                 &:hover {
                     background-color: #870ae6;

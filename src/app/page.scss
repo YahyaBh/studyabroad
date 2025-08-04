@@ -85,6 +85,7 @@ header {
             background-color: transparent;
             color: #949494;
             font-size: 18px;
+            font-weight: 400;
             padding: 0px 10px;
             cursor: pointer;
           }
@@ -107,6 +108,14 @@ header {
           border-bottom-right-radius: 12px;
           cursor: pointer;
           transition: all 0.2s ease;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          svg {
+            color: #000;
+            font-size: 20px;
+          }
 
           &:hover {
             opacity: 0.5;
@@ -294,7 +303,10 @@ header {
           }
 
           .line {
-            display: none;
+            height: 2px;
+            width: 50vw;
+            background: #ccc;
+            margin: auto;
           }
 
           button {
@@ -341,12 +353,14 @@ header {
 }
 
 .title-main {
+  font-size: 1.2em;
   font-weight: 600;
   color: #5e1a98;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 0.5em;
+  margin: auto;
 
   .line-l {
     background: linear-gradient(to right, #ffffff00, #5e1a98);
@@ -394,21 +408,6 @@ header {
       gap: 1.5rem;
       position: relative;
 
-      .title-main {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        font-size: 1.5rem;
-        font-weight: 700;
-
-        .line-l,
-        .line-r {
-          flex: 1;
-          height: 2px;
-          background-color: #5e1a98;
-        }
-      }
-
       h2 {
         font-weight: 600;
         font-size: 2rem;
@@ -455,9 +454,9 @@ header {
 
       > img {
         position: absolute;
-        bottom: -4rem;
-        left: 2rem;
-        width: 40px;
+        bottom: -7rem;
+        left: 4rem;
+        width: 10rem;
 
         @media screen and (max-width: 767px) {
           display: none;
@@ -494,25 +493,10 @@ header {
     width: 100%;
     max-width: 1400px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 3rem;
     box-sizing: border-box;
-
-    .title-main {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 700;
-      gap: 1rem;
-
-      .line-l,
-      .line-r {
-        flex: 1;
-        height: 2px;
-        background-color: #5e1a98;
-      }
-    }
 
     .services-main {
       display: flex;
@@ -603,11 +587,22 @@ header {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1rem;
+
+      @media screen and (max-width: 992px) {
+        justify-content: flex-start;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        
+      }
 
       .service-card {
-        flex: 1 1 100%;
+        flex-basis: 25%;
         max-width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: stretch;
+        align-items: stretch;
         border-radius: 20px;
         overflow: hidden;
         display: flex;
@@ -615,13 +610,13 @@ header {
         background: linear-gradient(to bottom, #f7c607, #870ae6) border-box;
         border: transparent 3px solid;
 
-        @media screen and (min-width: 576px) {
-          flex: 1 1 calc(50% - 1rem);
-        }
+        // @media screen and (min-width: 576px) {
+        //   flex: 1 1 calc(50% - 1rem);
+        // }
 
-        @media screen and (min-width: 992px) {
-          flex: 1 1 calc(25% - 1rem);
-        }
+        // @media screen and (min-width: 992px) {
+        //   flex: 1 1 calc(22% - 1rem);
+        // }
 
         .images-container {
           background-color: #fff;
@@ -678,22 +673,10 @@ header {
 
 .line-divider {
   width: 100%;
-  max-width: 600px; // limits max width on large screens
+  height: 10px;
+  max-width: 100dvw; // limits max width on large screens
   height: 8px; // slightly thinner for better balance
   background: linear-gradient(to right, #5e1a98, #f7c607);
-  margin: 20px auto; // centered with vertical spacing
-  border-radius: 5px; // smooth rounded edges
-
-  @media (max-width: 768px) {
-    max-width: 90%; // almost full width on tablets and below
-    height: 6px; // slightly thinner on smaller screens
-    margin: 15px auto;
-  }
-
-  @media (max-width: 480px) {
-    height: 4px; // very thin line on mobiles
-    margin: 10px auto;
-  }
 }
 
 // .countires {
@@ -865,7 +848,7 @@ header {
     }
 
     p {
-      font-size: 0.9em;
+      font-size: 0.7em;
       max-width: 700px;
       line-height: 1.6;
     }
@@ -921,7 +904,7 @@ header {
       }
 
       p {
-        font-size: 1.1em;
+        font-size: 0.8em;
         width: 60%;
       }
 
@@ -969,6 +952,10 @@ header {
         position: relative;
         background: transparent;
         border: 6px solid transparent;
+        background-color: #ffffff96;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
 
         &::before {
           content: "";
@@ -999,7 +986,7 @@ header {
 
               h3 {
                 font-size: 1.4em;
-                font-weight: 500;
+                font-weight: 600;
                 color: #410071;
               }
 
@@ -1044,7 +1031,7 @@ header {
 
               h3 {
                 font-size: 1.4em;
-                font-weight: 500;
+                font-weight: 600;
                 color: #410071;
               }
 
@@ -1227,6 +1214,10 @@ header {
     text-align: center;
     font-size: 2em;
     margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     svg {
       font-size: 0.8em;
