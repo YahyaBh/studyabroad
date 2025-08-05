@@ -50,7 +50,10 @@ const Navbar = () => {
                     <a href="/about" onClick={() => setMenuOpen(false)}>About Us</a>
                 </div>
 
-                {pathname === '/consulation' ? (
+
+                {/* if this url of the current page is consultation then remove the button */}
+
+                {pathname !== '/consultation' ? (
                     <a href="/consultation" className="get_consult active">Get Consultation</a>) : ''
                 }
                 <div className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>

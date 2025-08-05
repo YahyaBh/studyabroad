@@ -36,15 +36,27 @@ export async function POST(req) {
                 dateTime: `${user.meetingDate}T${endTime}:00Z`,
                 timeZone: 'UTC',
             },
-            conferenceData: {
-                createRequest: {
-                    requestId: uuidv4(),
-                    conferenceSolutionKey: { type: 'hangoutsMeet' },
+
+            //only if user meeting type is online and not in person the add conference data
+            ...(user.meetingType === 'Online') ? {} : {
+                conferenceData: {
+                    createRequest: {
+                        requestId: uuidv4(),
+                        conferenceSolutionKey: { type: 'hangoutsMeet' },
+                    },
                 },
+                attendees: [
+                    { email: user.email }
+                ],
             },
-            attendees: [
-                { email: user.email }
-            ],
+            reminders: {
+                useDefault: false,
+                overrides: [
+                    { method: 'email', minutes: 24 * 60 },
+                    { method: 'popup', minutes: 10 },
+                ],
+            },
+            visibility: 'default',
         };
 
         const response = await calendar.events.insert({

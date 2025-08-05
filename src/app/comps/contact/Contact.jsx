@@ -1,8 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Contact.scss'
 import { FaArrowDown, FaLocationArrow } from 'react-icons/fa'
+import { client } from '@/app/lib/sanityClient';
+import toast from 'react-hot-toast';
 
 const Contact = () => {
+
+    const [userData = {}, setUserData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        message: ''
+    });
+
+
+    async function handleSubmit() {
+        e.preventDefault();
+
+
+        const data = await client.create({
+            _type: 'contact',
+            ...userData
+        })
+
+        if (data) {
+            toast.success('Your message has been sent successfully!');
+            setUserData({
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                message: ''
+            });
+        }
+
+    }
+
+
+
     return (
         <section className="contact">
 
@@ -41,23 +77,23 @@ const Contact = () => {
                 <div className="right">
                     <div className="double-inp">
                         <label>
-                            <input type="text" placeholder="Search" />
+                            <input type="text" placeholder="First name" minLength={3} onChange={e => setUserData({ ...userData, firstName: e.target.value })} required />
                         </label>
                         <label>
-                            <input type="email" placeholder="Email" />
+                            <input type="text" placeholder="Last name" minLength={3} onChange={e => setUserData({ ...userData, lastName: e.target.value })} required />
                         </label>
                     </div>
 
                     <div className="double-inp">
                         <label>
-                            <input type="phone" placeholder="Phone" />
+                            <input type="email" placeholder="Email" minLength={3} onChange={e => setUserData({ ...userData, email: e.target.value })} required />
                         </label>
                         <label>
-                            <input type="phone" placeholder="Phone" />
+                            <input type="phone" placeholder="Phone" minLength={3} onChange={e => setUserData({ ...userData, phone: e.target.value })} required />
                         </label>
                     </div>
 
-                    <textarea placeholder="How can we help you ? Feel free to get in touch!" cols={"40"} rows={"10"} />
+                    <textarea placeholder="How can we help you ? Feel free to get in touch!" cols={"40"} rows={"10"} minLength={3} onChange={e => setUserData({ ...userData, message: e.target.value })} required />
 
                     <div className="agree">
 
@@ -67,7 +103,7 @@ const Contact = () => {
 
                     </div>
 
-                    <button className="btn-sub">🤙 Get In Touch</button>
+                    <button className="btn-sub" onClick={e => handleSubmit()}>🤙 Get In Touch</button>
 
 
                 </div>
