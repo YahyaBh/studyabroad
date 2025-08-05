@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.scss'
+import './univcard.scss'
 import { FaLocationArrow, FaStar } from 'react-icons/fa'
 import Link from 'next/link'
 import { MdArrowOutward } from 'react-icons/md'
@@ -10,19 +10,8 @@ const CardUni = ({ university, index }) => {
     return (
         <div className="universities-card" key={index + university.name}>
             <div className='top'>
-                {university.images && university.images.length > 0 ? (
-                    university.images.map(img =>
-                        img.asset ? (
-                            <img
-                                key={img._key}
-                                src={urlFor(img).url()}
-                                alt={`${university.name} image`}
-                            />
-                        ) : null
-                    )
-                ) : (
-                    <img src="https://via.placeholder.com/300x200" />
-                )}
+
+                <img src={urlFor(university.images[0]).url()} alt={university.name} />
 
 
                 <div className="rating">

@@ -5,7 +5,7 @@ import Navbar from '@/app/comps/navbar/navbar';
 import Footer from '@/app/comps/footer/footer';
 import { client, urlFor } from '@/app/lib/sanityClient';
 
-import './page.scss';
+import './univ.scss';
 import {
     FaFacebook,
     FaLinkedin,
@@ -58,8 +58,6 @@ const page = ({ params }) => {
             );
 
             setUniversity(res);
-            console.log(res);
-
         };
 
         const fetchUnis = async () => {
@@ -298,8 +296,8 @@ const page = ({ params }) => {
                     <div className='right'>
                         <div className='cards-cont'>
 
-                            {university?.courses?.map(course => (
-                                <div className='card' key={course._id}>
+                            {university?.courses?.map((course , index) => (
+                                <div className='card' key={index}>
                                     <img src='/assets/images/Uni/Rank1.png' />
                                     <h3>{course.course}'s Degree</h3>
                                 </div>
@@ -335,8 +333,8 @@ const page = ({ params }) => {
 
                     <div className='bottom-cont'>
                         {/* remove the first one and keep the others and map them each one onto a card */}
-                        {university?.admission_requirements.map(req => (
-                            <div className='card' key={req._id}>
+                        {university?.admission_requirements.map((req , index) => (
+                            <div className='card' key={req.title + index}>
                                 <img src='/assets/images/Uni/Rank1.png' />
                                 <h4>{req.title}</h4>
                             </div>
@@ -360,8 +358,8 @@ const page = ({ params }) => {
 
                     <div className='right'>
                         <div className='cards-container'>
-                            {university?.tuition_fees.map(fee => (
-                                <div className='card' key={fee._id}>
+                            {university?.tuition_fees.map((fee , index) => (
+                                <div className='card' key={fee.fee_for + index}>
                                     <h5>{fee.fee_for}:</h5>
                                     <h3>{fee.fee}</h3>
                                 </div>
@@ -474,7 +472,7 @@ const page = ({ params }) => {
 
                     <div className="universities-cards">
                         {universities.map((university, index) => (
-                            <CardUni university={university} index={index} />
+                            <CardUni university={university} index={index} key={university.name +  index} />
                         ))
                         }
                     </div>

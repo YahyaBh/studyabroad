@@ -10,7 +10,6 @@ import { client } from "@/app/lib/sanityClient"
 export default function HeroSection() {
 
 
-
     const [countries, setCountries] = useState([])
     const [programs, setPrograms] = useState([])
 
@@ -26,11 +25,10 @@ export default function HeroSection() {
 
 
         const data = await client.fetch(`*[_type == "university"]{
+            courses[]{course},
             country,
-            courses[]->{course}
         }`)
 
-        console.log(data);
 
 
         // Get unique countries
@@ -38,11 +36,12 @@ export default function HeroSection() {
         setCountries(Array.from(countriesSet))
 
         // Get unique programs
-        const allPrograms = data.flatMap(univ => univ.courses?.map(p => p.course) || [])
-        setPrograms(Array.from(new Set(allPrograms)))
+        const allPrograms = data.flatMap(u => u.courses?.map(c => c.course) || []);
+        setPrograms(Array.from(new Set(allPrograms)));
 
 
-        setLoading(false);
+        console.log(allPrograms);
+
     };
 
 

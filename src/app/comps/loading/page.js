@@ -10,10 +10,8 @@ const Loading = ({ loading }) => {
 
     useEffect(() => {
         if (loading) {
-            // Disable scrolling when loading
             document.body.style.overflow = "hidden";
         } else {
-            // Enable scrolling after loading is done
             document.body.style.overflow = "auto";
         }
 
@@ -25,7 +23,7 @@ const Loading = ({ loading }) => {
     return (
         <div className="loading">
 
-            <div style={{ height: '60dvh' }}>
+            <div style={{ height: '100dvh' }}>
                 <LottieAnimation animationData={animationData} />
             </div>
         </div>

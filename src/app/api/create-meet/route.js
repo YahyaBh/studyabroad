@@ -14,7 +14,7 @@ export async function POST(req) {
         const auth = new google.auth.OAuth2({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            redirectUri: process.env.GOOGLE_REDIRECT_URI,
+            redirectUri: 'https://developers.google.com/oauthplayground',
         });
 
         auth.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });

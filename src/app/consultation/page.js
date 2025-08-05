@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import Navbar from "../comps/navbar/navbar"
 import Loading from "../comps/loading/page"
 
-import './page.scss'
+import './consultation.scss'
 
 import { MdArrowBack, MdArrowRight } from "react-icons/md"
 import { AnimatePresence, motion } from "framer-motion"
@@ -133,10 +133,9 @@ const page = () => {
             if (res.status == 200) {
                 toast.success("Email sent successfully");
                 Cookies.set("lastVerificationTime", Date.now().toString());
-            } else if (res.status == 409) {
-                toast.error("Email already verified");
             } else {
-                toast.error(res?.message)
+                const data = await res.json();
+                toast.error(data?.message || "An error occurred");
             }
 
         } catch (err) {

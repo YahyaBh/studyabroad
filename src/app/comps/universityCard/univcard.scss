@@ -1,6 +1,7 @@
 .universities-card {
     flex-basis: 25%;
     min-width: 300px;
+    max-width: 300px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -45,7 +46,9 @@
             gap: 5px;
 
             svg {
-                color: #e1b738;
+                color: #ffd700;
+
+                filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.1));
             }
         }
 

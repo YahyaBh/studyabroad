@@ -114,7 +114,6 @@ export default function Home() {
             courses[]{course},
         }`)
 
-    console.log(data);
 
 
     // Get unique countries
@@ -126,7 +125,6 @@ export default function Home() {
     setPrograms(Array.from(new Set(allPrograms)));
 
     const homeData = await client.fetch(query);
-    console.log(homeData);
 
     setHomeData(homeData[0]);
     setLoading(false);

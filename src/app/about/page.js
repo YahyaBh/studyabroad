@@ -2,7 +2,7 @@
 import { FaArrowDown, FaLocationArrow, FaSchool } from 'react-icons/fa'
 import Footer from '../comps/footer/footer'
 import Navbar from '../comps/navbar/navbar'
-import './page.scss'
+import './about.scss'
 import { client, urlFor } from '../lib/sanityClient'
 import Loading from '../comps/loading/page'
 import { useEffect, useState } from 'react'

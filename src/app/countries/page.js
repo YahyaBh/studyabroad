@@ -5,7 +5,7 @@ import { FaLocationArrow, FaSearch } from 'react-icons/fa'
 import { MdArrowOutward } from "react-icons/md"
 
 
-import './page.scss'
+import './countires.scss'
 
 const page = () => {
     return (

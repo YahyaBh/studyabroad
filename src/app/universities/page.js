@@ -6,7 +6,7 @@ import Navbar from '../comps/navbar/navbar'
 import HeroSection from './hero/hero'
 import Loading from '../comps/loading/page'
 import { client } from '../lib/sanityClient'
-import './page.scss'
+import './unversities.scss'
 import "./university.scss"
 import { FaSearch } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -33,16 +33,28 @@ const Page = () => {
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        setCountry(params.get('country') || '');
-        setProgram(params.get('program') || '');
-        setType(params.get('type') || '');
-        setBudget(params.get('budget') || '');
+        const countryParam = params.get('country');
+        const programParam = params.get('program');
+        const typeParam = params.get('type');
+        const budgetParam = params.get('budget');
+
+
+        setCountry(countryParam || '');
+        setProgram(programParam || '');
+        setType(typeParam || '');
+        setBudget(budgetParam || '');
+
 
         getNavData();
     }, [])
 
     useEffect(() => {
         loadData();
+
+        setSelectedCountry(country);
+        setSelectedProgram(program);
+        setSelectedType(type);
+        setSelectedBudget(budget);
     }, [country, program, type, budget]);
 
     const loadData = async () => {
@@ -82,12 +94,6 @@ const Page = () => {
         }
     };
 
-    const renderStars = (rating) => {
-        return Array.from({ length: 5 }, (_, index) => (
-            <span key={index} className={index < rating ? "star-filled" : "star-empty"}>★</span>
-        ));
-    };
-
     const handleSearch = () => {
         const queryParams = new URLSearchParams();
         if (selectedCountry) queryParams.append("country", selectedCountry);
@@ -122,6 +128,10 @@ const Page = () => {
                 {(country || program || type || budget) ? (
                     <nav className='search-bar'>
                         <div className="search-container">
+
+                            {/* //if country is selected make it already selected in the select  */}
+
+                            
                             <label className="sidedrop">
                                 Country
                                 <select className="select" value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
@@ -177,16 +187,7 @@ const Page = () => {
                         <AnimatePresence>
                             {universities.map((university, index) => {
                                 return (
-                                    <motion.div
-                                        key={university._id}
-                                        layout
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -20 }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        <CardUni university={university} index={index} />
-                                    </motion.div>
+                                    <CardUni key={university._id} university={university} index={index} />
                                 )
                             })}
                         </AnimatePresence>

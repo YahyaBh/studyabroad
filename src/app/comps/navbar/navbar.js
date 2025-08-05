@@ -24,7 +24,7 @@ const Navbar = () => {
         <nav>
             <div className="nav-container">
                 <a href="/" className="logo">
-                    <img src="/favicon.svg" />
+                    <img src="/logo.svg" />
                 </a>
 
                 <div className={`nav-links ${menuOpen ? 'active' : ''}`}>

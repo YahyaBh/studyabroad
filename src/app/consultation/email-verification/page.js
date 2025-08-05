@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import './page.scss';
 import toast from 'react-hot-toast';
 import Loading from "@/app/comps/loading/page";
 import Cookies from "js-cookie";
