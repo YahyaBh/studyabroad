@@ -95,6 +95,8 @@ const page = ({ params }) => {
 
             <Navbar />
 
+        
+
 
             <header className='uni-header'>
 
@@ -170,6 +172,8 @@ const page = ({ params }) => {
 
                     <div className='right'>
 
+
+                        {/* whatever image it gets clicked it shows on the top of the page */}
                         <div className='images'>
                             <img className='main-image' src={urlFor(university?.images[0]).url()} alt={university?.name} />
                             <div className='images-container'>
